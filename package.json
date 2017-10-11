@@ -1,0 +1,41 @@
+{
+  "name": "asyncaf",
+  "description": "",
+  "author": "Scott Rudiger",
+  "license": "MIT",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ScottRudiger/AsyncAF#readme",
+  "bugs": {
+    "url": "https://github.com/ScottRudiger/AsyncAF/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScottRudiger/AsyncAF.git"
+  },
+  "keywords": [
+    "async",
+    "await",
+    "async/await",
+    "library",
+    "map",
+    "forEach",
+    "reduce",
+    "filter",
+    "every",
+    "some",
+    "includes",
+    "find",
+    "findIndex"
+    "indexOf",
+    "lastIndexOf",
+    "join",
+    "pop",
+    "shift",
+    "splice",
+    "toString"
+  ],
+  "main": "asyncaf.js",
+  "scripts": {
+    "test": "mocha"
+  }
+}
