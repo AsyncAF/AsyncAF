@@ -17,6 +17,9 @@
     "await",
     "async/await",
     "library",
+    "array",
+    "method",
+    "methods",
     "map",
     "forEach",
     "reduce",
@@ -25,7 +28,7 @@
     "some",
     "includes",
     "find",
-    "findIndex"
+    "findIndex",
     "indexOf",
     "lastIndexOf",
     "join",
