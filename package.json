@@ -1,18 +1,20 @@
 {
-  "name": "asyncaf",
+  "name": "async-af",
   "description": "async/await fun",
   "author": "Scott Rudiger",
   "license": "MIT",
   "version": "1.0.0",
-  "homepage": "https://github.com/ScottRudiger/AsyncAF#readme",
+  "homepage": "https://github.com/AsyncAF/AsyncAF#readme",
   "bugs": {
-    "url": "https://github.com/ScottRudiger/AsyncAF/issues"
+    "url": "https://github.com/AsyncAF/AsyncAF/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ScottRudiger/AsyncAF.git"
+    "url": "git+https://github.com/AsyncAF/AsyncAF.git"
   },
   "keywords": [
+    "AsyncAF",
+    "async-af",
     "async",
     "await",
     "async/await",
@@ -37,7 +39,7 @@
     "splice",
     "toString"
   ],
-  "main": "asyncaf.js",
+  "main": "AsyncAF.js",
   "scripts": {
     "test": "mocha",
     "lint": "eslint *.js"
