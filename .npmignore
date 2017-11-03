@@ -4,3 +4,7 @@ node_modules/
 .eslintignore
 .eslintrc
 package-lock.json
+forEachAF.js
+mapAF2.js
+mapAF3.js
+test.js
