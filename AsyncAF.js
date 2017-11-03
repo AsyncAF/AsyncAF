@@ -12,8 +12,6 @@ AsyncAF.prototype.catch = function catchAF(reject) {
   return this.then(null, reject);
 };
 
-AsyncAF.prototype.mapAF = function mapAF(fn) {
-  return this.then(array => Promise.all(array.map(fn)));
-};
+AsyncAF.prototype.mapAF = require('./mapAF');
 
 module.exports = AsyncAF;
