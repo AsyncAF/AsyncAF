@@ -1,0 +1,57 @@
+{
+  "name": "async-af",
+  "description": "async/await fun",
+  "main": "AsyncAF.js",
+  "authors": [
+    "Scott Rudiger (https://github.com/ScottRudiger)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "AsyncAF",
+    "async-af",
+    "async",
+    "await",
+    "async/await",
+    "library",
+    "array",
+    "method",
+    "methods",
+    "map",
+    "forEach",
+    "reduce",
+    "filter",
+    "every",
+    "some",
+    "includes",
+    "find",
+    "findIndex",
+    "indexOf",
+    "lastIndexOf",
+    "join",
+    "pop",
+    "shift",
+    "splice",
+    "toString"
+  ],
+  "homepage": "https://github.com/AsyncAF/AsyncAF#readme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AsyncAF/AsyncAF.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    ".vscode",
+    ".eslintignore",
+    ".eslintrc",
+    ".gitignore",
+    ".npmignore",
+    "forEachAF.js",
+    "mapAF2.js",
+    "mapAF3.js",
+    "package-lock.json",
+    "test.js"
+  ]
+}
