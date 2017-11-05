@@ -4,6 +4,7 @@ node_modules/
 .eslintignore
 .eslintrc
 package-lock.json
+bower.json
 forEachAF.js
 mapAF2.js
 mapAF3.js
