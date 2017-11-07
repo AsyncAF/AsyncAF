@@ -16,4 +16,6 @@ AsyncAF.prototype.mapAF = require('./mapAF');
 
 AsyncAF.prototype.filterAF = require('./filterAF');
 
+AsyncAF.logAF = require('./logAF');
+
 module.exports = AsyncAF;
