@@ -14,4 +14,6 @@ AsyncAF.prototype.catch = function catchAF(reject) {
 
 AsyncAF.prototype.mapAF = require('./mapAF');
 
+AsyncAF.prototype.filterAF = require('./filterAF');
+
 module.exports = AsyncAF;
