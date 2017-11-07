@@ -1,5 +1,7 @@
 node_modules/
 .vscode/
+test/
+.nyc_output/
 .gitignore
 .eslintignore
 .eslintrc
@@ -9,3 +11,4 @@ forEachAF.js
 mapAF2.js
 mapAF3.js
 test.js
+scratchPad.js
