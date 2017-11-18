@@ -53,6 +53,7 @@
     "mapAF2.js",
     "mapAF3.js",
     "package-lock.json",
-    "test.js"
+    "test.js",
+    "notes.txt"
   ]
 }
