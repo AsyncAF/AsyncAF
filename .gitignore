@@ -2,3 +2,6 @@ node_modules/
 .vscode/
 .nyc_output/
 notes.txt
+scratchPad.js
+mapAF2.js
+mapAF3.js
