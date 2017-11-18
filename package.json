@@ -3,7 +3,7 @@
   "description": "async/await fun",
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "homepage": "https://github.com/AsyncAF/AsyncAF#readme",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
