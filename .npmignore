@@ -8,6 +8,7 @@ test/
 package-lock.json
 bower.json
 forEachAF.js
+reduceAF.js
 mapAF2.js
 mapAF3.js
 test.js

@@ -50,6 +50,7 @@
     ".gitignore",
     ".npmignore",
     "forEachAF.js",
+    "reduceAF",
     "mapAF2.js",
     "mapAF3.js",
     "package-lock.json",
