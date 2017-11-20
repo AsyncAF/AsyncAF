@@ -26,11 +26,11 @@ const logAF = function logAF(...args) {
   const error = new Error();
   if (logAF.label && error.stack) {
     let lineNum;
+    const newLineForObjs = typeof args[0] === 'object' ? '\n' : '';
     const setFormat = {
       fileName() {
         const start = error.stack.lastIndexOf`/` + 1;
         const end = error.stack.indexOf(')', start);
-        const newLineForObjs = typeof args[0] === 'object' ? '\n' : '';
         lineNum = `@${error.stack.slice(start, end)}:${newLineForObjs}`;
       },
       filePath() {
@@ -42,7 +42,6 @@ const logAF = function logAF(...args) {
         const target = error.stack.lastIndexOf`/`;
         const end = error.stack.indexOf(')', target);
         const start = error.stack.slice(0, target).lastIndexOf`/` + 1;
-        const newLineForObjs = typeof args[0] === 'object' ? '\n' : '';
         lineNum = `@${error.stack.slice(start, end)}:${newLineForObjs}`;
       },
       fatArrow() {
