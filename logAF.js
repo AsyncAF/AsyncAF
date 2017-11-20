@@ -20,6 +20,9 @@ const logAF = function logAF(...args) {
         const start = error.stack.slice(0, target).lastIndexOf`/` + 1;
         lineNum = `@${error.stack.slice(start, end)}:`;
       },
+      fatArrow() {
+        lineNum = '========================>';
+      },
     };
     setFormat[logAF.labelFormat]();
     args.unshift(typeof args[0] === 'object' ? `${lineNum}\n` : lineNum);
@@ -33,10 +36,10 @@ logAF.labelFormat = 'fileName';
 logAF.options = function logAFOptions(options) {
   if (options.label === false) logAF.label = false;
   if (options.labelFormat) {
-    const validFormats = ['fileName', 'filePath', 'parent'];
+    const validFormats = ['fileName', 'filePath', 'parent', 'fatArrow'];
     const desiredFormat = options.labelFormat;
     if (!validFormats.includes(desiredFormat)) {
-      const msg = 'AsyncAF Warning: logAF labelFormat option must be set to \'fileName\' (default), \'filePath\', or \'parent\'';
+      const msg = 'AsyncAF Warning: logAF labelFormat option must be set to \'fileName\' (default), \'filePath\', \'parent\', or \'fatArrow\'';
       // eslint-disable-next-line
       console ? console.warn ? console.warn(msg) : console.log ? console.log(msg) : null : null;
     } else logAF.labelFormat = desiredFormat;
