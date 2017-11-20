@@ -14,6 +14,12 @@ const logAF = function logAF(...args) {
         const newLineForPaths = typeof args[0] !== 'object' ? '\n' : '';
         lineNum = `@${cutoff.slice(cutoff.lastIndexOf`(` + 1)}:${newLineForPaths}`;
       },
+      parent() {
+        const target = error.stack.lastIndexOf`/`;
+        const end = error.stack.indexOf(')', target);
+        const start = error.stack.slice(0, target).lastIndexOf`/` + 1;
+        lineNum = `@${error.stack.slice(start, end)}:`;
+      },
     };
     setFormat[logAF.labelFormat]();
     args.unshift(typeof args[0] === 'object' ? `${lineNum}\n` : lineNum);
