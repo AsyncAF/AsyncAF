@@ -40,19 +40,17 @@ logAF.setFormat = function setFormat(firstArg) {
   const error = new Error();
   if (!error.stack) return '';
   const newLineForObjs = typeof firstArg === 'object' ? '\n' : '';
+  const target = error.stack.lastIndexOf`/`;
   const formats = {
     fileName() {
-      const start = error.stack.lastIndexOf`/` + 1;
-      const end = error.stack.indexOf(')', start);
-      return `@${error.stack.slice(start, end)}:${newLineForObjs}`;
+      const end = error.stack.indexOf(')', target + 1);
+      return `@${error.stack.slice(target + 1, end)}:${newLineForObjs}`;
     },
     filePath() {
-      const target = error.stack.lastIndexOf`/`;
       const cutoff = error.stack.slice(0, error.stack.indexOf(')', target));
       return `@${cutoff.slice(cutoff.lastIndexOf`(` + 1)}:\n`;
     },
     parent() {
-      const target = error.stack.lastIndexOf`/`;
       const end = error.stack.indexOf(')', target);
       const start = error.stack.slice(0, target).lastIndexOf`/` + 1;
       return `@${error.stack.slice(start, end)}:${newLineForObjs}`;
