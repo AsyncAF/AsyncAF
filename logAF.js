@@ -1,9 +1,22 @@
-const logAF = function logAF(...args) {
+/**
+ * - Logs items to the console; if an item is a promise,
+ * logAF will first resolve the promise then log its value.
+ *
+ * - **Note:** The label (file:line:col) may not work correctly
+ * in all environments; to turn the label off, set label to false
+ * in logAF options, where you can also change the label's format.
+ *
+ * @since 1.3.0
+ * @param {*} items The items to print (log to the console)
+ * @see logAF.options to turn the label off or change its format
+ */
+
+const logAF = function logAF(...items) {
   if (logAF.label) {
-    const lineNum = logAF.setFormat(args[0]);
-    args.unshift(lineNum);
+    const lineNum = logAF.setFormat(items[0]);
+    items.unshift(lineNum);
   }
-  Promise.all(args).then((toLog) => {
+  Promise.all(items).then((toLog) => {
     // eslint-disable-next-line
     console ? console.log ? console.log(...toLog) : null : null;
   });
