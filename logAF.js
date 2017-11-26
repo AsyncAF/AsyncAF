@@ -18,9 +18,12 @@ const logAF = function logAF(...items) {
     items.unshift(lineNum);
   }
   Promise.all(items).then((toLog) => {
-    // eslint-disable-next-line
     const end = Date.now();
-    if (logAF.duration) toLog.push(`\nin ${((end - start) / 1000).toFixed(3)} secs`);
+    if (logAF.duration) {
+      const numberOf = ((end - start) / 1000).toFixed(3);
+      toLog.push(`\nin ${numberOf} secs`);
+    }
+    // eslint-disable-next-line
     console ? console.log ? console.log(...toLog) : null : null;
   });
 };
