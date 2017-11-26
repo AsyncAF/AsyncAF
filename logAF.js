@@ -14,7 +14,10 @@
 const logAF = function logAF(...items) {
   const start = Date.now();
   if (logAF.label) {
-    const lineNum = logAF.setFormat(items[0]);
+    let firstItem;
+    // eslint-disable-next-line no-return-assign
+    Promise.resolve(items[0]).then(item => firstItem = item);
+    const lineNum = logAF.setFormat(firstItem);
     items.unshift(lineNum);
   }
   Promise.all(items).then((toLog) => {
