@@ -12,18 +12,22 @@
  */
 
 const logAF = function logAF(...items) {
+  const start = Date.now();
   if (logAF.label) {
     const lineNum = logAF.setFormat(items[0]);
     items.unshift(lineNum);
   }
   Promise.all(items).then((toLog) => {
     // eslint-disable-next-line
+    const end = Date.now();
+    if (logAF.duration) toLog.push(`\nin ${((end - start) / 1000).toFixed(3)} secs`);
     console ? console.log ? console.log(...toLog) : null : null;
   });
 };
 
 logAF.label = true;
 logAF.labelFormat = 'file';
+logAF.duration = true;
 
 /*
 * labelFormat options:
@@ -92,6 +96,7 @@ logAF.setFormat = function setFormat(firstArg) {
 
 logAF.options = function logAFOptions(options) {
   if (options.label === false) logAF.label = false;
+  if (options.duration === false) logAF.duration = false;
   if (options.labelFormat) {
     const validFormats = [
       'file',
