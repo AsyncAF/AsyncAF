@@ -21,8 +21,8 @@ const logAF = function logAF(...items) {
     items.unshift(lineNum);
   }
   Promise.all(items).then((toLog) => {
-    const end = Date.now();
     if (logAF.duration) {
+      const end = Date.now();
       const numberOf = ((end - start) / 1000).toFixed(3);
       toLog.push(`\nin ${numberOf} secs`);
     }
