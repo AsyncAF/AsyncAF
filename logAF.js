@@ -63,7 +63,12 @@ logAF.setFormat = function setFormat(firstArg) {
   const error = new Error();
   if (!error.stack) return '';
   const newLineForObjs = typeof firstArg === 'object' ? '\n' : '';
-  const target = error.stack.lastIndexOf`/`;
+  let target = error.stack.lastIndexOf`/`;
+  // to avoid next_tick.js filename:
+  if (error.stack.slice(target).includes`next_tick`) {
+    error.stack = error.stack.split`\n`.slice(0, 4).join`\n`;
+    target = error.stack.lastIndexOf`/`;
+  }
   const formats = {
     file() {
       const end = error.stack.indexOf(')', target + 1);
