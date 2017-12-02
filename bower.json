@@ -55,6 +55,7 @@
     "mapAF3.js",
     "package-lock.json",
     "test.js",
-    "notes.txt"
+    "notes.txt",
+    "logAFOptions"
   ]
 }
