@@ -1,8 +1,18 @@
 /**
- * - Logs items to the console; if an item is a promise,
- * logAF will first resolve the promise then log its value.
+ * - Logs items to the console
+ * - if an item is a promise, logAF will first resolve the promise then log its value
  *
- * - **Note:** The label (file:line:col) may not work correctly
+ * Example:
+ * ```javascript
+ * const {logAF} = require('async-af');
+ *
+ * const promise = () => new Promise(resolve => setTimeout(() => resolve(1), 1000));
+ *
+ * logAF(promise(), 2);
+ * // @filename.js:212:9: 1 2
+ * // in 0.998 secs
+ * ```
+ * **Note:** The label may not work correctly
  * in all environments; to turn the label off, set label to false
  * in logAF options, where you can also change the label's format.
  *
