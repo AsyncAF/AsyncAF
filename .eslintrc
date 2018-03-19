@@ -1,4 +1,8 @@
 {
+  "env": {
+    "node": true,
+    "mocha": true
+  },
   "extends": ["airbnb-base"],
   "rules": {
     "no-restricted-syntax": [
