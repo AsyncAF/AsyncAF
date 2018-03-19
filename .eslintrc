@@ -8,6 +8,26 @@
       "WithStatement"
     ],
     "object-curly-spacing": ["error", "never"],
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": ["error", {
+      "multiline": true,
+      "consistent": true
+    }],
+    "import/no-extraneous-dependencies": ["error", {"DevDependencies": true}],
+    "require-jsdoc": ["error"],
+    "valid-jsdoc": ["error", {
+      "prefer": {
+        "return": "returns",
+        "arg": "param",
+        "argument": "param"
+      },
+      "preferType": {
+        "boolean": "Boolean",
+        "number": "Number",
+        "object": "Object",
+        "string": "String"
+      },
+      "requireReturnType": true
+    }]
   }
 }
