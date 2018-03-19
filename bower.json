@@ -56,6 +56,9 @@
     "package-lock.json",
     "test.js",
     "notes.txt",
-    "logAFOptions"
+    "logAFOptions",
+    "webpack.config.js",
+    "webpack.parts.js",
+    "packageList.js"
   ]
 }

@@ -15,3 +15,6 @@ test.js
 scratchPad.js
 notes.txt
 logAFOptions/
+webpack.config.js
+webpack.parts.js
+packageList.js
