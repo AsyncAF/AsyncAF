@@ -32,7 +32,7 @@ const logAF = function logAF(...items) {
   } else {
     items.unshift('');
   }
-  Promise.all(items).then((toLog) => {
+  Promise.all(items).then(toLog => {
     if (logAF.duration) {
       const end = Date.now();
       const numberOf = ((end - start) / 1000).toFixed(3);
@@ -117,6 +117,7 @@ logAF.setFormat = function setFormat(firstArg) {
   return formats[logAF.labelFormat]();
 };
 
+/* eslint-disable max-len */
 /**
  * Sets logging options for the logAF method;
  * accepts an options Object with the following optional properties:
@@ -221,6 +222,7 @@ logAF.setFormat = function setFormat(firstArg) {
  * @param {Boolean} [options.duration=true]
  * @param {string} [options.labelFormat=file]
  */
+/* eslint-enable */
 
 logAF.options = function logAFOptions(options) {
   if (options.label === false) logAF.label = false;
