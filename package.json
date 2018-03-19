@@ -41,8 +41,8 @@
   ],
   "main": "AsyncAF.js",
   "scripts": {
-    "start": "webpack --mode development --cache true --watch",
-    "build": "webpack --mode development --cache false && webpack --mode production --cache false",
+    "start": "webpack --mode development --cache --watch",
+    "build": "webpack --mode development && webpack --mode production",
     "prebuild": "rm -rf dist",
     "lint": "eslint *.js",
     "test": "nyc mocha ./test/**/*.test.js --recursive -R nyan --inline-diffs"
