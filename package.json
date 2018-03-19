@@ -41,20 +41,27 @@
   ],
   "main": "AsyncAF.js",
   "scripts": {
-    "test": "nyc mocha ./test/**/*.test.js --recursive -R nyan --inline-diffs",
-    "lint": "eslint *.js"
+    "start": "webpack --mode development --cache true --watch",
+    "build": "webpack --mode development --cache false && webpack --mode production --cache false",
+    "prebuild": "rm -rf dist",
+    "lint": "eslint *.js",
+    "test": "nyc mocha ./test/**/*.test.js --recursive -R nyan --inline-diffs"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/runtime": "^7.0.0-beta.40",
+    "babel-loader": "^8.0.0-beta.2",
     "chai": "^4.1.2",
-    "eslint": "^4.8.0",
+    "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
-    "webpack": "^4.1.1"
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
   }
 }
