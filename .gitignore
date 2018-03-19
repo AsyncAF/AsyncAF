@@ -9,3 +9,4 @@ forEachAF.js
 logAFOptions/
 reduceAF.js
 test/methods/logAF.test.js
+dist/
