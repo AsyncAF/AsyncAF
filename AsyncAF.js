@@ -1,3 +1,7 @@
+import mapAF from './mapAF';
+import filterAF from './filterAF';
+import logAF from './logAF';
+
 const AsyncAF = function AsyncAF(promises) {
   if (!(this instanceof AsyncAF)) return new AsyncAF(promises);
   this.promise = Promise.resolve(promises);
@@ -12,10 +16,10 @@ AsyncAF.prototype.catch = function catchAF(reject) {
   return this.then(null, reject);
 };
 
-AsyncAF.prototype.mapAF = require('./mapAF');
+AsyncAF.prototype.mapAF = mapAF;
 
-AsyncAF.prototype.filterAF = require('./filterAF');
+AsyncAF.prototype.filterAF = filterAF;
 
-AsyncAF.logAF = require('./logAF');
+AsyncAF.logAF = logAF;
 
-module.exports = AsyncAF;
+export default AsyncAF;

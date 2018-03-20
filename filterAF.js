@@ -3,4 +3,4 @@ const filterAF = function filterAF(fn) {
     .then(([values, booleans]) => values.filter((_, i) => !!booleans[i]));
 };
 
-module.exports = filterAF;
+export default filterAF;

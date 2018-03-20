@@ -247,4 +247,4 @@ logAF.options = function logAFOptions(options) {
   }
 };
 
-module.exports = logAF;
+export default logAF;
