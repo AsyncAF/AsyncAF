@@ -8,7 +8,7 @@ const {
   banner,
 } = require('./webpack.parts');
 
-module.exports = (_, {mode, cache}) => ({
+module.exports = ({modern}, {mode, cache}) => ({
   mode,
   entry: Object.entries(packages).reduce((entries, [pkg, file]) => (
     {...entries, [pkg]: path.resolve(file)}
@@ -16,14 +16,18 @@ module.exports = (_, {mode, cache}) => ({
   devtool: 'source-map',
   output: {
     path: path.resolve('dist'),
-    filename: `[name]${mode === 'production' ? '.min' : ''}.js`,
+    filename: `[name]${
+      (modern ? '.modern' : '.legacy')
+      +
+      (mode === 'production' ? '.min' : '')
+    }.js`,
     library: [libName, '[name]'],
     libraryTarget: 'umd',
     libraryExport: 'default',
     umdNamedDefine: true,
     globalObject: 'typeof self !== \'undefined\' ? self : this',
   },
-  module: moduleProp(cache),
+  module: modern ? {} : moduleProp(cache),
   optimization: mode === 'production' ? minify() : {},
   plugins: [
     banner,
