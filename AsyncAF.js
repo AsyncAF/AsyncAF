@@ -2,24 +2,39 @@ import mapAF from './mapAF';
 import filterAF from './filterAF';
 import logAF from './logAF';
 
-const AsyncAF = function AsyncAF(promises) {
-  if (!(this instanceof AsyncAF)) return new AsyncAF(promises);
-  this.promise = Promise.resolve(promises);
-  return this;
+class AsyncAfProto {
+  static logAF(...args) {
+    return logAF(...`${args}`);
+  }
+}
+
+class AsyncAF extends AsyncAfProto {
+  constructor(promises) {
+    super();
+    this.value = null;
+    if (promises instanceof Promise) {
+      Promise.resolve(promises).then(resolved => {
+        this.value = resolved;
+      });
+    }
+    if (Array.isArray(promises)) {
+      this.value = promises;
+    }
+  }
+}
+
+const AsyncAfCreator = AsyncAF;
+// eslint-disable-next-line no-class-assign, no-shadow
+AsyncAF = function AsyncAF(...args) {
+  return new AsyncAfCreator(...args);
 };
 
-AsyncAF.prototype.then = function thenAF(resolve, reject) {
-  return new AsyncAF(this.promise.then(resolve, reject));
-};
+AsyncAF.prototype = AsyncAfCreator.prototype;
+Object.setPrototypeOf(AsyncAF, AsyncAfCreator);
+AsyncAF.prototype.constructor = AsyncAF;
 
-AsyncAF.prototype.catch = function catchAF(reject) {
-  return this.then(null, reject);
-};
+AsyncAfProto.prototype.mapAF = mapAF;
 
-AsyncAF.prototype.mapAF = mapAF;
-
-AsyncAF.prototype.filterAF = filterAF;
-
-AsyncAF.logAF = logAF;
+AsyncAfProto.prototype.filterAF = filterAF;
 
 export default AsyncAF;
