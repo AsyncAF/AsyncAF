@@ -27,7 +27,7 @@ module.exports = ({modern}, {mode, cache}) => ({
     umdNamedDefine: true,
     globalObject: 'typeof self !== \'undefined\' ? self : this',
   },
-  module: modern ? {} : moduleProp(cache),
+  module: moduleProp(cache, modern),
   optimization: mode === 'production' ? minify() : {},
   plugins: [
     banner,
