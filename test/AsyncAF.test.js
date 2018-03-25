@@ -1,6 +1,6 @@
-const {expect} = require('chai');
+import {expect} from 'chai';
 
-const AsyncAF = require('../dist/async-af.modern');
+import AsyncAF from '../dist/async-af.modern';
 
 describe('full AsyncAF class', () => {
   it('should create an instance of AsyncAF', () => {
