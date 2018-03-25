@@ -42,18 +42,18 @@
   "main": "./lib/AsyncAF.js",
   "sideEffects": false,
   "scripts": {
-    "start": "concurrently \"npm run build-watch -s\" \"npm run test-watch -s\"",
-    "test": "npm run build-dev -s && npm run test-base -s",
-    "cover": "npm run build -s && nyc -- npm run test-base -s",
-    "lint": "eslint *.js",
+    "start": "concurrently \"npm run build-watch\" \"npm run test-watch\"",
+    "test": "npm run build-dev && npm run test-base",
+    "cover": "npm run build && nyc -- npm run test-base",
+    "lint": "echo \"\neslint's a linting...\n\" && eslint . --ext .js",
     "build": "webpack --mode development --env.legacy && webpack --mode development --env.modern && webpack --mode production --env.legacy && webpack --mode production --env.modern",
     "prebuild": "rm -rf dist && echo '\nbuilding modern & legacy packages...\n'",
     "postbuild": "echo '\nbuilds complete!\n'",
-    "prepublishOnly": "npm run cover -s && npm run lint",
+    "prepublishOnly": "npm run cover && npm run lint",
     "build-dev": "webpack --mode development --cache --env.modern",
     "test-base": "mocha --recursive -R nyan --inline-diffs",
-    "build-watch": "npm run build-dev -s -- --watch",
-    "test-watch": "npm run test-base -s -- --watch"
+    "build-watch": "npm run build-dev -- --watch",
+    "test-watch": "npm run test-base -- --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
