@@ -74,6 +74,7 @@ const banner = new BannerPlugin({
 });
 
 module.exports = {
+  libName,
   moduleProp,
   minify,
   banner,

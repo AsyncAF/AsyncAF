@@ -1,8 +1,8 @@
 const path = require('path');
 
 const packages = require('./packageList');
-const {name: libName} = require('./package.json');
 const {
+  libName,
   moduleProp,
   minify,
   banner,
