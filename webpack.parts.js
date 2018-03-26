@@ -25,7 +25,13 @@ const legacyTargets = [
   'not ie <= 10',
 ];
 
-const moduleProp = (cache, modern) => ({
+const plugins = {
+  modern: [],
+  legacy: ['@babel/plugin-transform-runtime'],
+  cover: ['babel-plugin-istanbul'],
+};
+
+const moduleProp = (cache, modern, cover) => ({
   rules: [{
     test: /\.js$/,
     exclude: /node_modules/,
@@ -33,7 +39,7 @@ const moduleProp = (cache, modern) => ({
       loader: 'babel-loader',
       options: {
         cacheDirectory: cache,
-        plugins: modern ? [] : ['@babel/plugin-transform-runtime'],
+        plugins: (cover && plugins.cover) || (modern && plugins.modern) || plugins.legacy,
         presets: [['@babel/preset-env', {
           modules: false,
           targets: {browsers: modern ? modernTargets : legacyTargets},

@@ -8,7 +8,7 @@ const {
   banner,
 } = require('./webpack.parts');
 
-module.exports = ({modern}, {mode, cache}) => ({
+module.exports = ({modern, cover}, {mode, cache}) => ({
   mode,
   entry: Object.entries(packages).reduce((entries, [pkg, file]) => (
     {...entries, [pkg]: path.resolve(file)}
@@ -27,7 +27,7 @@ module.exports = ({modern}, {mode, cache}) => ({
     umdNamedDefine: true,
     globalObject: 'typeof self !== \'undefined\' ? self : this',
   },
-  module: moduleProp(cache, modern),
+  module: moduleProp(cache, modern, cover),
   optimization: mode === 'production' ? minify() : {},
   plugins: [
     banner,
