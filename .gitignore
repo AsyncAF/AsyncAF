@@ -3,10 +3,9 @@ node_modules/
 .nyc_output/
 notes.txt
 scratchPad.js
-mapAF2.js
-mapAF3.js
 forEachAF.js
 logAFOptions/
 reduceAF.js
 test/methods/logAF.test.js
 dist/
+coverage/
