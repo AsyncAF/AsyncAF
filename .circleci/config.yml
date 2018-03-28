@@ -37,6 +37,8 @@ jobs:
       - run:
         name: checking coverage...
         command: npm run cover
+          post:
+            - bash <(curl -s https://codecov.io/bash)
       - run:
         name: linting...
         command: npm run lint
@@ -46,8 +48,8 @@ jobs:
       - deploy:
         dependencies:
           pre:
-          - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+            - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           npm:
             tag: /v[0-9]+(\.[0-9]+)*/
               commands:
-            - npm publish
+                - npm publish
