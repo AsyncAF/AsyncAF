@@ -26,6 +26,7 @@ module.exports = ({modern, cover}, {mode, cache}) => ({
     libraryExport: 'default',
     umdNamedDefine: true,
     globalObject: 'typeof self !== \'undefined\' ? self : this',
+    pathinfo: false,
   },
   module: moduleProp(cache, modern, cover),
   optimization: mode === 'production' ? minify() : {},
