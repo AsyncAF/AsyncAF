@@ -70,6 +70,7 @@
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.1.2",
+    "codecov": "^3.0.0",
     "concurrently": "^3.5.1",
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.0.2",
