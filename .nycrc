@@ -10,5 +10,8 @@
     "text",
     "lcov"
   ],
-  "cache": true
+  "cache": true,
+  "include": [
+    "./lib**"
+  ]
 }
