@@ -25,17 +25,20 @@ describe('use method', () => {
     });
     it('mapAF', () => {
       AsyncAfWrapper.use({mapAF});
+      expect(AsyncAfWrapper().forEachAF).to.be.an.instanceOf(Function);
       expect(AsyncAfWrapper().mapAF).to.be.an.instanceOf(Function);
       expect(AsyncAfWrapper.logAF).to.be.undefined;
+    });
+    it('logAF (static does not use `use`)', () => {
+      AsyncAfWrapper.logAF = logAF;
+      expect(AsyncAfWrapper().forEachAF).to.be.an.instanceOf(Function);
+      expect(AsyncAfWrapper().mapAF).to.be.an.instanceOf(Function);
+      expect(AsyncAfWrapper.logAF).to.be.an.instanceOf(Function);
     });
     it('custom function', () => {
       const noop = () => {};
       AsyncAF.use({noop});
       expect(AsyncAF().noop).to.be.an.instanceOf(Function);
-    });
-    it('logAF (static does not use `use`)', () => {
-      AsyncAfWrapper.logAF = logAF;
-      expect(AsyncAfWrapper.logAF).to.be.an.instanceOf(Function);
     });
   });
 });
