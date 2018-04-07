@@ -33,7 +33,6 @@
       },
       "requireReturnType": true
     }],
-    "space-before-function-paren": "off",
     "max-len": ["error", 100, 2, {
       "ignoreUrls": true,
       "ignoreComments": true,
@@ -44,6 +43,7 @@
     "function-paren-newline": ["error", "consistent"],
     "no-plusplus": "off",
     "no-shadow": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "func-names": ["error", "as-needed"]
   }
 }
