@@ -44,6 +44,7 @@
     "no-plusplus": "off",
     "no-shadow": "off",
     "no-unused-expressions": "off",
-    "func-names": ["error", "as-needed"]
+    "func-names": ["error", "as-needed"],
+    "no-nested-ternary": "off"
   }
 }
