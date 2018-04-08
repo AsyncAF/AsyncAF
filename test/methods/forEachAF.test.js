@@ -16,6 +16,9 @@ describe('forEachAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 6]);
     });
+    it('and return undefined', async () => {
+      expect(await AsyncAF(nums).forEachAF(num => num)).to.equal(undefined);
+    });
   });
 
   context('should work on an array of promises', () => {
@@ -44,14 +47,14 @@ describe('forEachAF method', () => {
     });
   });
 
-  context('should process elements in order', () => {
+  context('should process elements in order and in parallel', () => {
     const clock = sinon.useFakeTimers();
     const nums = [
       new Promise(resolve => setTimeout(() => resolve(1), 2000)),
       new Promise(resolve => setTimeout(() => resolve(2), 1000)),
       new Promise(resolve => setTimeout(() => resolve(3), 0)),
     ];
-    clock.runAll();
+    clock.tick(2000); // tick exactly 2000 to be sure elements are processed in parallel
     it('and apply a function to each', async () => {
       const numsTimes2 = [];
       await AsyncAF(nums).forEachAF(num => {
@@ -78,19 +81,19 @@ describe('forEachAF method', () => {
       }
     }
     /* eslint-disable func-names */
-    Thing.prototype.goodAdd = async function(nums) {
+    Thing.prototype.goodAdd = async function (nums) {
       await AsyncAF(nums).forEachAF(function callback(num) {
         this.sum += num;
       }, this); // should work because we're specifying thisArg as this
     };
 
-    Thing.prototype.otherGoodAdd = async function(nums) {
+    Thing.prototype.otherGoodAdd = async function (nums) {
       await AsyncAF(nums).forEachAF(num => {
         this.sum += num;
       }); // should work w/o specifying thisArg because of => funcs' lexical this binding
     };
 
-    Thing.prototype.badAdd = async function(nums) {
+    Thing.prototype.badAdd = async function (nums) {
       await AsyncAF(nums).forEachAF(function callback(num) {
         this.sum += num;
       }); // should be rejected w/o specifying thisArg
@@ -106,5 +109,11 @@ describe('forEachAF method', () => {
 
     const thing3 = new Thing(6);
     expect(thing3.badAdd(nums)).to.be.rejectedWith(TypeError);
+  });
+  it('should reject with TypeError: undefined is not a function', async () => {
+    await expect(AsyncAF([]).forEachAF()).to.eventually.be.rejected.and.has.property(
+      'message',
+      'undefined is not a function',
+    );
   });
 });
