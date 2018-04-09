@@ -3,7 +3,7 @@ module.exports = {
   'async-af.wrapper': './lib/AsyncAfWrapper',
   'async-af.log': './lib/methods/other/logAF',
   // 'async-af/arrays': 'AsyncAF.arrays.js',
-  'async-af.map': './lib/methods/combined/mapAF',
-  'async-af.forEach': './lib/methods/combined/forEachAF',
-  'async-af.filter': './lib/methods/combined/filterAF',
+  'async-af.map': './lib/methods/arrays/mapAF',
+  'async-af.forEach': './lib/methods/arrays/forEachAF',
+  'async-af.filter': './lib/methods/arrays/filterAF',
 };
