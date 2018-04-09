@@ -7,11 +7,8 @@ test/
 .eslintrc
 package-lock.json
 bower.json
-forEachAF.js
-reduceAF.js
 scratchPad.js
 notes.txt
-logAFOptions/
 webpack.config.js
 webpack.parts.js
 packageList.js
