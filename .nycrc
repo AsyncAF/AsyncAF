@@ -13,5 +13,8 @@
   "cache": true,
   "include": [
     "./lib**"
+  ],
+  "exclude": [
+    "./lib/methods/internal**"
   ]
 }
