@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import AsyncAF from '../dist/async-af.modern';
+import AsyncAF from '../dist/async-af';
 
 describe('full AsyncAF class', () => {
   it('should create an instance of AsyncAF', () => {

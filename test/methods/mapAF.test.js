@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 
-const AsyncAF = require('../../dist/async-af.modern');
+const AsyncAF = require('../../dist/async-af');
 
 describe('mapAF method', () => {
   context('should work on an array of non-promises', () => {

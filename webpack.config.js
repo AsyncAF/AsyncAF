@@ -17,7 +17,7 @@ module.exports = ({modern, cover}, {mode, cache}) => ({
   output: {
     path: path.resolve('dist'),
     filename: `[name]${
-      (modern ? '.modern' : '.legacy')
+      (modern ? '' : '.legacy')
       +
       (mode === 'production' ? '.min' : '')
     }.js`,
