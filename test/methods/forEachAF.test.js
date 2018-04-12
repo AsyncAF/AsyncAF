@@ -7,6 +7,12 @@ import AsyncAF from '../../dist/async-af';
 chai.use(chaiAsPromised);
 
 describe('forEachAF method', () => {
+  it('should have the same arity as native forEach', () => {
+    expect(AsyncAF([]).forEachAF.length).to.equal([].forEach.length);
+    expect(AsyncAF.prototype.forEachAF.length)
+      .to.equal(Array.prototype.forEach.length);
+  });
+
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 3];
     it('and apply a function to each', async () => {

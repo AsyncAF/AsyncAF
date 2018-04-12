@@ -3,6 +3,12 @@ const {expect} = require('chai');
 const AsyncAF = require('../../dist/async-af');
 
 describe('mapAF method', () => {
+  it('should have the same arity as native map', () => {
+    expect(AsyncAF([]).mapAF.length).to.equal([].map.length);
+    expect(AsyncAF.prototype.mapAF.length)
+      .to.equal(Array.prototype.map.length);
+  });
+
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 3, 4];
     it('and return an instance of Array', async () => {

@@ -7,6 +7,12 @@ import AsyncAF from '../../dist/async-af';
 chai.use(chaiAsPromised);
 
 describe('filterAF method', () => {
+  it('should have the same arity as native filter', () => {
+    expect(AsyncAF([]).filterAF.length).to.equal([].filter.length);
+    expect(AsyncAF.prototype.filterAF.length)
+      .to.equal(Array.prototype.filter.length);
+  });
+
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 4];
     it('and apply a function to each', async () => {
