@@ -22,7 +22,7 @@ jobs:
           command: npm run cover
       - run:
           name: reporting to codecov...
-          command: ./node_modules/.bin/codecov -t $CODECOV_TOKEN
+          command: bash <(curl -s https://codecov.io/bash)
       - run:
           name: linting...
           command: npm run lint
