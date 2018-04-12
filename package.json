@@ -1,6 +1,6 @@
 {
   "name": "async-af",
-  "description": "(a.k.a AsyncAF, a.k.a. Async/Await Fun) - async/await inside Array/Object\nmethods and other tools for your asynchronous utility belt--zero dependencies",
+  "description": "async/await fun",
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "version": "2.0.0",
