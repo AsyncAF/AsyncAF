@@ -79,7 +79,7 @@ describe('logAF static method', () => {
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           // /^@\/.+\/(\w|\.)+.js:\d+:\d+:(\n|\r)$/,
-          /^@\/.+\/AsyncAF\/test\/methods\/logAF.test.js:\d+:\d+:(\n|\r)$/,
+          /^@\/.+\/test\/methods\/logAF.test.js:\d+:\d+:(\n|\r)$/,
           'path',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
@@ -166,7 +166,7 @@ describe('logAF static method', () => {
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           // /^\/.+\/$/,
-          /^\/.+\/AsyncAF\/test\/methods\//,
+          /^\/.+\/test\/methods\//,
           'path',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
