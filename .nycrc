@@ -1,7 +1,6 @@
 {
-  "description": "istanbul/nyc configuration; set 'per-file': true to see Errors for each file",
+  "description": "istanbul/nyc configuration",
   "check-coverage": true,
-  "per-file": false,
   "lines": 100,
   "statements": 100,
   "functions": 100,
