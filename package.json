@@ -1,6 +1,6 @@
 {
   "name": "async-af",
-  "description": "async/await fun",
+  "description": "(a.k.a AsyncAF, a.k.a. Async/Await Fun) - async/await inside Array/Object\nmethods and other tools for your asynchronous utility belt--zero dependencies",
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "version": "2.0.0",
@@ -39,18 +39,51 @@
     "splice",
     "toString"
   ],
-  "main": "AsyncAF.js",
+  "main": "./lib/AsyncAF.js",
+  "sideEffects": false,
   "scripts": {
-    "test": "nyc mocha ./test/**/*.test.js --recursive -R nyan --inline-diffs",
-    "lint": "eslint *.js"
+    "start": "concurrently \"npm run build:watch\" \"npm run test:watch\"",
+    "test": "npm run build:dev && npm run test:base",
+    "cover": "npm run build:dev -- --env.cover && echo \"\nrunning tests & creating coverage report...\n\" && nyc --check-coverage -- npm run test:base",
+    "lint": "echo \"\neslint's a linting...\n\" && eslint . --ext .js",
+    "build": "webpack --mode development --env.legacy && webpack --mode development --env.modern && webpack --mode production --env.legacy && webpack --mode production --env.modern",
+    "precover": "echo \"\nbuilding modern package...\n\"",
+    "prebuild": "rm -rf dist && echo '\nbuilding modern & legacy packages...\n'",
+    "postbuild": "echo '\nbuilds complete!\n'",
+    "prepublishOnly": "npm run cover && npm run lint && npm run build",
+    "build:dev": "webpack --mode development --cache --env.modern",
+    "test:base": "mocha --require @babel/register --require @babel/polyfill --recursive -R nyan --inline-diffs",
+    "build:watch": "npm run build:dev -- --watch",
+    "test:watch": "npm run test:base -- --watch"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.42",
+    "@babel/polyfill": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/register": "^7.0.0-beta.42",
+    "@babel/runtime": "^7.0.0-beta.42",
+    "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.1.2",
-    "eslint": "^4.8.0",
+    "chai-as-promised": "^7.1.1",
+    "codecov": "^3.0.0",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
-    "nyc": "^11.3.0"
+    "nyc": "^11.6.0",
+    "sinon": "^4.5.0",
+    "sinon-chai": "^3.0.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   }
 }

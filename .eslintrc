@@ -1,3 +1,50 @@
 {
-  "extends": ["airbnb-base"]
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "extends": ["airbnb-base"],
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "object-curly-spacing": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": ["error", {
+      "multiline": true,
+      "consistent": true
+    }],
+    "import/no-extraneous-dependencies": ["error", {"DevDependencies": true}],
+    "require-jsdoc": ["error"],
+    "valid-jsdoc": ["error", {
+      "prefer": {
+        "return": "returns",
+        "arg": "param",
+        "argument": "param"
+      },
+      "preferType": {
+        "boolean": "Boolean",
+        "number": "Number",
+        "object": "Object",
+        "string": "String"
+      },
+      "requireReturnType": true
+    }],
+    "max-len": ["error", 100, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": true,
+      "ignoreRegExpLiterals": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "function-paren-newline": ["error", "consistent"],
+    "no-plusplus": "off",
+    "no-shadow": "off",
+    "no-unused-expressions": "off",
+    "func-names": ["error", "as-needed"],
+    "no-nested-ternary": "off"
+  }
 }

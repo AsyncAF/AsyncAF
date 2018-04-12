@@ -51,11 +51,18 @@
     ".npmignore",
     "forEachAF.js",
     "reduceAF",
-    "mapAF2.js",
-    "mapAF3.js",
     "package-lock.json",
-    "test.js",
     "notes.txt",
-    "logAFOptions"
+    "logAFOptions",
+    "webpack.config.js",
+    "webpack.parts.js",
+    "packageList.js",
+    ".circleci",
+    "coverage",
+    "lib",
+    ".editorconfig",
+    ".npmrc",
+    ".nycrc",
+    "CONTRIBUTING.md"
   ]
 }

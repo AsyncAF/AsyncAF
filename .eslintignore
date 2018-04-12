@@ -1,1 +1,8 @@
 /node_modules
+/dist
+/coverage
+scratchPad.js
+
+#temp
+reduceAF.js
+logAFOptions/

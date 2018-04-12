@@ -4,6 +4,15 @@
 [![npm version](https://img.shields.io/npm/v/async-af.svg?style=for-the-badge&colorB=cb3837)](https://www.npmjs.com/package/async-af)
 [![yarn version](https://img.shields.io/npm/v/async-af.svg?label=yarn&style=for-the-badge&colorB=2c8ebb)](https://yarnpkg.com/en/package/async-af)
 ![bower version](https://img.shields.io/bower/v/async-af.svg?style=for-the-badge&colorB=FFCC2F)
-[![MIT License](https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa)](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa)](https://github.com/AsyncAF/AsyncAF/blob/master/README.md#license)
+[![license scan](https://img.shields.io/badge/license%20scan-passing-brightgreen.svg?style=for-the-badge)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/)
 <!-- ![](https://img.shields.io/github/size/AsyncAF/AsyncAF/AsyncAF.js.svg?style=for-the-badge) -->
 <!-- ![](https://img.shields.io/github/languages/code-size/badges/AsyncAf/AsyncAF.svg?style=for-the-badge) -->
+
+
+## License
+AsyncAF is licensed under the [MIT License](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE), so you can pretty much use it however you want
+
+(but [click here](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE) to get into specifics).
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/)

@@ -1,0 +1,19 @@
+{
+  "description": "istanbul/nyc configuration",
+  "check-coverage": true,
+  "lines": 100,
+  "statements": 100,
+  "functions": 100,
+  "branches": 100,
+  "reporter": [
+    "text",
+    "lcov"
+  ],
+  "cache": true,
+  "include": [
+    "./lib**"
+  ],
+  "exclude": [
+    "./lib/methods/internal**"
+  ]
+}
