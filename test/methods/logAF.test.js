@@ -55,6 +55,9 @@ describe('logAF static method', () => {
   });
 
   context('options', () => {
+    it('should not throw when nothing is passed in', () => {
+      expect(() => logAfStub.options()).to.not.throw();
+    });
     it('should allow turning off the label', async () => {
       logAfStub.options({label: false});
       await logAfStub('no label');
