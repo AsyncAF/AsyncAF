@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Class: AsyncAF</title>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":true,"default":{"outputSourceFiles":false}};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+    <button id="menuToggle" class="btn btn-link btn-lg menu-toggle">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+    <div class="search">
+        <input id="search" type="text" class="form-control input-md" placeholder="Search...">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="AsyncAF">
+            <span class="title  ">
+                
+                <a href="AsyncAF.html">AsyncAF</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="AsyncAF.logAF"><a href="AsyncAF.html#.logAF">logAF</a></li>
+            
+                <li class="parent  " data-name="AsyncAF#filterAF"><a href="AsyncAF.html#filterAF">filterAF</a></li>
+            
+                <li class="parent  " data-name="AsyncAF#forEachAF"><a href="AsyncAF.html#forEachAF">forEachAF</a></li>
+            
+                <li class="parent  " data-name="AsyncAF#mapAF"><a href="AsyncAF.html#mapAF">mapAF</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="AsyncAF.html">Class: AsyncAF</h1>
+        
+
+
+
+<section>
+    
+<header>
+    <div class="header content-size">
+        <h2>AsyncAF
+        </h2>
+        
+    </div>
+</header>  
+
+<article class="content-size">
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="AsyncAF">
+            <a class="share-icon" href="#AsyncAF"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                new AsyncAF
+            </span>
+            <span class="signature">(data)</span><span class="type-signature">Object</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>class that holds all the AsyncAF methods</p>
+<p>while AsyncAF is a class, it can create instances with or without the <code>new</code> keyword</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>the data to be wrapped by the AsyncAF class; can be promises or non-promises</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>3.0.0</dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>AsyncAfWrapper</li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Object
+                        
+                    
+            </td>
+            <td class="description last">returns an instance of AsyncAF wrapping the passed in data</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>const promises = [1, 2, 3].map(n => Promise.resolve(n));
+
+
+AsyncAF(promises).mapAF(n => n * 2).filterAF(n => n !== 4).forEachAF(n => console.log(n));
+// logs 2 then 6</code></pre>
+    
+
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl class="list-methods">
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".logAF">
+            <a class="share-icon" href="#.logAF"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                AsyncAF.logAF
+            </span>
+            <span class="signature">(items)</span><span class="type-signature">Promise.&lt;undefined></span>
+            
+            <span class="access-signature">static</span>
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>logs items to the console in the order given</p>
+<p>if any items are a promise, they will first be resolved in parallel and then logged</p>
+<pre class="prettyprint source lang-js"><code>import { logAF } from 'async-af'
+
+const promise = new Promise(resolve => setTimeout(
+ () => resolve(2), 1000)
+);
+
+logAF(1, promise, 3);
+// @filename.js:6:12:
+// 1 2 3
+// in 0.998 secs</code></pre><p><strong>Note:</strong> since logAF returns a promise, the items in the previous example would be logged <em>after</em> any synchronous calls to <code>console.log</code></p>
+<p>to produce in-order logging, <code>await</code> logAF:</p>
+<pre class="prettyprint source lang-js"><code>logAF.options({ label: false, duration: false });
+
+(async () => {
+  console.log(1);
+  // ...some code
+  await logAF(promise);
+  // ...some more code
+  console.log(3);
+})();
+// 1
+// 2
+// 3</code></pre><p><strong>experimental feature</strong>: the label may not work correctly in all environments; to turn the label off, set <code>label</code> to <code>false</code> in <code>logAF.options</code>, where you can also change the label's format</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                        <span class="repeatable">repeatable</span>
+                    
+                
+                <p>The items to print (log to the console)</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>3.0.0</dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>log</li>
+        
+            <li>logAF.options to turn the label off or change its format</li>
+        
+            <li>logAF.reset to reset options to default</li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Promise.&lt;undefined>
+                        
+                    
+            </td>
+            <td class="description last">returns a <code>Promise</code> that logs items to the console</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="filterAF">
+            <a class="share-icon" href="#filterAF"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                filterAF
+            </span>
+            <span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature">Promise.&lt;Array></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>creates a new <code>Array</code> with all elements that pass the test implemented by the provided callback function</p>
+<p>if any elements are a <code>Promise</code>, they will first be resolved in parallel and then tested</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>function that tests each element of the array; return <code>true</code> to keep the element, <code>false</code> to filter it out</p>
+<p><code>callback</code> accepts three arguments:</p>
+<ul>
+<li><code>currentValue</code> value of the current element being processed in the array</li>
+<li><code>index</code><em><code>(optional)</code></em> index of <code>currentValue</code> in the array</li>
+<li><code>array</code><em><code>(optional)</code></em> the array that <code>filterAF</code> is being applied to</li>
+</ul></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>thisArg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                        <span class="repeatable">repeatable</span>
+                    
+                
+                <p>value to use as <code>this</code> when executing <code>callback</code></p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>3.0.0</dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>filter</li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Promise.&lt;Array>
+                        
+                    
+            </td>
+            <td class="description last"><code>Promise</code> that resolves to a new <code>Array</code> with the elements that pass the test; if no elements pass the test, the promise will resolve to an empty array</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>const promises = [1, 2, 3].map(n => Promise.resolve(n));
+
+
+// basic usage
+const odds = AsyncAF(promises).filterAF(n => n % 2);
+
+console.log(odds); // Promise that resolves to [1, 3]
+
+AsyncAF.logAF(odds); // logs [1, 3]
+
+
+// using .then
+AsyncAF(promises).filterAF(n => n % 2).then(odds => {
+  console.log(odds); // logs [1, 3]
+});
+
+
+// inside an async function
+(async () => {
+  const odds = await AsyncAF(promises).filterAF(
+    n => n % 2
+  );
+  console.log(odds); // logs [1, 3]
+})();</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="forEachAF">
+            <a class="share-icon" href="#forEachAF"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                forEachAF
+            </span>
+            <span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature">Promise.&lt;undefined></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>executes a callback function on each element in an array</p>
+<p>if any elements are a <code>Promise</code>, they will first be resolved in parallel and then processed</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>function to execute for each element</p>
+<p><code>callback</code> accepts three arguments:</p>
+<ul>
+<li><code>currentValue</code> value of the current element being processed in the array</li>
+<li><code>index</code><em><code>(optional)</code></em> index of <code>currentValue</code> in the array</li>
+<li><code>array</code><em><code>(optional)</code></em> the array that forEachAF is being applied to</li>
+</ul></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>thisArg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                        <span class="repeatable">repeatable</span>
+                    
+                
+                <p>value to use as <code>this</code> when executing <code>callback</code></p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>3.0.0</dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>forEach</li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Promise.&lt;undefined>
+                        
+                    
+            </td>
+            <td class="description last"><code>Promise</code> that resolves to <code>undefined</code></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>const promises = [1, 2].map(n => Promise.resolve(n));
+
+
+AsyncAF(promises).forEachAF(el => {
+  console.log(el); // logs 1 then 2
+});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="mapAF">
+            <a class="share-icon" href="#mapAF"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                mapAF
+            </span>
+            <span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature">Promise.&lt;Array></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>creates a new <code>Array</code> with the results of calling a provided function on every element in the original array</p>
+<p>if any elements are a <code>Promise</code>, they will first be resolved in parallel and then processed</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>function that produces an element of the new <code>Array</code></p>
+<p><code>callback</code> accepts three arguments:</p>
+<ul>
+<li><code>currentValue</code> value of the current element being processed in the array</li>
+<li><code>index</code><em><code>(optional)</code></em> index of <code>currentValue</code> in the array</li>
+<li><code>array</code><em><code>(optional)</code></em> the array that mapAF is being applied to</li>
+</ul></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>thisArg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                        <span class="repeatable">repeatable</span>
+                    
+                
+                <p>value to use as <code>this</code> when executing <code>callback</code></p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>3.0.0</dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>map</li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Promise.&lt;Array>
+                        
+                    
+            </td>
+            <td class="description last"><code>Promise</code> that resolves to a new <code>Array</code> with each element being the result of calling <code>callback</code> on each original element</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>const promises = [1, 2].map(n => Promise.resolve(n));
+
+
+// basic usage
+const doubled = AsyncAF(promises).mapAF(el => el * 2);
+
+console.log(doubled); // Promise that resolves to [2, 4]
+
+AsyncAF.logAF(doubled); // logs [2, 4]
+
+
+// using .then
+AsyncAF(promises).mapAF(el => el * 3).then(tripled => {
+  console.log(tripled); // logs [3, 6]
+});
+
+
+// inside an async function
+(async () => {
+  const quadrupled = await AsyncAF(promises).mapAF(
+    el => el * 4
+  );
+  console.log(quadrupled); // logs [4, 8]
+})();</code></pre>
+    
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+
+    
+</article>
+
+</section>  
+
+
+
+
+
+        
+
+        <footer class="content-size">
+            <div class="footer">
+                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 16 2018 00:58:48 GMT-0700 (PDT)
+            </div>
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/main.js"></script>
+</body>
+</html>
