@@ -45,6 +45,7 @@
     "no-shadow": "off",
     "no-unused-expressions": "off",
     "func-names": ["error", "as-needed"],
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "prefer-rest-params": "off"
   }
 }
