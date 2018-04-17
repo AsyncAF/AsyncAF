@@ -55,8 +55,10 @@
     "test:base": "mocha --require @babel/register --require @babel/polyfill --recursive -R nyan --inline-diffs",
     "build:watch": "npm run build:dev -- --watch",
     "test:watch": "npm run test:base -- --watch",
-    "docs": "echo 'generating docs...\n' && jsdoc -c jsdoc.conf.js -R README.md",
-    "postdocs": "echo done! please open 'file://'$(pwd)'/docs/out/index.html' in the browser for a preview"
+    "docs": "echo '\ngenerating docs...\n' && jsdoc -c docs/jsdoc.conf.js -R README.md",
+    "postdocs": "echo \"\ndone!\n\nplease open file://\"$(pwd)\"/docs/out/index.html in the browser or run '$ npm run docs:open' for a preview\n\nif satisfied, run '$ npm run docs:publish' to commit and push to your fork's gh-pages branch\n\"",
+    "docs:open": "opener file://$(pwd)/docs/out/index.html",
+    "docs:publish": "gh-pages -x -d docs/out -m 'auto-generated commit' && echo \"\n docs published to your fork's gh-pages branch\n\""
   },
   "babel": {
     "presets": [
@@ -81,12 +83,14 @@
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
+    "gh-pages": "^1.1.0",
     "ink-docstrap": "^1.3.2",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
     "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "nyc": "^11.6.0",
+    "opener": "^1.4.3",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0",
     "tui-jsdoc-template": "^1.2.2",
