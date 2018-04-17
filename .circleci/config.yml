@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    branches:
+      ignore: gh-pages
+    steps:
+      - run:
+          name: Skipping tests on gh-pages branch
+          command: echo ""
