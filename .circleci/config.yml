@@ -1,6 +1,10 @@
 version: 2
 jobs:
   build:
+    filters:
+      branches:
+        ignore:
+          - gh-pages
     working_directory: ~/tmp
     docker:
       - image: circleci/node:9.7.1
