@@ -7,3 +7,4 @@ logAFOptions/
 reduceAF.js
 dist/
 coverage/
+docs/out/

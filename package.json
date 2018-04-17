@@ -55,12 +55,10 @@
     "test:base": "mocha --require @babel/register --require @babel/polyfill --recursive -R nyan --inline-diffs",
     "build:watch": "npm run build:dev -- --watch",
     "test:watch": "npm run test:base -- --watch",
-    "docs": "echo 'generating docs...\n' && jsdoc -c jsdoc.conf.js -R README.md",
-    "postdocs": "echo done! please open 'file://'$(pwd)'/docs/out/index.html' in the browser for a preview",
-    "docs:tui": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/tui-jsdoc-template -d docs/tui",
-    "docs:minami": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/minami -d docs/minami",
-    "docs:pixi": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/@pixi/jsdoc-template -d docs/pixi",
-    "docs:docstrap": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/ink-docstrap/template -d docs/docstrap"
+    "docs": "echo '\ngenerating docs...\n' && jsdoc -c docs/jsdoc.conf.js -R README.md",
+    "postdocs": "echo \"\ndone!\n\nplease open file://\"$(pwd)\"/docs/out/index.html in the browser or run '$ npm run docs:open' for a preview\n\nif satisfied, run '$ npm run docs:publish' to commit and push to your fork's gh-pages branch\n\"",
+    "docs:open": "opener file://$(pwd)/docs/out/index.html",
+    "docs:publish": "gh-pages -x -d docs/out -m 'auto-generated commit' && echo \"\n docs published to your fork's gh-pages branch\n\""
   },
   "babel": {
     "presets": [
@@ -74,7 +72,6 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "@babel/register": "^7.0.0-beta.42",
     "@babel/runtime": "^7.0.0-beta.42",
-    "@pixi/jsdoc-template": "^2.4.0",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.1.2",
@@ -85,15 +82,14 @@
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
-    "ink-docstrap": "^1.3.2",
+    "gh-pages": "^1.1.0",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
-    "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "nyc": "^11.6.0",
+    "opener": "^1.4.3",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0",
-    "tui-jsdoc-template": "^1.2.2",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
