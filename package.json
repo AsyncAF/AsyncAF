@@ -56,11 +56,7 @@
     "build:watch": "npm run build:dev -- --watch",
     "test:watch": "npm run test:base -- --watch",
     "docs": "echo 'generating docs...\n' && jsdoc -c jsdoc.conf.js -R README.md",
-    "postdocs": "echo done! please open 'file://'$(pwd)'/docs/out/index.html' in the browser for a preview",
-    "docs:tui": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/tui-jsdoc-template -d docs/tui",
-    "docs:minami": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/minami -d docs/minami",
-    "docs:pixi": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/@pixi/jsdoc-template -d docs/pixi",
-    "docs:docstrap": "jsdoc -c jsdoc.conf.js -R README.md -t node_modules/ink-docstrap/template -d docs/docstrap"
+    "postdocs": "echo done! please open 'file://'$(pwd)'/docs/out/index.html' in the browser for a preview"
   },
   "babel": {
     "presets": [
