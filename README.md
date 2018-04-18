@@ -8,7 +8,11 @@
 [![MIT License](https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa)](https://github.com/AsyncAF/AsyncAF/blob/master/README.md#license)
 <!-- [![license scan](https://img.shields.io/badge/license%20scan-passing-brightgreen.svg?style=for-the-badge)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/) -->
 
-(README in progress...check back another time for beautiful documentation!)
+README in progress...come back another time to lay eyes on the most beautiful documentation you've ever seen! 😍
+
+In the meantime, <a href="https://asyncaf.github.io/AsyncAF/AsyncAF.html" target="_blank">
+  check out the docs
+</a>! 🚀
 
 ## License
 AsyncAF is licensed under the [MIT License](https://choosealicense.com/licenses/mit/), so you can pretty much use it however you want
