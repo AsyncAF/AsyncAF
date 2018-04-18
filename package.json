@@ -44,7 +44,7 @@
   "scripts": {
     "start": "concurrently \"npm run build:watch\" \"npm run test:watch\"",
     "test": "npm run build:dev && npm run test:base",
-    "cover": "npm run build:dev -- --env.cover && echo \"\nrunning tests & creating coverage report...\n\" && nyc --check-coverage -- npm run test:base || npm run cover:link",
+    "cover": "npm run build:dev -- --env.cover && echo \"\nrunning tests & creating coverage report...\n\" && nyc --check-coverage -- npm run test:base; npm run cover:link",
     "lint": "echo \"\neslint's a linting...\n\" && eslint . --ext .js",
     "build": "webpack --mode development --env.legacy && webpack --mode development --env.modern && webpack --mode production --env.legacy && webpack --mode production --env.modern",
     "precover": "echo \"\nbuilding modern package...\n\"",
