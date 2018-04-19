@@ -11,8 +11,10 @@
 README in progress...come back another time to lay eyes on the most beautiful documentation you've ever seen! 😍
 
 In the meantime, <a href="https://asyncaf.github.io/AsyncAF/AsyncAF.html" target="_blank">
-  check out the docs
-</a>! 🚀
+  check out the docs!
+</a> 🚀
+
+Or, [see how to contribute.](https://github.com/AsyncAF/AsyncAF/blob/master/CONTRIBUTING.md) 💙
 
 ## License
 AsyncAF is licensed under the [MIT License](https://choosealicense.com/licenses/mit/), so you can pretty much use it however you want
