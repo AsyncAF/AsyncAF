@@ -8,13 +8,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package-lock.json" }}
-            - v2-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run:
           name: installing dev dependencies...
-          command: npm ci
+          command: npm install
       - save_cache:
-          key: v2-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
               - ./node_modules
       - run:
