@@ -1,9 +1,71 @@
-module.exports = {
-  'async-af': './lib/AsyncAF',
-  'async-af.wrapper': './lib/AsyncAfWrapper',
-  'async-af.log': './lib/methods/other/logAF',
-  // 'async-af/arrays': 'AsyncAF.arrays.js',
-  'async-af.map': './lib/methods/arrays/mapAF',
-  'async-af.forEach': './lib/methods/arrays/forEachAF',
-  'async-af.filter': './lib/methods/arrays/filterAF',
+const {name: libName} = require('./package.json');
+
+/* eslint-disable import/first */
+const libPath = './lib/';
+
+/* ____________________________
+  |           CLASSES          |
+  |____________________________| */
+
+const classes = [
+  [`${libName}`, `${libPath}AsyncAF`],
+  [`${libName}.wrapper`, `${libPath}AsyncAfWrapper`],
+];
+
+/* ____________________________
+  |         COLLECTIONS        |
+  |____________________________| */
+
+// import arrays from './lib/collections/arrays';
+
+// const collectionPath = `${libPath}collections/`;
+
+const collections = [
+  // [`${libName}.arrays`, `${collectionPath}arrays`],
+];
+
+/* ____________________________
+  |       STATIC METHODS       |
+  |____________________________| */
+
+import logAF from './lib/methods/other/logAF';
+
+const otherPath = `${libPath}methods/other/`;
+
+const staticMethods = [
+  [`${libName}.log`, `${otherPath + logAF.name}`, logAF],
+];
+
+/* ____________________________
+  |      PROTOTYPE METHODS     |
+  |____________________________| */
+
+import mapAF from './lib/methods/arrays/mapAF';
+import forEachAF from './lib/methods/arrays/forEachAF';
+import filterAF from './lib/methods/arrays/filterAF';
+
+const arrayPath = `${libPath}methods/arrays/`;
+
+const prototypeMethods = [
+  [`${libName}.map`, `${arrayPath + mapAF.name}`, mapAF],
+  [`${libName}.forEach`, `${arrayPath + forEachAF.name}`, forEachAF],
+  [`${libName}.filter`, `${arrayPath + filterAF.name}`, filterAF],
+];
+
+export default [
+  ...classes,
+  ...collections,
+  ...staticMethods,
+  ...prototypeMethods,
+];
+
+/* eslint-disable-next-line no-unused-vars */
+const pluckMethods = packages => packages.map(([pkg, file, method]) => method);
+
+const staticMethodsOnly = pluckMethods(staticMethods);
+const prototypeMethodsOnly = pluckMethods(prototypeMethods);
+
+export {
+  staticMethodsOnly as staticMethods,
+  prototypeMethodsOnly as prototypeMethods,
 };

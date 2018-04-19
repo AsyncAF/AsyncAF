@@ -8,3 +8,4 @@ reduceAF.js
 dist/
 coverage/
 docs/out/
+lib/methods/arrays/sumAF.js

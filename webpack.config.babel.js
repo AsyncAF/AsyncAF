@@ -1,17 +1,17 @@
-const path = require('path');
+import path from 'path';
 
-const packages = require('./packageList');
-const {
+import packages from './packageList';
+import {
   libName,
   moduleProp,
   minify,
   banner,
-} = require('./webpack.parts');
+} from './webpack.parts';
 
-module.exports = ({modern, cover}, {mode, cache}) => ({
+export default ({modern, cover}, {mode, cache}) => ({
   mode,
-  entry: Object.entries(packages).reduce((entries, [pkg, file]) => (
-    {...entries, [pkg]: path.resolve(file)}
+  entry: packages.reduce((pkgs, [pkg, file]) => (
+    {...pkgs, [pkg]: path.resolve(file)}
   ), {}),
   devtool: 'source-map',
   output: {

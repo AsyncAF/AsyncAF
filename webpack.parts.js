@@ -1,5 +1,5 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const {BannerPlugin} = require('webpack');
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import {BannerPlugin} from 'webpack';
 
 const {
   name: libName,
@@ -73,7 +73,7 @@ const banner = new BannerPlugin({
   entryOnly: true,
 });
 
-module.exports = {
+export {
   libName,
   moduleProp,
   minify,
