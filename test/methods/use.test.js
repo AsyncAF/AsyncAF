@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 
-import AsyncAF from '../../dist/async-af';
-import AsyncAfWrapper from '../../dist/async-af.wrapper';
-import forEachAF from '../../dist/async-af.forEach';
-import mapAF from '../../dist/async-af.map';
-import logAF from '../../dist/async-af.log';
+import AsyncAF from '../../dist/async-af/async-af';
+import AsyncAfWrapper from '../../dist/async-af.wrapper/async-af.wrapper';
+import forEachAF from '../../dist/async-af.forEach/async-af.forEach';
+import mapAF from '../../dist/async-af.map/async-af.map';
+import logAF from '../../dist/async-af.log/async-af.log';
 
 describe('use method', () => {
   it('should be available on AsyncAF', () => {

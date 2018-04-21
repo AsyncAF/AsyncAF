@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import {logAF} from '../../dist/async-af';
+import {logAF} from '../../dist/async-af/async-af';
 
 chai.use(sinonChai);
 

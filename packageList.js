@@ -7,9 +7,11 @@ const libPath = './lib/';
   |           CLASSES          |
   |____________________________| */
 
+const classPath = `${libPath}classes/`;
+
 const classes = [
-  [`${libName}`, `${libPath}AsyncAF`],
-  [`${libName}.wrapper`, `${libPath}AsyncAfWrapper`],
+  [`${libName}`, `${classPath}AsyncAF`],
+  [`${libName}.wrapper`, `${classPath}AsyncAfWrapper`],
 ];
 
 /* ____________________________
