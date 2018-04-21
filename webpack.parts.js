@@ -69,7 +69,7 @@ const minify = () => ({
 });
 
 const banner = new BannerPlugin({
-  banner: `${libName} ${description}\n\n[file] v${version}\n\nCopyright (c) 2017-present, ${author}\n\nThis source code is licensed under the ${license} license found in the\nLICENSE file in the root directory of this source tree.`,
+  banner: `${libName} ${description}\n\n[filebase] v${version}\n\nCopyright (c) 2017-present, ${author}\n\nThis source code is licensed under the ${license} license found in the\nLICENSE file in the root directory of this source tree.`,
   entryOnly: true,
 });
 
