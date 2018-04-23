@@ -18,7 +18,7 @@ Do whatever you like from the following choices:
 
 2. Open two terminal tabs and [run `$ npm run build:watch`](#-npm-start-) in one and [run `$ npm run test:watch`](#-npm-start-) in the other
 
-3. Build and test manually after making changes with `$ npm run build:dev` and [`$ npm test`](#-npm-test-)
+3. Build and test manually after making changes with [`$ npm test`](#-npm-test-)
 
 Setup Complete! 🚀
 
