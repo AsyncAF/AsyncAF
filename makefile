@@ -35,7 +35,8 @@ docs:
 	babel-node docs/custom/fixHashDot
 	babel-node docs/custom/fixThisArg
 	babel-node docs/custom/fixLogAfOptions
-	echo "done!\n\nplease open file\://"$(CURDIR)"/docs/out/index.html in the browser or run '$$ npm run docs:open' for a preview\n\nif satisfied, run '$$ npm run docs:publish' to commit and push to your fork's gh-pages branch\n"
+	babel-node docs/custom/fixEOF
+	echo "done!\n\nplease open file://"$(CURDIR)"/docs/out/index.html in the browser or run '$$ npm run docs:open' for a preview\n\nif satisfied, run '$$ npm run docs:publish' to commit and push to your fork's gh-pages branch\n"
 
 docs-publish:
 	gh-pages -x -d docs/out -m "auto-generated commit"
