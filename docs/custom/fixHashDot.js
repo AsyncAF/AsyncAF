@@ -1,6 +1,7 @@
-const fs = require('fs-extra');
+import fs from 'fs-extra';
 
 // simply to change '#.' to '#' for static methods, e.g., '#.logAF' -> '#logAF' for the sake of more easily linking to documentation programmatically
+
 fs.readdirSync('docs/out').filter(file => file.includes`.html`).forEach(file => {
   fs.readFile(`docs/out/${file}`, 'utf8')
     .then(html => html.replace(/#\./g, '#'))
