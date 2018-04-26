@@ -1,7 +1,8 @@
 module.exports = {
   plugins: [
     'plugins/markdown',
-    'docs/customizations/callbackFn.js',
+    'docs/custom/callbackFn.js',
+    'docs/custom/forceStatic.js',
   ],
   recurseDepth: 10,
   source: {

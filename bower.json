@@ -1,7 +1,7 @@
 {
   "name": "async-af",
   "description": "async/await fun",
-  "main": "AsyncAF.js",
+  "main": "dist/async-af/index.js",
   "authors": [
     "Scott Rudiger (https://github.com/ScottRudiger)"
   ],
@@ -33,7 +33,7 @@
     "splice",
     "toString"
   ],
-  "homepage": "https://github.com/AsyncAF/AsyncAF#readme",
+  "homepage": "https://asyncaf.github.io/AsyncAF/index.html",
   "repository": {
     "type": "git",
     "url": "git://github.com/AsyncAF/AsyncAF.git"
@@ -49,12 +49,9 @@
     ".eslintrc",
     ".gitignore",
     ".npmignore",
-    "forEachAF.js",
-    "reduceAF",
     "package-lock.json",
     "notes.txt",
-    "logAFOptions",
-    "webpack.config.js",
+    "webpack.config.babel.js",
     "webpack.parts.js",
     "packageList.js",
     ".circleci",
@@ -63,6 +60,11 @@
     ".editorconfig",
     ".npmrc",
     ".nycrc",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "docs",
+    "scripts",
+    "lerna.json",
+    "makefile",
+    "scratchPad.js"
   ]
 }
