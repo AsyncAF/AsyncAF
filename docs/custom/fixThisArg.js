@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 const file = 'docs/out/AsyncAF.html';
 
 const removeRestParams = html => html.replace(/&hellip;thisArg/g, 'thisArg');
-const removeRepeatable = (html, thisArg = 'thisArg<span class="signature-attr') => (
+const removeRepeatable = (html, thisArg = 'thisArg<span class=signature-attr') => (
   html.split(thisArg).map(part => part.replace('&lt;repeatable><br>', '')).join(thisArg)
 );
 const writeFile = html => fs.writeFile(file, html);
