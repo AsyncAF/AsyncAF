@@ -19,13 +19,18 @@ body {
   line-height: 160%;
 }
 
+img {
+  max-width: 100%;
+}
+
 a,
 a:active {
-  color: #606;
+  color: #37b8eb;
   text-decoration: none;
 }
 
 a:hover {
+  color: #c54141;
   text-decoration: none;
 }
 
@@ -46,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #000;
+  color: #334;
   font-weight: 400;
   margin: 0;
 }
@@ -79,8 +84,8 @@ h4 {
 }
 
 h4.name {
-  color: #fff;
-  background: #6d426d;
+  color: #EAE8FF;
+  background: #464d6b;
   box-shadow: 0 .25em .5em #d3d3d3;
   border-top: 1px solid #d3d3d3;
   border-bottom: 1px solid #d3d3d3;
@@ -89,7 +94,7 @@ h4.name {
 }
 
 h4.name a {
-  color: #fc83ff;
+  color: #3c83ff;
 }
 
 h4.name a:hover {
@@ -172,7 +177,7 @@ nav h3 {
   line-height: 24px;
   margin: 15px 0 10px;
   padding: 0;
-  color: #000;
+  color: #334;
 }
 
 nav ul {
@@ -195,7 +200,7 @@ nav ul a:active {
 
 nav a:hover,
 nav a:active {
-  color: #606;
+  color: #c54141;
 }
 
 nav > ul {
@@ -203,7 +208,8 @@ nav > ul {
 }
 
 nav > ul > li > a {
-  color: #606;
+  color: #6e85abcc;
+  font-size: 16px;
 }
 
 nav ul ul {
@@ -215,8 +221,9 @@ nav ul ul + ul {
 }
 
 nav ul ul a {
-  color: hsl(207, 1%, 60%);
+  color: #ADACB5;
   border-left: 1px solid hsl(207, 10%, 86%);
+  font-size: 12.8px;
 }
 
 nav ul ul a,
@@ -233,11 +240,17 @@ nav h2 {
 nav > h2 > a {
    display: block;
    margin: 10px 0 -10px;
-   color: #606 !important;
+   color: #535664 !important;
+   font-size: 14px;
+   font-weight: bold;
+}
+
+nav > h2 > a:hover {
+  color: #c54141 !important;
 }
 
 footer {
-  color: hsl(0, 0%, 28%);
+  color: #ADACB5;
   margin-left: 250px;
   display: block;
   padding: 15px;
@@ -267,11 +280,11 @@ footer {
 }
 
 .type-signature {
-  color: #CA79CA
+  color: #b0d7ffa6;
 }
 
 .type-signature:last-child {
-  color: #eee;
+  color: #EAE8FF;
 }
 
 .name, .signature {
@@ -279,7 +292,7 @@ footer {
 }
 
 .signature {
-    color: #fc83ff;
+    color: #B0D7FF;
 }
 
 .details {
@@ -344,7 +357,7 @@ footer {
 .prettyprint code {
   line-height: 18px;
   display: block;
-  background-color: #0d152a;
+  background-color: #2D3142;
   color: #4D4E53;
 }
 
@@ -449,7 +462,7 @@ footer {
 }
 
 span.param-type, .params td .param-type, .param-type dd {
-   color: #606;
+   color: #4f4da3;
   font-family: Consolas, Monaco, 'Andale Mono', monospace
 }
 
