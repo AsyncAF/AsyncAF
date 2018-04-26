@@ -40,7 +40,7 @@ docs:
 	echo "done!\n\nplease open file://"$(CURDIR)"/docs/out/index.html in the browser\nor run '$$ npm run docs:open' for a preview\n\nif satisfied, run '$$ npm run docs:publish' to commit and push to your fork's gh-pages branch\n"
 
 docs-publish:
-	gh-pages -x -d docs/out -m "auto-generated commit"
+	gh-pages -x -a -d docs/out -m "auto-generated commit"
 	echo "\n docs published to your fork's gh-pages branch\n"
 
 build-package.jsons:
