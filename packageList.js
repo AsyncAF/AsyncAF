@@ -1,17 +1,18 @@
-const {name: libName} = require('./package.json');
-
 /* eslint-disable import/first */
+const libName = 'async-af';
 const libPath = './lib/';
 
 /* ____________________________
   |           CLASSES          |
   |____________________________| */
 
+import AsyncAfWrapper from './lib/classes/AsyncAfWrapper';
+
 const classPath = `${libPath}classes/`;
 
 const classes = [
   [`${libName}`, `${classPath}AsyncAF`],
-  [`${libName}.wrapper`, `${classPath}AsyncAfWrapper`],
+  [`@${libName}/wrapper`, `${classPath}AsyncAfWrapper`, AsyncAfWrapper],
 ];
 
 /* ____________________________
@@ -23,7 +24,7 @@ const classes = [
 // const collectionPath = `${libPath}collections/`;
 
 const collections = [
-  // [`${libName}.arrays`, `${collectionPath}arrays`],
+  // [`@${libName}/arrays`, `${collectionPath}arrays`],
 ];
 
 /* ____________________________
@@ -35,7 +36,7 @@ import logAF from './lib/methods/other/logAF';
 const otherPath = `${libPath}methods/other/`;
 
 const staticMethods = [
-  [`${libName}.log`, `${otherPath + logAF.name}`, logAF],
+  [`@${libName}/log`, `${otherPath}logAF`, logAF],
 ];
 
 /* ____________________________
@@ -49,9 +50,9 @@ import filterAF from './lib/methods/arrays/filterAF';
 const arrayPath = `${libPath}methods/arrays/`;
 
 const prototypeMethods = [
-  [`${libName}.map`, `${arrayPath + mapAF.name}`, mapAF],
-  [`${libName}.forEach`, `${arrayPath + forEachAF.name}`, forEachAF],
-  [`${libName}.filter`, `${arrayPath + filterAF.name}`, filterAF],
+  [`@${libName}/map`, `${arrayPath}mapAF`, mapAF],
+  [`@${libName}/forEach`, `${arrayPath}forEachAF`, forEachAF],
+  [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
 ];
 
 export default [

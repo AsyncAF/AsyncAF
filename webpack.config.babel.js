@@ -16,10 +16,9 @@ export default ({modern, cover}, {mode, cache}) => ({
   devtool: 'source-map',
   output: {
     path: path.resolve('dist'),
-    filename: `[name]${
-      (modern ? '' : '.legacy')
-      +
-      (mode === 'production' ? '.min' : '')
+    filename: ({chunk}) => `${chunk.name}/${
+      (modern ? '' : 'legacy/') +
+      (mode === 'production' ? 'min' : 'index')
     }.js`,
     library: [libName, '[name]'],
     libraryTarget: 'umd',

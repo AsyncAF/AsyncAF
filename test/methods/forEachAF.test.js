@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 
-import AsyncAF from '../../dist/async-af/async-af';
+import AsyncAF from '../../dist/async-af';
 
 chai.use(chaiAsPromised);
 
