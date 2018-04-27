@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: circleci/node:10.0.0
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
