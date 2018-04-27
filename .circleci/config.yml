@@ -12,7 +12,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: updating npm...
-          command: npm i -g npm
+          command: sudo npm i -g npm
       - run:
           name: installing dev dependencies...
           command: npm ci
