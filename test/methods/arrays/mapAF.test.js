@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 
-const AsyncAF = require('../../dist/async-af');
+const AsyncAF = require('../../../dist/async-af');
 
 describe('mapAF method', () => {
   it('should have the same arity as native map', () => {
