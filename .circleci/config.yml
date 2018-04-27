@@ -4,10 +4,6 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: circleci/node:9.11.1
-    dependencies:
-        cache_directories:
-            - /home/ubuntu/nvm/versions/node/9.11.1/bin
-            - /home/ubuntu/nvm/versions/node/9.11.1/lib/node_modules
     steps:
       - checkout
       - restore_cache:
