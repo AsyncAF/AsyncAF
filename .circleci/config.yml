@@ -3,13 +3,20 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:9.11.1
+    dependencies:
+        cache_directories:
+            - /home/ubuntu/nvm/versions/node/9.11.1/bin
+            - /home/ubuntu/nvm/versions/node/9.11.1/lib/node_modules
     steps:
       - checkout
       - restore_cache:
           keys:
             - v2-dependencies-{{ checksum "package-lock.json" }}
             - v2-dependencies-
+      - run:
+          name: updating npm...
+          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then npm i -g npm; else echo "pulling from cache"; fi
       - run:
           name: installing dev dependencies...
           command: npm ci
