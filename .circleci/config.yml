@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/tmp
+    working_directory: ~/AsyncAF
     docker:
       - image: circleci/node:9.11.1
     steps:
