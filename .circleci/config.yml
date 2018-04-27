@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/AsyncAF
     docker:
-      - image: circleci/node:9.11.1
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
@@ -12,7 +12,7 @@ jobs:
             - v2-dependencies-
       - run:
           name: updating npm...
-          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "pulling from cache"; fi
+          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "Node.js Docker Team finally decided to include npm v6+ in latest image; you can remove this script now"; fi
       - run:
           name: installing dev dependencies...
           command: npm ci
