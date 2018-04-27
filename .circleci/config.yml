@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: circleci/node:9.7.1
+      - image: circleci/node:10.0.0
     steps:
       - checkout
       - restore_cache:
@@ -11,8 +11,11 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run:
+          name: updating npm...
+          command: npm i -g npm
+      - run:
           name: installing dev dependencies...
-          command: npm install
+          command: npm ci
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
