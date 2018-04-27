@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import {logAF} from '../../dist/async-af';
+import {logAF} from '../../../dist/async-af';
 
 chai.use(sinonChai);
 
@@ -81,8 +81,7 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: 'path'});
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
-          // /^@\/.+\/(\w|\.)+.js:\d+:\d+:(\n|\r)$/,
-          /^@\/.+\/test\/methods\/logAF.test.js:\d+:\d+:(\n|\r)$/,
+          /^@\/.+\/AsyncAF\/test\/methods\/other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
           'path',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
@@ -91,8 +90,7 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: 'parent'});
         await logAfStub('parent');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
-          // /^@\w+\/(\w|\.)+.js:\d+:\d+:(\n|\r)$/,
-          /^@methods\/logAF.test.js:\d+:\d+:(\n|\r)$/,
+          /^@other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
           'parent',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
@@ -150,7 +148,7 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: 'custom=`${parent}`'});
         await logAfStub('parent');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
-          'methods/',
+          'other/',
           'parent',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
@@ -168,8 +166,7 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: 'custom=`${path}`'});
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
-          // /^\/.+\/$/,
-          /^\/.+\/test\/methods\//,
+          /^\/.+\/AsyncAF\/test\/methods\//,
           'path',
           /^(\n|\r)in \d\.\d{3} secs$/,
         );

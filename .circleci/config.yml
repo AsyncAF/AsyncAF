@@ -1,20 +1,23 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/tmp
+    working_directory: ~/AsyncAF
     docker:
-      - image: circleci/node:9.7.1
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package-lock.json" }}
+            - v2-dependencies-
+      - run:
+          name: updating npm...
+          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "Node.js Docker Team finally decided to include npm v6+ in latest image; you can remove this script now"; fi
       - run:
           name: installing dev dependencies...
-          command: npm install
+          command: npm ci
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package-lock.json" }}
           paths:
               - ./node_modules
       - run:
