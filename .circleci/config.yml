@@ -16,7 +16,7 @@ jobs:
             - v2-dependencies-
       - run:
           name: updating npm...
-          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then npm i -g npm; else echo "pulling from cache"; fi
+          command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "pulling from cache"; fi
       - run:
           name: installing dev dependencies...
           command: npm ci
