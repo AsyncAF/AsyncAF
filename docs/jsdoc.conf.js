@@ -1,3 +1,5 @@
+const title = require('../package.json').keywords[0];
+
 module.exports = {
   plugins: [
     'plugins/markdown',
@@ -27,6 +29,7 @@ module.exports = {
     destination: 'docs/out',
     encoding: 'utf8',
     template: 'node_modules/docdash',
+    mainpagetitle: title,
   },
   docdash: {
     sort: false,
