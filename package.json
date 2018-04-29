@@ -56,7 +56,8 @@
     "build:watch": "npm run build:dev -- --watch",
     "docs": "make docs",
     "docs:open": "opener file://$(pwd)/docs/out/index.html",
-    "docs:publish": "make docs-publish"
+    "docs:publish": "make docs-publish",
+    "commitmsg": "make commit"
   },
   "babel": {
     "presets": [
@@ -64,6 +65,11 @@
     ],
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
     ]
   },
   "devDependencies": {
@@ -75,6 +81,8 @@
     "@babel/preset-env": "^7.0.0-beta.46",
     "@babel/register": "^7.0.0-beta.46",
     "@babel/runtime": "^7.0.0-beta.46",
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-conventional": "^6.1.3",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^4.1.6",
     "chai": "^4.1.2",
@@ -87,6 +95,7 @@
     "eslint-plugin-import": "^2.11.0",
     "fs-extra": "^5.0.0",
     "gh-pages": "^1.1.0",
+    "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
     "lerna": "^2.11.0",
