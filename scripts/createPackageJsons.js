@@ -18,14 +18,14 @@ packages.forEach(([pkgName, , member]) => {
     name: pkgName.toLowerCase(),
     description: pkgName === libName
       ? description
-      : `standalone ${libName} package: ${member.name} (${
+      : `standalone ${keywords[0]} package: ${member.name} (${
         member.name.includes`Wrapper`
           ? homepage.replace('index', member.name)
           : homepage.replace('index.html', `AsyncAF.html#${member.name}`)
       })`,
     author,
-    version,
     license,
+    version,
     homepage,
     bugs,
     repository,
