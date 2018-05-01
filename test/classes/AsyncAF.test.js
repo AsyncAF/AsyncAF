@@ -21,10 +21,19 @@ describe('full AsyncAF class', () => {
     const a = AsyncAF();
     it('mapAF', () => expect(a.mapAF).to.be.ok);
     it('filterAF', () => expect(a.filterAF).to.be.ok);
+    it('forEachAF', () => expect(a.forEachAF).to.be.ok);
   });
 
   context('should have access to static methods', () => {
     it('logAF', () => expect(AsyncAF.logAF).to.be.ok);
+  });
+
+  context("should have access to 'AF-less' aliases", () => {
+    const a = AsyncAF();
+    it('map', () => expect(a.map).to.be.ok);
+    it('filter', () => expect(a.filter).to.be.ok);
+    it('forEach', () => expect(a.forEach).to.be.ok);
+    it('log', () => expect(AsyncAF.log).to.be.ok);
   });
 
   context('should have methods then and catch', () => {
