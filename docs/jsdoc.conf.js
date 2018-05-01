@@ -18,7 +18,7 @@ module.exports = {
     dictionaries: ['jsdoc', 'closure'],
   },
   templates: {
-    cleverLinks: true,
+    cleverLinks: false,
     monospaceLinks: false,
     default: {
       outputSourceFiles: false,
