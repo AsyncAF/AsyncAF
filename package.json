@@ -57,7 +57,6 @@
     "docs": "make docs",
     "docs:open": "opener file://$(pwd)/docs/out/index.html",
     "docs:publish": "make docs-publish",
-    "commitmsg": "make commit",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "babel": {
@@ -72,6 +71,11 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "make commit"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
