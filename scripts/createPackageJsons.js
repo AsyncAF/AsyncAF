@@ -31,6 +31,11 @@ packages.forEach(([pkgName, , member]) => {
     repository,
     keywords,
     main: 'index.js',
+    files: [
+      'index*',
+      'min*',
+      'legacy/**',
+    ],
     publishConfig: {
       access: 'public',
     },
