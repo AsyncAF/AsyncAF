@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 
+/* eslint-disable import/first, import/extensions, import/no-unresolved */
+
 import AsyncAfModern from '../dist/async-af';
 import AsyncAfModernMin from '../dist/async-af/min';
 import AsyncAfLegacy from '../dist/async-af/legacy';
 import AsyncAfLegacyMin from '../dist/async-af/legacy/min';
-
-/* eslint-disable import/first */
 
 describe('AsyncAF class should be available in', () => {
   it('AsyncAfModern', () => expect(AsyncAfModern()).to.be.an.instanceOf(AsyncAfModern));
