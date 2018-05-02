@@ -5,7 +5,7 @@
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
-  "version": "3.0.0-prerelease.2",
+  "version": "3.0.0-prerelease.3",
   "homepage": "https://asyncaf.github.io/AsyncAF/index.html",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
@@ -48,6 +48,7 @@
     "test": "make test",
     "test:base": "mocha -r @babel/register -r @babel/polyfill --recursive -R nyan --inline-diffs",
     "test:watch": "npm run test:base -- --watch",
+    "test:built": "make test-built",
     "cover": "make cover",
     "cover:open": "opener file://$(pwd)/coverage/lcov-report/index.html",
     "lint": "make lint",

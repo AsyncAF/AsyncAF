@@ -56,13 +56,16 @@ const minify = () => ({
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
+          unsafe: true,
           passes: 2,
         },
         mangle: {
-          toplevel: true,
           // safari10: true, // revisit after cross-env testing
         },
+        keep_fnames: true,
+        keep_classnames: false,
         minimize: true,
+        toplevel: true,
       },
       parallel: true,
       sourceMap: true,

@@ -29,6 +29,10 @@ build:
 	webpack --mode production --env.modern
 	echo "\n\033[0;36mbuilds complete!\033[0m 📦\n"
 
+test-built:
+	npm run build
+	mocha -r @babel/register -r @babel/polyfill --recursive -R nyan --inline-diffs testBuilt/**.js
+
 docs:
 	echo "\ngenerating docs... 📝\n"
 	jsdoc -c docs/jsdoc.conf.js -R README.md
