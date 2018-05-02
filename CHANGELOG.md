@@ -1,3 +1,22 @@
+<a name="3.0.0-prerelease.3"></a>
+# [3.0.0-prerelease.3](https://github.com/AsyncAF/AsyncAF/compare/v2.0.0...v3.0.0-prerelease.3) (2018-05-02)
+
+
+### Bug Fixes
+
+* don't mangle function names to prevent bugs in minified files ([31bd350](https://github.com/AsyncAF/AsyncAF/commit/31bd350))
+
+
+### Code Refactoring
+
+* **bower:** delete bower.json & stop releasing to bower ([93acf2a](https://github.com/AsyncAF/AsyncAF/commit/93acf2a))
+
+
+### BREAKING CHANGES
+
+* **bower:** updates no longer released to bower
+
+
 <a name="3.0.0-prerelease.2"></a>
 # [3.0.0-prerelease.2](https://github.com/AsyncAF/AsyncAF/compare/v2.0.0...v3.0.0-prerelease.2) (2018-05-01)
 
