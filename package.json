@@ -48,6 +48,7 @@
     "test": "make test",
     "test:base": "mocha -r @babel/register -r @babel/polyfill --recursive -R nyan --inline-diffs",
     "test:watch": "npm run test:base -- --watch",
+    "test:built": "make test-built",
     "cover": "make cover",
     "cover:open": "opener file://$(pwd)/coverage/lcov-report/index.html",
     "lint": "make lint",
