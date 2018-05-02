@@ -3,6 +3,8 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import {logAF} from '../../../dist/async-af';
+import log from '../../../dist/@async-af/log';
+import AsyncAfWrapper from '../../../dist/@async-af/wrapper';
 
 chai.use(sinonChai);
 
@@ -188,5 +190,36 @@ describe('logAF static method', () => {
         /^(\n|\r)in \d\.\d{3} secs$/,
       );
     });
+  });
+});
+
+describe('@async-af/log separate package', () => {
+  let wrappedLogStub;
+  let logStub;
+  const nums = [1, 2].map(n => Promise.resolve(n));
+
+  beforeEach(() => {
+    wrappedLogStub = sinon.stub();
+    logStub = Object.assign(log, {wrappedLog: wrappedLogStub});
+    logStub.options.reset();
+  });
+  it('should work when called directly', async () => {
+    await logStub(...nums);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
+      1,
+      2,
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+  it('should work when added to AsyncAfWrapper', async () => {
+    AsyncAfWrapper.log = logStub;
+    await AsyncAfWrapper.log(...nums);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
+      1,
+      2,
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
   });
 });

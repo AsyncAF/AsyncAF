@@ -1,3 +1,14 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/AsyncAF/AsyncAF/compare/v2.0.0...v3.0.0) (2018-05-02)
+
+
+### Bug Fixes
+
+* **log:** fixed case where logAF would throw when aliased
+
+  specifically, calling an aliased logAF added as a static method to AsyncAfWrapper ([e511ec5](https://github.com/AsyncAF/AsyncAF/commit/e511ec5))
+
+
 <a name="3.0.0-prerelease.3"></a>
 # [3.0.0-prerelease.3](https://github.com/AsyncAF/AsyncAF/compare/v2.0.0...v3.0.0-prerelease.3) (2018-05-02)
 
