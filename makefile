@@ -22,6 +22,8 @@ lint:
 build:
 	rm -rf dist
 	make build-package.jsons
+	cp README.md dist/async-af
+	make build-READMEs
 	echo "\n\033[0;33mbuilding modern & legacy packages...\033[0m  🏗️\n"
 	webpack --mode development --env.legacy
 	webpack --mode development --env.modern
@@ -49,6 +51,9 @@ docs-publish:
 
 build-package.jsons:
 	babel-node scripts/createPackageJsons
+
+build-READMEs:
+	babel-node scripts/createREADMEs
 
 commit:
 	echo "\033[0;36menter commit msg following the angular convention ( \033[4;36mhttps://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit \033[0;36m)"

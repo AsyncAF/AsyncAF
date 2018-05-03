@@ -1,15 +1,19 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/AsyncAF
+  docker:
+    - image: circleci/node:latest
+
 jobs:
-  build:
-    working_directory: ~/AsyncAF
-    docker:
-      - image: circleci/node:latest
+  test:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package-lock.json" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "package-lock.json" }}
+            - v3-dependencies-
       - run:
           name: updating npm...
           command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "Node.js Docker Team finally decided to include npm v6+ in latest image; you can remove this script now"; fi
@@ -17,9 +21,9 @@ jobs:
           name: installing dev dependencies...
           command: npm ci
       - save_cache:
-          key: v2-dependencies-{{ checksum "package-lock.json" }}
+          key: v3-dependencies-{{ checksum "package-lock.json" }}
           paths:
-              - ./node_modules
+              - node_modules
       - run:
           name: checking coverage...
           command: npm run cover
@@ -32,3 +36,34 @@ jobs:
       - run:
           name: testing modern & legacy packages...
           command: npm run test:built
+      - persist_to_workspace:
+          root: ~/AsyncAF
+          paths: .
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/AsyncAF
+      - run:
+          name: authenticating with npm registry...
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/AsyncAF/.npmrc
+      - run:
+          name: publishing all packages...
+          command: npm run release
+
+workflows:
+  version: 2
+  test-publish:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+($|-prerelease\.\d+$)/
+      - publish:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+($|-prerelease\.\d+$)/
+            branches:
+              ignore: /.*/

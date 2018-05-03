@@ -3,8 +3,6 @@ node_modules/
 .nyc_output/
 notes.txt
 scratchPad.js
-logAFOptions/
-reduceAF.js
 dist/
 coverage/
 docs/out/
