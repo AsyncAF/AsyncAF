@@ -58,12 +58,12 @@ workflows:
       - test:
           filters:
             tags:
-              only: /^v.*/
+              only: /^v\d+\.\d+\.\d+($|-prerelease\.\d+$)/
       - publish:
           requires:
             - test
           filters:
             tags:
-              only: /^v.*/
+              only: /^v\d+\.\d+\.\d+($|-prerelease\.\d+$)/
             branches:
               ignore: /.*/
