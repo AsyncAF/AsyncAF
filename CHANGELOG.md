@@ -1,3 +1,12 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/AsyncAF/AsyncAF/compare/v3.0.0...v3.1.0) (2018-05-03)
+
+
+### Features
+
+* **reduce:** implement reduceAF method ([d67358a](https://github.com/AsyncAF/AsyncAF/commit/d67358a))
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/AsyncAF/AsyncAF/compare/v2.0.0...v3.0.0) (2018-05-02)
 
