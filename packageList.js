@@ -46,6 +46,7 @@ const staticMethods = [
 import mapAF from './lib/methods/arrays/mapAF';
 import forEachAF from './lib/methods/arrays/forEachAF';
 import filterAF from './lib/methods/arrays/filterAF';
+import reduceAF from './lib/methods/arrays/reduceAF';
 
 const arrayPath = `${libPath}methods/arrays/`;
 
@@ -53,6 +54,7 @@ const prototypeMethods = [
   [`@${libName}/map`, `${arrayPath}mapAF`, mapAF],
   [`@${libName}/forEach`, `${arrayPath}forEachAF`, forEachAF],
   [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
+  [`@${libName}/reduce`, `${arrayPath}reduceAF`, reduceAF],
 ];
 
 export default [
