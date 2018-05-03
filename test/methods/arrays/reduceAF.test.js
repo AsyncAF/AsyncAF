@@ -113,7 +113,7 @@ describe('reduceAF method', () => {
       'message',
       'Cannot read property \'reduceAF\' of null',
     );
-    await expect(AsyncAF(undefined).reduceAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
+    await expect(AsyncAF().reduceAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
       'message',
       'Cannot read property \'reduceAF\' of undefined',
     );
