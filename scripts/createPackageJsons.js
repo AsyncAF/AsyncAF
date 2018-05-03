@@ -35,6 +35,7 @@ packages.forEach(([pkgName, , member]) => {
       'index*',
       'min*',
       'legacy/**',
+      'README.md',
     ],
     publishConfig: {
       access: 'public',
