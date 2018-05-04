@@ -38,7 +38,14 @@ jobs:
           command: npm run test:built
       - persist_to_workspace:
           root: ~/AsyncAF
-          paths: .
+          paths:
+            - ./circleci/*
+            - ./package.json
+            - ./package-lock.json
+            - ./node_modules/*
+            - ./dist/*
+            - ./.npmrc
+            - ./lerna.json
   publish:
     <<: *defaults
     steps:
@@ -46,7 +53,7 @@ jobs:
           at: ~/AsyncAF
       - run:
           name: authenticating with npm registry...
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ./.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
           name: publishing all packages...
           command: npm run release
