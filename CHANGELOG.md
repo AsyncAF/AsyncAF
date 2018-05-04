@@ -1,3 +1,7 @@
+<a name="3.2.3"></a>
+# [3.2.3](https://github.com/AsyncAF/AsyncAF/compare/v3.2.2...v3.2.3) (2018-05-04)
+
+
 <a name="3.2.2"></a>
 # [3.2.2](https://github.com/AsyncAF/AsyncAF/compare/v3.2.1...v3.2.2) (2018-05-04)
 
