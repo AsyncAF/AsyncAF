@@ -59,7 +59,7 @@
     "docs:open": "opener file://$(pwd)/docs/out/index.html",
     "docs:publish": "make docs-publish",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "lerna exec -- npm publish"
+    "release": "lerna exec --concurrency 1 -- npm publish"
   },
   "babel": {
     "presets": [
