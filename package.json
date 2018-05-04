@@ -5,7 +5,7 @@
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "homepage": "https://asyncaf.github.io/AsyncAF/index.html",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
@@ -59,7 +59,7 @@
     "docs:open": "opener file://$(pwd)/docs/out/index.html",
     "docs:publish": "make docs-publish",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "lerna exec --concurrency 1 -- npm publish"
+    "release": "lerna exec -- npm publish"
   },
   "babel": {
     "presets": [
