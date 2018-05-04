@@ -37,8 +37,8 @@ jobs:
           name: testing modern & legacy packages...
           command: npm run test:built
       - persist_to_workspace:
-          root: ~/AsyncAF
-          paths: .
+          root: ~/
+          paths: ~/
   publish:
     <<: *defaults
     steps:
@@ -46,7 +46,7 @@ jobs:
           at: ~/AsyncAF
       - run:
           name: authenticating with npm registry...
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/AsyncAF/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
           name: publishing all packages...
           command: npm run release
