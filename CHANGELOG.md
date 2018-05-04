@@ -1,3 +1,12 @@
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/AsyncAF/AsyncAF/compare/v3.1.0...v3.2.0) (2018-05-03)
+
+
+### Features
+
+* **every:** implement everyAF method ([ee24c58](https://github.com/AsyncAF/AsyncAF/commit/ee24c58))
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/AsyncAF/AsyncAF/compare/v3.0.0...v3.1.0) (2018-05-03)
 
