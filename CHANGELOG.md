@@ -1,3 +1,12 @@
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/AsyncAF/AsyncAF/compare/v3.2.5...v3.3.0) (2018-05-05)
+
+
+### Features
+
+* **some:** implement someAF method ([f119291](https://github.com/AsyncAF/AsyncAF/commit/f119291))
+
+
 <a name="3.2.5"></a>
 # [3.2.5](https://github.com/AsyncAF/AsyncAF/compare/v3.2.4...v3.2.5) (2018-05-04)
 
