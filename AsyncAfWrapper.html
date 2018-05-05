@@ -1,28 +1,41 @@
 <!DOCTYPE html><html lang=en><meta charset=utf-8><title>AsyncAfWrapper - Documentation</title><script src=scripts/prettify/prettify.js></script><script src=scripts/prettify/lang-css.js></script><!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]--><link href=styles/prettify.css rel=stylesheet><link href=styles/jsdoc.css rel=stylesheet><meta content="width=device-width,initial-scale=1" name=viewport><input class=nav-trigger id=nav-trigger type=checkbox> <label class="navicon-button x" for=nav-trigger><div class=navicon></div></label> <label class=overlay for=nav-trigger></label><nav><h2><a href=index.html>Home</a></h2><h3>Classes</h3><ul><li><a href=AsyncAF.html>AsyncAF</a><ul class=methods><li data-type=method><a href=AsyncAF.html#filterAF>filterAF</a><li data-type=method><a href=AsyncAF.html#forEachAF>forEachAF</a><li data-type=method><a href=AsyncAF.html#mapAF>mapAF</a><li data-type=method><a href=AsyncAF.html#logAF>logAF</a><li data-type=method><a href=AsyncAF.html#logAF_options>logAF.options</a></ul><li><a href=AsyncAfWrapper.html>AsyncAfWrapper</a></ul></nav><div id=main><h1 class=page-title>AsyncAfWrapper</h1><section><header><h2>AsyncAfWrapper</h2></header><article><div class=container-overview><h4 class=name id=AsyncAfWrapper><span class=type-signature></span>new AsyncAfWrapper<span class=signature>(data)</span><span class=type-signature> &rarr; {Object}</span></h4><div class=description><p>empty AsyncAF class wrapper<p>AsyncAfWrapper is one option for cherry-picking only the methods you'd like to use in your code; <code>use</code> is the only method initially available on the AsyncAfWrapper prototype; see example below<p><strong>Note:</strong> while AsyncAfWrapper is a class, it can create instances with or without the <code>new</code> keyword</div><dl class=details><dt class=tag-since>Since:<dd class=tag-since><ul class=dummy><li>3.0.0</ul><dt class=tag-see>See:<dd class=tag-see><ul><li><a href=AsyncAF.html>AsyncAF</a><li>use</ul></dl><h5>Example</h5><pre class=prettyprint><code>// say you only want to use 'mapAF', 'filterAF', and 'forEachAF' instead of pulling in the entire AsyncAF library
-
-// first, install the separage packages (e.g., for npm):
-// '$ npm install --save async-af.wrapper async-af.mapAF async-af.filterAF async-af.forEachAF'
-
-// note: don't forget to append '.legacy' to each of the packages if you're running in a pre-ES6 environment
-
-// import the packages
-import AsyncAF from 'async-af.wrapper';
-import mapAF from 'async-af.mapAF';
-import filterAF from 'async-af.filterAF';
-import forEachAF from 'async-af.forEachAF';
-
-// then, call 'use' to add each of the methods to the empty AsyncAF class's prototype
-AsyncAF.use({
+    <![endif]--><link href=styles/prettify.css rel=stylesheet><link href=styles/jsdoc.css rel=stylesheet><meta content="width=device-width,initial-scale=1" name=viewport><input class=nav-trigger id=nav-trigger type=checkbox> <label class="navicon-button x" for=nav-trigger><div class=navicon></div></label> <label class=overlay for=nav-trigger></label><nav><h2><a href=index.html>Home</a></h2><h3>Classes</h3><ul><li><a href=AsyncAF.html>AsyncAF</a><ul class=methods><li data-type=method><a href=AsyncAF.html#everyAF>everyAF</a><li data-type=method><a href=AsyncAF.html#filterAF>filterAF</a><li data-type=method><a href=AsyncAF.html#forEachAF>forEachAF</a><li data-type=method><a href=AsyncAF.html#mapAF>mapAF</a><li data-type=method><a href=AsyncAF.html#reduceAF>reduceAF</a><li data-type=method><a href=AsyncAF.html#someAF>someAF</a><li data-type=method><a href=AsyncAF.html#logAF>logAF</a><li data-type=method><a href=AsyncAF.html#logAF_options>logAF.options</a></ul><li><a href=AsyncAfWrapper.html>AsyncAfWrapper</a><ul class=methods><li data-type=method><a href=AsyncAfWrapper.html#use>use</a></ul></ul></nav><div id=main><h1 class=page-title>AsyncAfWrapper</h1><section><header><h2>AsyncAfWrapper</h2></header><article><div class=container-overview><h4 class=name id=AsyncAfWrapper><span class=type-signature></span>new AsyncAfWrapper<span class=signature>(data)</span><span class=type-signature> &rarr; {Object}</span></h4><div class=description><p>empty AsyncAF class wrapper<p>AsyncAfWrapper is one option for cherry-picking only the methods you'd like to use in your code; <a href=AsyncAfWrapper.html#use>use</a> is the only method initially available on the AsyncAfWrapper prototype; see example below<p><strong>Note:</strong> while AsyncAfWrapper is a class, it can create instances with or without the <code>new</code> keyword<p><strong>Example:</strong><p>say you only want to use <a href=AsyncAF.html#mapAF>mapAF</a>, <a href=AsyncAF.html#filterAF>filterAF</a>, <a href=AsyncAF.html#forEachAF>forEachAF</a>, and <a href=AsyncAF.html#logAF>logAF</a> instead of pulling in the entire AsyncAF library<p>first, install the separate packages (e.g., for npm):<p><code>$ npm install --save @async-af/{wrapper,map,filter,foreach,log}</code><p>or, if on Windows:<p><code>$ npm install --save @async-af/wrapper @async-af/map @async-af/filter @async-af/foreach @async-af/log</code><p>then import the packages<pre class="lang-js prettyprint source"><code>import AsyncAF from '@async-af/wrapper'; // aliasing 'AsyncAfWrapper' as 'AsyncAF'
+import mapAF from '@async-af/map';
+import filterAF from '@async-af/filter';
+import forEachAF from '@async-af/foreach';
+import logAF from '@async-af/log';</code></pre><p>and call <a href=AsyncAfWrapper.html#use>use</a>, including all prototype methods you'd like to add to AsyncAfWrapper's prototype<pre class="lang-js prettyprint source"><code>AsyncAF.use({
   mapAF,
   filterAF,
   forEachAF
-});
-
-// ready to go!
-const promises = [1, 2, 3].map(n => Promise.resolve(n));
-
+});</code></pre><p><a href=AsyncAF.html#logAF>logAF</a> is a static method, so you should not use <a href=AsyncAfWrapper.html#use>use</a>; simply use regular property assignment to add it<pre class="lang-js prettyprint source"><code>AsyncAF.logAF = logAF;</code></pre><p>ready to go!<pre class="lang-js prettyprint source"><code>const promises = [1, 2, 3].map(n => Promise.resolve(n));
 
 AsyncAF(promises).mapAF(n => n * 2).filterAF(n => n !== 4).forEachAF(n => console.log(n));
-// logs 2 then 6</code></pre><h5>Parameters:</h5><table class=params><thead><tr><th>Name<th>Type<th class=last>Description<tbody><tr><td class=name><code>data</code><td class=type><span class=param-type>any</span><td class="description last"><p>the data to be wrapped by the AsyncAF class; can be promises or non-promises</table><h5>Returns:</h5><div class=param-desc><p>returns an instance of AsyncAF wrapping the passed in data</div><dl class=param-type><dt>Type<dd><span class=param-type>Object</span></dl></div></article></section></div><br class=clear><footer>Documentation generated by <a href=https://github.com/jsdoc3/jsdoc>JSDoc 3.5.5</a> on Thursday, April 26, 2018 using the <a href=https://github.com/AsyncAF/docdash>AsyncAF/docdash</a> theme.</footer><script>prettyPrint()</script><script src=scripts/linenumber.js></script>
+// logs 2 then 6
+
+AsyncAF.logAF(promises);
+// @filename.js:24:9:
+//  [ 1, 2, 3 ]
+// in 0.003 secs</code></pre><p><strong>protip:</strong> you can use the same technique to add your own custom prototype or static methods to AsyncAfWrapper or even to the main AsyncAF class; see <a href=AsyncAfWrapper.html#use>use</a> for an example</div><dl class=details><dt class=tag-since>Since:<dd class=tag-since><ul class=dummy><li>3.0.0</ul><dt class=tag-see>See:<dd class=tag-see><ul><li><a href=AsyncAF.html>AsyncAF</a><li><a href=AsyncAfWrapper.html#use>use</a></ul></dl><h5>Parameters:</h5><table class=params><thead><tr><th>Name<th>Type<th class=last>Description<tbody><tr><td class=name><code>data</code><td class=type><span class=param-type>any</span><td class="description last"><p>the data to be wrapped by the AsyncAF class; can be promises or non-promises</table><h5>Returns:</h5><div class=param-desc><p>returns an instance of AsyncAfWrapper wrapping the passed in data</div><dl class=param-type><dt>Type<dd><span class=param-type>Object</span></dl></div><h3 class=subsection-title>Methods</h3><h4 class=name id=use><span class=type-signature></span>use<span class=signature>(methods)</span><span class=type-signature> &rarr; {undefined}</span></h4><div class=description><p>adds prototype methods to AsyncAF or AsyncAfWrapper<p>see <a href=AsyncAfWrapper.html>AsyncAfWrapper</a> for an example of how to cherry-pick AsyncAF methods you'd like to use rather than pulling in the entire AsyncAF library;<p>for something different, the following shows how to add custom prototype methods to AsyncAF &amp; AsyncAfWrapper<p><strong>Example:</strong><p>say you want to extend AsyncAF with your own method that acts on an array of non-promises or promises that resolve to numbers and naively adds them up<p>let's call it sumAF; here's some code:<pre class="lang-js prettyprint source"><code>// sumAF.js
+
+const sumAF = function () {
+  return this.then(numbers => numbers.reduce((sum, num) => sum + num));
+};
+
+export default sumAF;</code></pre><p>pull in <a href=AsyncAF.html>AsyncAF</a> or <a href=AsyncAfWrapper.html>AsyncAfWrapper</a> and sumAF to the file you'd like to use it in:<pre class="lang-js prettyprint source"><code>// otherFile.js
+
+import AsyncAF from 'async-af';
+import sumAF from './sumAF';</code></pre><p>then, call <code>use</code> on <a href=AsyncAF.html>AsyncAF</a> and pass in sumAF wrapped in an object:<pre class="lang-js prettyprint source"><code>// otherFile.js
+// ...
+
+AsyncAF.use({sumAF});</code></pre><p>ready! now your custom prototype method will be available on <a href=AsyncAF.html>AsyncAF</a><pre class="lang-js prettyprint source"><code>// otherFile.js
+// ...
+
+const promises = [1, 2, 3].map(n => Promise.resolve(n));
+
+const sum = AsyncAF(promises).sumAF()
+
+AsyncAF.logAF(sum);
+// @otherFile.js:10:9:
+//  6
+// in 0.001 secs</code></pre></div><dl class=details><dt class=tag-since>Since:<dd class=tag-since><ul class=dummy><li>3.0.0</ul><dt class=tag-see>See:<dd class=tag-see><ul><li><a href=AsyncAF.html>AsyncAF</a><li><a href=AsyncAfWrapper.html>AsyncAfWrapper</a></ul></dl><h5>Parameters:</h5><table class=params><thead><tr><th>Name<th>Type<th class=last>Description<tbody><tr><td class=name><code>methods</code><td class=type><span class=param-type>Object</span><td class="description last"><p>an Object containing the prototype methods you'd like to use</table><h5>Returns:</h5><div class=param-desc><p>adds prototype methods to AsyncAF or AsyncAfWrapper</div><dl class=param-type><dt>Type<dd><span class=param-type>undefined</span></dl></article></section></div><br class=clear><footer>Documentation generated by <a href=https://github.com/jsdoc3/jsdoc>JSDoc 3.5.5</a> on Friday, May 4, 2018 using the <a href=https://github.com/AsyncAF/docdash>AsyncAF/docdash</a> theme.</footer><script>prettyPrint()</script><script src=scripts/linenumber.js></script>

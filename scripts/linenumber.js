@@ -1,25 +1,2 @@
 /*global document */
-(function() {
-    var source = document.getElementsByClassName('prettyprint source linenums');
-    var i = 0;
-    var lineNumber = 0;
-    var lineId;
-    var lines;
-    var totalLines;
-    var anchorHash;
-
-    if (source && source[0]) {
-        anchorHash = document.location.hash.substring(1);
-        lines = source[0].getElementsByTagName('li');
-        totalLines = lines.length;
-
-        for (; i < totalLines; i++) {
-            lineNumber++;
-            lineId = 'line' + lineNumber;
-            lines[i].id = lineId;
-            if (lineId === anchorHash) {
-                lines[i].className += ' selected';
-            }
-        }
-    }
-})();
+!function(){var e,t,n,s,l=document.getElementsByClassName("prettyprint source linenums"),a=0,i=0;if(l&&l[0])for(s=document.location.hash.substring(1),n=(t=l[0].getElementsByTagName("li")).length;a<n;a++)e="line"+ ++i,(t[a].id=e)===s&&(t[a].className+=" selected")}();
