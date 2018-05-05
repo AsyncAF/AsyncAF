@@ -48,6 +48,7 @@ import forEachAF from './lib/methods/arrays/forEachAF';
 import filterAF from './lib/methods/arrays/filterAF';
 import reduceAF from './lib/methods/arrays/reduceAF';
 import everyAF from './lib/methods/arrays/everyAF';
+import someAF from './lib/methods/arrays/someAF';
 
 const arrayPath = `${libPath}methods/arrays/`;
 
@@ -57,6 +58,7 @@ const prototypeMethods = [
   [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
   [`@${libName}/reduce`, `${arrayPath}reduceAF`, reduceAF],
   [`@${libName}/every`, `${arrayPath}everyAF`, everyAF],
+  [`@${libName}/some`, `${arrayPath}someAF`, someAF],
 ];
 
 export default [
