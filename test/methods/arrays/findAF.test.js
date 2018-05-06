@@ -43,4 +43,21 @@ describe('findAF method', () => {
       expect(await AsyncAF(nums).findAF((n, i, array) => n === array[2])).to.equal(3);
     });
   });
+
+  it('should throw TypeError when callback is not a function', () => {
+    expect(AsyncAF([]).findAF()).to.eventually.be.rejected.and.have.property(
+      'message',
+      'undefined is not a function',
+    );
+  });
+  it('should throw TypeError when called on a non-array', async () => {
+    expect(AsyncAF({}).findAF(e => e === 1)).to.eventually.be.rejected.and.have.property(
+      'message',
+      'findAF called on [object Object]; findAF can only be called on an array',
+    );
+    expect(AsyncAF(null).findAF(e => e === 1)).to.eventually.be.rejected.and.have.property(
+      'message',
+      'findAF called on null; findAF can only be called on an array',
+    );
+  });
 });
