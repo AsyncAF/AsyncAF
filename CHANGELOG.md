@@ -1,3 +1,13 @@
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/AsyncAF/AsyncAF/compare/v3.3.1...v3.4.0) (2018-05-06)
+
+
+### Features
+
+* **includes:** implement includesAF method ([4e2e8dc](https://github.com/AsyncAF/AsyncAF/commit/4e2e8dc))
+
+
+
 <a name="3.3.1"></a>
 ## [3.3.1](https://github.com/AsyncAF/AsyncAF/compare/v3.3.0...v3.3.1) (2018-05-06)
 
@@ -86,3 +96,51 @@
 ### BREAKING CHANGES
 
 * **bower:** updates no longer released to bower
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/AsyncAF/AsyncAF/compare/v1.6.0...v2.0.0) (2017-12-02)
+
+
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/AsyncAF/AsyncAF/compare/v1.5.0...v1.6.0) (2017-11-22)
+
+
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/AsyncAF/AsyncAF/compare/v1.4.1...v1.5.0) (2017-11-20)
+
+
+
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/AsyncAF/AsyncAF/compare/v1.4.0...v1.4.1) (2017-11-18)
+
+
+
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/AsyncAF/AsyncAF/compare/v1.3.0...v1.4.0) (2017-11-18)
+
+
+
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/AsyncAF/AsyncAF/compare/v1.2.0...v1.3.0) (2017-11-07)
+
+
+
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/AsyncAF/AsyncAF/compare/v1.1.1...v1.2.0) (2017-11-07)
+
+
+
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/AsyncAF/AsyncAF/compare/v1.1.0...v1.1.1) (2017-11-05)
+
+
+
+<a name="1.1.0"></a>
+# 1.1.0 (2017-11-03)
+
+
+
