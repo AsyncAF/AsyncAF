@@ -39,7 +39,6 @@ docs:
 	echo "\ngenerating docs... 📝\n"
 	jsdoc -c docs/jsdoc.conf.js -R README.md
 	babel-node docs/custom/fixHashDot
-	babel-node docs/custom/fixThisArg
 	babel-node docs/custom/fixLogAfOptions
 	babel-node docs/custom/fixEOF
 	babel-node docs/custom/alterSignature

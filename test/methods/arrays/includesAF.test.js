@@ -5,7 +5,7 @@ import AsyncAF from '../../../dist/async-af';
 
 chai.use(chaiAsPromised);
 
-describe('someAF method', () => {
+describe('includesAF method', () => {
   it('should have the same arity as native includes', () => {
     expect(AsyncAF([]).includesAF.length)
       .to.equal([].includes.length)
