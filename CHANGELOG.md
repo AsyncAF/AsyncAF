@@ -1,3 +1,15 @@
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/AsyncAF/AsyncAF/compare/v3.4.0...v3.5.0) (2018-05-06)
+
+
+### Features
+
+* **find:** implement findAF method ([2bb538e](https://github.com/AsyncAF/AsyncAF/commit/2bb538e))
+* **findindex:** implement findIndexAF method ([7c34711](https://github.com/AsyncAF/AsyncAF/commit/7c34711))
+* **indexof:** implement indexOfAF method ([1cd2377](https://github.com/AsyncAF/AsyncAF/commit/1cd2377))
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/AsyncAF/AsyncAF/compare/v3.3.1...v3.4.0) (2018-05-06)
 
