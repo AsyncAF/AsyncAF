@@ -51,6 +51,7 @@ import everyAF from './lib/methods/arrays/everyAF';
 import someAF from './lib/methods/arrays/someAF';
 import includesAF from './lib/methods/arrays/includesAF';
 import findAF from './lib/methods/arrays/findAF';
+import findIndexAF from './lib/methods/arrays/findIndexAF';
 
 const arrayPath = `${libPath}methods/arrays/`;
 
@@ -63,6 +64,7 @@ const prototypeMethods = [
   [`@${libName}/some`, `${arrayPath}someAF`, someAF],
   [`@${libName}/includes`, `${arrayPath}includesAF`, includesAF],
   [`@${libName}/find`, `${arrayPath}findAF`, findAF],
+  [`@${libName}/findIndex`, `${arrayPath}findIndexAF`, findIndexAF],
 ];
 
 export default [
