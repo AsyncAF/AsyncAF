@@ -20,8 +20,8 @@ packages.forEach(([pkgName, , member]) => {
       ? description
       : `standalone ${keywords[0]} package: ${member.name} (${
         member.name.includes`Wrapper`
-          ? homepage.replace('index', member.name)
-          : homepage.replace('index.html', `AsyncAF.html#${member.name}`)
+          ? `${homepage}/${member.name}.html`
+          : `${homepage}/${keywords[0]}.html#${member.name}`
       })`,
     author,
     license,
