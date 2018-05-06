@@ -10,7 +10,7 @@
 
 README in progress...come back another time to lay eyes on the most beautiful documentation you've ever seen! 😍
 
-In the meantime, <a href="https://asyncaf.github.io/AsyncAF/AsyncAF.html" target="_blank">
+In the meantime, <a href="https://async-af.js.org/AsyncAF.html" target="_blank">
   check out the docs!
 </a> 🚀
 
