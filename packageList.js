@@ -53,6 +53,7 @@ import includesAF from './lib/methods/arrays/includesAF';
 import findAF from './lib/methods/arrays/findAF';
 import findIndexAF from './lib/methods/arrays/findIndexAF';
 import indexOfAF from './lib/methods/arrays/indexOfAF';
+import lastIndexOfAF from './lib/methods/arrays/lastIndexOfAF';
 
 const arrayPath = `${libPath}methods/arrays/`;
 
@@ -67,6 +68,7 @@ const prototypeMethods = [
   [`@${libName}/find`, `${arrayPath}findAF`, findAF],
   [`@${libName}/findIndex`, `${arrayPath}findIndexAF`, findIndexAF],
   [`@${libName}/indexOf`, `${arrayPath}indexOfAF`, indexOfAF],
+  [`@${libName}/lastIndexOf`, `${arrayPath}lastIndexOfAF`, lastIndexOfAF],
 ];
 
 export default [
