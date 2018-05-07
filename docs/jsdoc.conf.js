@@ -3,7 +3,7 @@ const title = require('../package.json').keywords[0];
 module.exports = {
   plugins: [
     'plugins/markdown',
-    'docs/custom/callbackFn.js',
+    'docs/custom/alterParams.js',
     'docs/custom/forceStatic.js',
   ],
   recurseDepth: 10,
