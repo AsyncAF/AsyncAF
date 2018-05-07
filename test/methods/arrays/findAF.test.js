@@ -50,14 +50,26 @@ describe('findAF method', () => {
       'undefined is not a function',
     );
   });
-  it('should throw TypeError when called on a non-array', async () => {
-    expect(AsyncAF({}).findAF(e => e === 1)).to.eventually.be.rejected.and.have.property(
+  it('should reject with TypeError when called on non-array-like objects', async () => {
+    await expect(AsyncAF(null).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
       'message',
-      'findAF called on [object Object]; findAF can only be called on an array',
+      'findAF cannot be called on null, only on an Array or array-like Object',
     );
-    expect(AsyncAF(null).findAF(e => e === 1)).to.eventually.be.rejected.and.have.property(
+    await expect(AsyncAF().findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
       'message',
-      'findAF called on null; findAF can only be called on an array',
+      'findAF cannot be called on undefined, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF({}).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
+      'message',
+      'findAF cannot be called on [object Object], only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(true).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
+      'message',
+      'findAF cannot be called on true, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(2).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
+      'message',
+      'findAF cannot be called on 2, only on an Array or array-like Object',
     );
   });
 });

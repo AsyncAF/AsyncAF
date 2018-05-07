@@ -111,7 +111,7 @@ describe('indexOfAF method', () => {
     });
   });
 
-  it('should reject with TypeError when called on non-compatible objects', async () => {
+  it('should reject with TypeError when called on non-array-like objects', async () => {
     await expect(AsyncAF(null).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
       'message',
       'indexOfAF cannot be called on null, only on an Array, String, or array-like Object',
@@ -124,14 +124,13 @@ describe('indexOfAF method', () => {
       'message',
       'indexOfAF cannot be called on [object Object], only on an Array, String, or array-like Object',
     );
-    await expect(AsyncAF(() => {}).indexOfAF(2))
-      .to.eventually.be.rejected.and.has.property(
-        'message',
-        'indexOfAF cannot be called on function () {}, only on an Array, String, or array-like Object',
-      );
     await expect(AsyncAF(true).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
       'message',
       'indexOfAF cannot be called on true, only on an Array, String, or array-like Object',
+    );
+    await expect(AsyncAF(2).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
+      'message',
+      'indexOfAF cannot be called on 2, only on an Array, String, or array-like Object',
     );
   });
 });

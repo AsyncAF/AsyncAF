@@ -122,4 +122,26 @@ describe('forEachAF method', () => {
       'undefined is not a function',
     );
   });
+  it('should reject with TypeError when called on non-array-like objects', async () => {
+    await expect(AsyncAF(null).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'forEachAF cannot be called on null, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF().forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'forEachAF cannot be called on undefined, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF({}).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'forEachAF cannot be called on [object Object], only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(true).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'forEachAF cannot be called on true, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(2).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'forEachAF cannot be called on 2, only on an Array or array-like Object',
+    );
+  });
 });

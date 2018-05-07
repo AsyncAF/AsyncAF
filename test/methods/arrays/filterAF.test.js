@@ -99,4 +99,26 @@ describe('filterAF method', () => {
       'undefined is not a function',
     );
   });
+  it('should reject with TypeError when called on non-array-like objects', async () => {
+    await expect(AsyncAF(null).filterAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'filterAF cannot be called on null, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF().filterAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'filterAF cannot be called on undefined, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF({}).filterAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'filterAF cannot be called on [object Object], only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(true).filterAF(() => {})).to.eventually.be.rejected.and.has.property(
+      'message',
+      'filterAF cannot be called on true, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(2).filterAF(() => { })).to.eventually.be.rejected.and.has.property(
+      'message',
+      'filterAF cannot be called on 2, only on an Array or array-like Object',
+    );
+  });
 });

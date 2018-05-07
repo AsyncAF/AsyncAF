@@ -110,5 +110,9 @@ describe('joinAF method', () => {
       'message',
       'joinAF cannot be called on true, only on an Array or array-like Object',
     );
+    await expect(AsyncAF(2).joinAF('')).to.eventually.be.rejected.and.has.property(
+      'message',
+      'joinAF cannot be called on 2, only on an Array or array-like Object',
+    );
   });
 });
