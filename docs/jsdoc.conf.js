@@ -30,6 +30,7 @@ module.exports = {
     encoding: 'utf8',
     template: 'node_modules/docdash',
     mainpagetitle: title,
+    tutorials: 'docs/tutorials',
   },
   docdash: {
     sort: false,
