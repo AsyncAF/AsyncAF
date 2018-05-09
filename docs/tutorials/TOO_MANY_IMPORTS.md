@@ -20,7 +20,7 @@ import joinAF from '@async-af/join';
 import logAF from '@async-af/log';
 
 AsyncAF.use({
-  // ...all the prototype methods
+  // ...all the methods
 });
 
 // ...more sweet sweet code
@@ -99,7 +99,7 @@ Now, with the babel plugin up and running _(make sure you've installed any peer 
 import {wrapper as AsyncAF, map, filter, includes, every, indexOf, some, reduce, join, log} from 'async-af';
 
 AsyncAF.use({
-  // ...all the prototype methods
+  // ...all the methods
 });
 
 // ...more sweet sweet code
@@ -116,7 +116,7 @@ If it's important to you that the AsyncAF methods you use be clearly differentia
 import {wrapper as AsyncAF, map as mapAF, filter as filterAF, includes as includesAF, every as everyAF, indexOf as indexOfAF, some as someAF, reduce as reduceAF, join as joinAF, log as logAF} from 'async-af';
 ```
 
-Alternatively, you can alias the prototype methods when you add them to {@link AsyncAfWrapper `AsyncAfWrapper`} via the {@link AsyncAfWrapper#use `use`} method or via property assignment for static methods:
+Alternatively, you can alias the methods when you add them to {@link AsyncAfWrapper `AsyncAfWrapper`} via the {@link AsyncAfWrapper#use `use`} method:
 
 ```js
 import {wrapper as AsyncAF, map, filter, includes, every, indexOf, some, reduce, join, log} from 'async-af';
@@ -125,8 +125,8 @@ AsyncAF.use({
   mapAF: map,
   filterAF: filter,
   // ... etc.
+}, {
+  logAF: log
 });
-
-AsyncAF.logAF = log;
 
 ```
