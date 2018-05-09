@@ -2,7 +2,7 @@
 
 ## Workflow
 
-To demonstrate the proper workflow for contributing to AsyncAF, (❤️ Thanks! ❤️) let's say you want to add a hypothetical feature on the AsyncAf prototype; for example, a method that acts on an array of non-promises or promises that resolve to numbers and naively adds them up.
+To demonstrate the proper workflow for contributing to AsyncAF, (❤️ Thanks! ❤️) let's say you want to add a hypothetical feature on the AsyncAf prototype; for example, a method that acts on an array of numbers or promises that resolve to numbers and naively adds them up.
 
 <hr>
 
@@ -85,16 +85,17 @@ First, append an import statement to the bottom of the other prototype methods f
 Then, add your package to the `prototypeMethods` array with the format
 
 `[/* packageName */, /* pathToFile */, /* method */],`.
- - `packageName` is what will be published to npm, etc. so consumers can install it by running, say `$ npm install async-af.map`.
+ - `packageName` is what will be published to npm, etc. so consumers can install it by running, say `$ npm install @async-af/map`.
  - `pathToFile` is the path from the project root to the file where your new method lives.
  - `method` is a reference to the actual method imported in the previous step.
 
-For example, using the available variables to keep it DRY: ``[`${libName}.sum`, `${arrayPath + sumAF.name}`, sumAF]``
+For example, using the available variables to keep it DRY: ``[`@${libName}/sum`, `${arrayPath}sumAF`, sumAF]``
 
 ```js
 // lib/packageList.js
 
-const {name: libName} = require('./package.json');
+const libName = 'async-af';
+const libPath = './lib/';
 
 // ...
 
@@ -102,14 +103,14 @@ const {name: libName} = require('./package.json');
   |       STATIC METHODS       |
   |____________________________| */
 
-import logAF from './methods/other/logAF';
+import logAF from './lib/methods/other/logAF';
 // ...
 // a new static method would be imported here
 
-const otherPath = './methods/other/';
+const otherPath = `${libPath}methods/other/`;
 
 const staticMethods = [
-  [`${libName}.log`, `${otherPath + logAF.name}`, logAF],
+  [`@${libName}/log`, `${otherPath}logAF`, logAF],
   // ...
   // info for a new static method would go here
 ];
@@ -118,31 +119,31 @@ const staticMethods = [
   |      PROTOTYPE METHODS     |
   |____________________________| */
 
-import mapAF from './methods/arrays/mapAF';
-import forEachAF from './methods/arrays/forEachAF';
-import filterAF from './methods/arrays/filterAF';
+import mapAF from './lib/methods/arrays/mapAF';
+import forEachAF from './lib/methods/arrays/forEachAF';
+import filterAF from './lib/methods/arrays/filterAF';
 // ...
 // import new prototype method here
-import sumAF from './methods/arrays/sumAF';
+import sumAF from './lib/methods/arrays/sumAF';
 
-const arrayPath = './methods/arrays/';
+const arrayPath = `${libPath}methods/arrays/`;
 
 const prototypeMethods = [
-  [`${libName}.map`, `${arrayPath + mapAF.name}`, mapAF],
-  [`${libName}.forEach`, `${arrayPath + forEachAF.name}`, forEachAF],
-  [`${libName}.filter`, `${arrayPath + filterAF.name}`, filterAF],
+  [`@${libName}/map`, `${arrayPath}mapAF`, mapAF],
+  [`@${libName}/forEach`, `${arrayPath}forEachAF`, forEachAF],
+  [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
   // ...
   // add info for new prototype method here
-  [`${libName}.sum`, `${arrayPath + sumAF.name}`, sumAF],
+  [`@${libName}/sum`, `${arrayPath}sumAF`, sumAF],
 ];
 
 // ...
 
 ```
 
-`lib/packageList.js` is where we keep a central repository of all the AsyncAF methods. Once your shiny new method is added here, it'll automatically be included in AsyncAF or the AsyncAF prototype on builds. Adding a method here also indicates that it will eventually be published as a standalone package.
+`packageList.js` is where we keep a central repository of all the AsyncAF methods. Once your shiny new method is added here, it'll automatically be included in AsyncAF or the AsyncAF prototype on builds. Adding a method here also indicates that it will eventually be published as a standalone package.
 
-There! Now `sumAF` should be available on the AsyncAF prototype and be built as a separate file called `async-af.sum.js`, which you can verify in the [terminal tab running your builds](#setup).
+There! Now `sumAF` should be available on the AsyncAF prototype and be built as a separate scoped package called `@async-af/sum`, which you can verify in the [terminal tab running your builds](#setup).
 
 <hr>
 
@@ -170,14 +171,14 @@ There! Now `sumAF` should be available on the AsyncAF prototype and be built as 
 
 #### `$ npm run build`
 - if you'd like to see the output for all packages (what will eventually be published)
-    - builds legacy (transpiled to ES5) packages - `*.legacy.js`
-    - builds minified legacy packages - `*.legacy.min.js`
-    - builds modern (minimally transpiled for modern environments) packages - `*.js`
-    - builds minified modern packages - `*.min.js`
+    - builds legacy (transpiled to ES5) packages
+    - builds minified legacy packages
+    - builds modern (minimally transpiled for modern environments) packages
+    - builds minified modern packages
 
 #### `$ npm run cover`
 - rebuilds modern packages
-- runs tests on all `.js` files
+- runs tests in all `test/**.test.js` files
 - and shows coverage report using `nyc`
 
 #### `$ npm run cover:open`
@@ -189,3 +190,6 @@ There! Now `sumAF` should be available on the AsyncAF prototype and be built as 
 
 #### `$ npm run docs:open`
 - opens generated docs from local filesystem in the browser
+
+#### `$ npm run docs:publish`
+- commits the docs and pushes to your `gh-pages` branch

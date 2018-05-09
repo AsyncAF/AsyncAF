@@ -213,7 +213,7 @@ describe('@async-af/log separate package', () => {
     );
   });
   it('should work when added to AsyncAfWrapper', async () => {
-    AsyncAfWrapper.log = logStub;
+    AsyncAfWrapper.use({}, {log: logStub});
     await AsyncAfWrapper.log(...nums);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
       /^@logAF.test.js:\d+:\d+:(\n|\r)$/,

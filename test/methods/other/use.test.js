@@ -13,8 +13,9 @@ describe('use method', () => {
   it('should be available on AsyncAfWrapper', () => {
     expect(AsyncAfWrapper.use).to.be.an.instanceOf(Function);
   });
-  it('should throw when not passed an object', () => {
+  it('should throw when not passed object(s)', () => {
     expect(() => AsyncAfWrapper.use('forEach')).to.throw(TypeError);
+    expect(() => AsyncAfWrapper.use({}, 'forEach')).to.throw(TypeError);
   });
   context('should make these methods available:', () => {
     it('forEachAF', () => {
@@ -29,16 +30,18 @@ describe('use method', () => {
       expect(AsyncAfWrapper().mapAF).to.be.an.instanceOf(Function);
       expect(AsyncAfWrapper.logAF).to.be.undefined;
     });
-    it('logAF (static does not use `use`)', () => {
-      AsyncAfWrapper.logAF = logAF;
+    it('logAF (static)', () => {
+      AsyncAfWrapper.use({}, {logAF});
       expect(AsyncAfWrapper().forEachAF).to.be.an.instanceOf(Function);
       expect(AsyncAfWrapper().mapAF).to.be.an.instanceOf(Function);
       expect(AsyncAfWrapper.logAF).to.be.an.instanceOf(Function);
     });
     it('custom function', () => {
       const noop = () => {};
-      AsyncAF.use({noop});
+      const noop2 = () => { };
+      AsyncAF.use({noop}, {noop2});
       expect(AsyncAF().noop).to.be.an.instanceOf(Function);
+      expect(AsyncAF.noop2).to.be.an.instanceOf(Function);
     });
   });
 });
