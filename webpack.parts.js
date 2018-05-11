@@ -73,13 +73,23 @@ const minify = () => ({
   ],
 });
 
+const [libNameCamel] = keywords; // 'AsyncAF'
+
 const banner = new BannerPlugin({
-  banner: `${keywords[0]} (${description})\n\n[name] v${version}\n\nCopyright (c) 2017-present, ${author}\n\nThis source code is licensed under the ${license} license found in this library's GitHub repository (${licenseUrl}).`,
+  banner: `${libNameCamel} (${description})
+
+[file] v${version}
+
+Copyright (c) 2017-present, ${author}
+
+This source code is licensed under the ${license} license found in this library's
+GitHub repository (${licenseUrl}).`,
   entryOnly: true,
 });
 
 export {
   libName,
+  libNameCamel,
   moduleProp,
   minify,
   banner,

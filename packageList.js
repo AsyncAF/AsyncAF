@@ -2,29 +2,17 @@
 const libName = 'async-af';
 const libPath = './lib/';
 
+const makeScoped = name => `@${libName}/${name.replace(/(AsyncAf|AF)/g, '').toLowerCase()}`;
+
 /* ____________________________
   |           CLASSES          |
   |____________________________| */
 
-import AsyncAfWrapper from './lib/classes/AsyncAfWrapper';
-
 const classPath = `${libPath}classes/`;
 
 const classes = [
-  [`${libName}`, `${classPath}AsyncAF`],
-  [`@${libName}/wrapper`, `${classPath}AsyncAfWrapper`, AsyncAfWrapper],
-];
-
-/* ____________________________
-  |         COLLECTIONS        |
-  |____________________________| */
-
-// import arrays from './lib/collections/arrays';
-
-// const collectionPath = `${libPath}collections/`;
-
-const collections = [
-  // [`@${libName}/arrays`, `${collectionPath}arrays`],
+  [{name: 'AsyncAF'}, `${classPath}AsyncAF`, libName],
+  [{name: 'AsyncAfWrapper'}, `${classPath}AsyncAfWrapper`, makeScoped('AsyncAfWrapper')],
 ];
 
 /* ____________________________
@@ -36,8 +24,12 @@ import logAF from './lib/methods/other/logAF';
 const otherPath = `${libPath}methods/other/`;
 
 const staticMethods = [
-  [`@${libName}/log`, `${otherPath}logAF`, logAF],
-];
+  logAF,
+].map(method => [
+  method,
+  `${otherPath + method.name}`,
+  makeScoped(method.name),
+]);
 
 /* ____________________________
   |      PROTOTYPE METHODS     |
@@ -58,30 +50,49 @@ import joinAF from './lib/methods/arrays/joinAF';
 
 const arrayPath = `${libPath}methods/arrays/`;
 
+const arrayMethods = [
+  mapAF,
+  forEachAF,
+  filterAF,
+  reduceAF,
+  everyAF,
+  someAF,
+  includesAF,
+  findAF,
+  findIndexAF,
+  indexOfAF,
+  lastIndexOfAF,
+  joinAF,
+].map(method => [
+  method,
+  `${arrayPath + method.name}`,
+  makeScoped(method.name),
+]);
+
 const prototypeMethods = [
-  [`@${libName}/map`, `${arrayPath}mapAF`, mapAF],
-  [`@${libName}/forEach`, `${arrayPath}forEachAF`, forEachAF],
-  [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
-  [`@${libName}/reduce`, `${arrayPath}reduceAF`, reduceAF],
-  [`@${libName}/every`, `${arrayPath}everyAF`, everyAF],
-  [`@${libName}/some`, `${arrayPath}someAF`, someAF],
-  [`@${libName}/includes`, `${arrayPath}includesAF`, includesAF],
-  [`@${libName}/find`, `${arrayPath}findAF`, findAF],
-  [`@${libName}/findIndex`, `${arrayPath}findIndexAF`, findIndexAF],
-  [`@${libName}/indexOf`, `${arrayPath}indexOfAF`, indexOfAF],
-  [`@${libName}/lastIndexOf`, `${arrayPath}lastIndexOfAF`, lastIndexOfAF],
-  [`@${libName}/join`, `${arrayPath}joinAF`, joinAF],
+  ...arrayMethods,
+];
+
+/* ____________________________
+  |         COLLECTIONS        |
+  |____________________________| */
+
+// import arrays from './lib/collections/arrays';
+
+// const collectionPath = `${libPath}collections/`;
+
+const collections = [
+  // [`@${libName}/arrays`, `${collectionPath}arrays`],
 ];
 
 export default [
   ...classes,
-  ...collections,
   ...staticMethods,
   ...prototypeMethods,
+  ...collections,
 ];
 
-/* eslint-disable-next-line no-unused-vars */
-const pluckMethods = packages => packages.map(([pkg, file, method]) => method);
+const pluckMethods = packages => packages.map(([method]) => method);
 
 const staticMethodsOnly = pluckMethods(staticMethods);
 const prototypeMethodsOnly = pluckMethods(prototypeMethods);
@@ -89,4 +100,5 @@ const prototypeMethodsOnly = pluckMethods(prototypeMethods);
 export {
   staticMethodsOnly as staticMethods,
   prototypeMethodsOnly as prototypeMethods,
+  makeScoped,
 };

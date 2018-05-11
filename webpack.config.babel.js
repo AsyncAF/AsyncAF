@@ -1,8 +1,9 @@
 import path from 'path';
 
-import packages from './packageList';
+import packages, {makeScoped} from './packageList';
 import {
   libName,
+  libNameCamel,
   moduleProp,
   minify,
   banner,
@@ -10,17 +11,17 @@ import {
 
 export default ({modern, cover}, {mode, cache}) => ({
   mode,
-  entry: packages.reduce((pkgs, [pkg, file]) => (
-    {...pkgs, [pkg]: path.resolve(file)}
+  entry: packages.reduce((pkgs, [{name}, file]) => (
+    {...pkgs, [name]: path.resolve(file)}
   ), {}),
   devtool: 'source-map',
   output: {
     path: path.resolve('dist'),
-    filename: ({chunk}) => `${chunk.name}/${
+    filename: ({chunk: {name}}) => `${name === libNameCamel ? libName : makeScoped(name)}/${
       (modern ? '' : 'legacy/') +
       (mode === 'production' ? 'min' : 'index')
     }.js`,
-    library: [libName, '[name]'],
+    library: '[name]',
     libraryTarget: 'umd',
     libraryExport: 'default',
     umdNamedDefine: true,
