@@ -6,7 +6,7 @@
 [![MIT License](https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa)](https://github.com/AsyncAF/AsyncAF/blob/master/README.md#license)
 <!-- [![license scan](https://img.shields.io/badge/license%20scan-passing-brightgreen.svg?style=for-the-badge)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/) -->
 
-<center><a href="https://async-af.js.org" target=_blank><img src="docs/custom/assets/async-af-logo.png"></a></center>
+<p align=center><a href="https://async-af.js.org" target=_blank><img src="https://cdn.rawgit.com/AsyncAF/AsyncAF/1ce388a7/docs/custom/assets/async-af-logo.png"></a></p>
 
 <br>
 
