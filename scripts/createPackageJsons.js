@@ -1,5 +1,11 @@
 import fs from 'fs-extra';
+
 import packages from '../packageList';
+import {
+  isMain,
+  libNameCamel,
+  getDocsUrl,
+} from './helpers';
 
 const {
   description,
@@ -12,16 +18,13 @@ const {
   keywords,
 } = require('../package.json');
 
-const [libNameCamel] = keywords; // AsyncAF
-
-const isWrapper = pkgName => pkgName.includes`wrapper`;
-
 packages.forEach(([{name: memberName}, , pkgName]) => {
-  const scopedDescription = `standalone ${libNameCamel} package: ${memberName} (${homepage}/${isWrapper(pkgName) ? `${memberName}.html` : `${libNameCamel}.html#${memberName}`})`;
+  const docs = getDocsUrl(memberName);
+  const scopedDescription = `standalone ${libNameCamel} package: ${memberName} ${docs}`;
 
   fs.outputFileSync(`dist/${pkgName}/package.json`, JSON.stringify({
     name: pkgName,
-    description: memberName === libNameCamel ? description : scopedDescription,
+    description: isMain(memberName) ? description : scopedDescription,
     author,
     license,
     version,
@@ -43,9 +46,3 @@ packages.forEach(([{name: memberName}, , pkgName]) => {
   }, null, 2));
   fs.appendFileSync(`dist/${pkgName}/package.json`, '\n');
 });
-
-export {
-  libNameCamel,
-  isWrapper,
-  homepage,
-};

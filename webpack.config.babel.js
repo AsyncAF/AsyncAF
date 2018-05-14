@@ -1,9 +1,9 @@
 import path from 'path';
 
 import packages, {makeScoped} from './packageList';
+import {isMain} from './scripts/helpers';
 import {
   libName,
-  libNameCamel,
   moduleProp,
   minify,
   banner,
@@ -17,7 +17,7 @@ export default ({modern, cover}, {mode, cache}) => ({
   devtool: 'source-map',
   output: {
     path: path.resolve('dist'),
-    filename: ({chunk: {name}}) => `${name === libNameCamel ? libName : makeScoped(name)}/${
+    filename: ({chunk: {name}}) => `${isMain(name) ? libName : makeScoped(name)}/${
       (modern ? '' : 'legacy/') +
       (mode === 'production' ? 'min' : 'index')
     }.js`,
