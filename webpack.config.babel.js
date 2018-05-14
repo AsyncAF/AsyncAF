@@ -1,4 +1,5 @@
 import path from 'path';
+import {optimize} from 'webpack';
 
 import packages, {makeScoped} from './packageList';
 import {isMain} from './scripts/helpers';
@@ -8,6 +9,8 @@ import {
   minify,
   banner,
 } from './webpack.parts';
+
+const {ModuleConcatenationPlugin} = optimize;
 
 export default ({modern, cover}, {mode, cache}) => ({
   mode,
@@ -32,5 +35,6 @@ export default ({modern, cover}, {mode, cache}) => ({
   optimization: mode === 'production' ? minify() : {},
   plugins: [
     banner,
+    new ModuleConcatenationPlugin(),
   ],
 });
