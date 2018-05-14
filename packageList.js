@@ -21,13 +21,11 @@ const classes = [
 
 import logAF from './lib/methods/other/logAF';
 
-const otherPath = `${libPath}methods/other/`;
-
 const staticMethods = [
   logAF,
 ].map(method => [
   method,
-  `${otherPath + method.name}`,
+  `${libPath}methods/other/${method.name}`,
   makeScoped(method.name),
 ]);
 
@@ -35,6 +33,7 @@ const staticMethods = [
   |      PROTOTYPE METHODS     |
   |____________________________| */
 
+// Arrays:
 import mapAF from './lib/methods/arrays/mapAF';
 import forEachAF from './lib/methods/arrays/forEachAF';
 import filterAF from './lib/methods/arrays/filterAF';
@@ -47,8 +46,6 @@ import findIndexAF from './lib/methods/arrays/findIndexAF';
 import indexOfAF from './lib/methods/arrays/indexOfAF';
 import lastIndexOfAF from './lib/methods/arrays/lastIndexOfAF';
 import joinAF from './lib/methods/arrays/joinAF';
-
-const arrayPath = `${libPath}methods/arrays/`;
 
 const arrayMethods = [
   mapAF,
@@ -65,7 +62,7 @@ const arrayMethods = [
   joinAF,
 ].map(method => [
   method,
-  `${arrayPath + method.name}`,
+  `${libPath}methods/arrays/${method.name}`,
   makeScoped(method.name),
 ]);
 
@@ -79,10 +76,8 @@ const prototypeMethods = [
 
 // import arrays from './lib/collections/arrays';
 
-// const collectionPath = `${libPath}collections/`;
-
 const collections = [
-  // [`@${libName}/arrays`, `${collectionPath}arrays`],
+  // arrays,
 ];
 
 export default [
