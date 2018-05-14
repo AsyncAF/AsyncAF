@@ -1,4 +1,4 @@
-const title = require('../package.json').keywords[0];
+const {keywords: [title]} = require('../package.json');
 
 module.exports = {
   plugins: [
