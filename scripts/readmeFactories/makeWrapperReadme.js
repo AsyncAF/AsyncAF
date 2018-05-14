@@ -1,23 +1,23 @@
-import {homepage} from '../createPackageJsons';
+import {getDocsUrl} from '../helpers';
 
-const makeWrapperReadme = pkgName =>
+export default pkgName =>
   `# ${pkgName}
 
-This is the standalone [\`AsyncAF\`](${homepage}) package for [\`AsyncAfWrapper\`](${homepage}/AsyncAfWrapper.html).
+This is the standalone [\`AsyncAF\`]${getDocsUrl()} package for [\`AsyncAfWrapper\`]${getDocsUrl('AsyncAfWrapper')}.
 
-\`AsyncAfWrapper\` is one option for cherry-picking only the [\`AsyncAF\`](${homepage}) methods you'd like to use in your code, rather than pulling in the entire AsyncAF library (A.K.A. [\`async-af\`](https://www.npmjs.com/package/async-af)).
+\`AsyncAfWrapper\` is one option for cherry-picking only the [\`AsyncAF\`]${getDocsUrl()} methods you'd like to use in your code, rather than pulling in the entire AsyncAF library (A.K.A. [\`async-af\`](https://www.npmjs.com/package/async-af)).
 
 ### For more information:
 
-- check out the docs for [\`AsyncAfWrapper\`](${homepage}/AsyncAfWrapper.html);
+- check out the docs for [\`AsyncAfWrapper\`]${getDocsUrl('AsyncAfWrapper')};
 - for more general setup, take a look at
-   - the [AsyncAF docs](${homepage})
+   - the [AsyncAF docs]${getDocsUrl()}
    - the main [AsyncAF README](https://github.com/AsyncAF/AsyncAF/blob/master/README.md)
 - or just continue reading for an example of how to use \`AsyncAfWrapper\`
 
 ### Usage
 
-Say you only want to use [\`mapAF\`](${homepage}/AsyncAF#mapAF), [\`filterAF\`](${homepage}/AsyncAF#filterAF), [\`forEachAF\`](${homepage}/AsyncAF#forEachAF), and [\`logAF\`](${homepage}/AsyncAF#logAF) instead of pulling in the entire AsyncAF library.
+Say you only want to use [\`mapAF\`]${getDocsUrl`mapAF`}, [\`filterAF\`]${getDocsUrl`filterAF`}, [\`forEachAF\`]${getDocsUrl`forEachAF`}, and [\`logAF\`]${getDocsUrl`logAF`} instead of pulling in the entire AsyncAF library.
 
 First, install the separate packages (e.g., for npm):
 
@@ -38,9 +38,9 @@ import forEachAF from '@async-af/foreach';
 import logAF from '@async-af/log';
 \`\`\`
 
- _If you'd like to save some vertical screen real estate and cut the imports down to one line, see_ [Wrapper/Use: Too Many 🤬 Imports!?](${homepage}/tutorial-TOO_MANY_IMPORTS.html)
+ _If you'd like to save some vertical screen real estate and cut the imports down to one line, see_ [Wrapper/Use: Too Many 🤬 Imports!?]${getDocsUrl().replace('AsyncAF', 'tutorial-TOO_MANY_IMPORTS')}
 
-Now call [\`use\`](${homepage}/AsyncAfWrapper.html#use), including all prototype methods you'd like to add to AsyncAfWrapper's prototype in the first argument, \`prototypeMethods\` and all static methods you'd like to add to AsyncAfWrapper in the second optional argument, \`staticMethods\`
+Now call [\`use\`]${getDocsUrl`use`.replace('F', 'fWrapper')}, including all prototype methods you'd like to add to AsyncAfWrapper's prototype in the first argument, \`prototypeMethods\` and all static methods you'd like to add to AsyncAfWrapper in the second optional argument, \`staticMethods\`
 \`\`\`js
 AsyncAF.use({ // prototype methods go in the first argument
   mapAF,
@@ -64,7 +64,5 @@ AsyncAF.logAF(promises);
 // in 0.003 secs
 \`\`\`
 
-**protip:** you can use the same technique to add your own custom prototype or static methods to AsyncAfWrapper or even to the main AsyncAF class; see [\`use\`](${homepage}/AsyncAfWrapper.html#use) for an example.
+**protip:** you can use the same technique to add your own custom prototype or static methods to AsyncAfWrapper or even to the main AsyncAF class; see [\`use\`]${getDocsUrl`use`.replace('F', 'fWrapper')} for an example.
 `;
-
-export default makeWrapperReadme;
