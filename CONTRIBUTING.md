@@ -2,7 +2,7 @@
 
 ## Workflow
 
-To demonstrate the proper workflow for contributing to AsyncAF, (❤️ Thanks! ❤️) let's say you want to add a hypothetical feature on the AsyncAf prototype; for example, a method that acts on an array of numbers or promises that resolve to numbers and naively adds them up.
+To demonstrate the proper workflow for contributing to AsyncAF, (❤️ Thanks! ❤️) let's say you want to add a hypothetical feature on the AsyncAF prototype; for example, a method that acts on an array of numbers or promises that resolve to numbers and naively adds them up.
 
 <hr>
 
@@ -26,7 +26,7 @@ Setup Complete! 🚀
 
 ### Building Your Module `||` The Meat of Your Contribution
 
-AsyncAF prototype methods that act on arrays live in `/lib/methods/arrays`. If you're contributing a method that acts on objects it would reside in `/lib/methods/objects` and so on.
+AsyncAF prototype methods that act on arrays live in `lib/methods/arrays`. If you're contributing a method that acts on objects it would reside in `lib/methods/objects` and so on.
 
 So for our (naive) asynchronous adding module, let's call it `sumAF`, create a new file named `sumAF.js` in the `lib/methods/arrays` directory.
 
@@ -80,22 +80,10 @@ export default sumAF;
 
 If it's exported...you guessed it, we've got to import it too...somewhere. Since we want to add this particular method to the AsyncAF prototype, navigate on over to `lib/packageList.js` and scroll down to the `PROTOTYPE METHODS` section. This is where we'll import the new method and add some information about it.
 
-First, append an import statement to the bottom of the other prototype methods following the style `import methodName from './path/to/your/fileName';`.
-
-Then, add your package to the `prototypeMethods` array with the format
-
-`[/* packageName */, /* pathToFile */, /* method */],`.
- - `packageName` is what will be published to npm, etc. so consumers can install it by running, say `$ npm install @async-af/map`.
- - `pathToFile` is the path from the project root to the file where your new method lives.
- - `method` is a reference to the actual method imported in the previous step.
-
-For example, using the available variables to keep it DRY: ``[`@${libName}/sum`, `${arrayPath}sumAF`, sumAF]``
+First, append an import statement to the bottom of the other prototype methods that act on arrays, following the style `import methodName from './path/to/your/fileName';`. Then, add your method to the `arrayMethods` array below that.
 
 ```js
-// lib/packageList.js
-
-const libName = 'async-af';
-const libPath = './lib/';
+// packageList.js
 
 // ...
 
@@ -107,35 +95,40 @@ import logAF from './lib/methods/other/logAF';
 // ...
 // a new static method would be imported here
 
-const otherPath = `${libPath}methods/other/`;
-
 const staticMethods = [
-  [`@${libName}/log`, `${otherPath}logAF`, logAF],
+  logAF,
   // ...
-  // info for a new static method would go here
-];
+  // and inserted here
+].map(method => [
+  method,
+  `${libPath}methods/other/${method.name}`,
+  makeScoped(method.name),
+]);
 
 /* ____________________________
   |      PROTOTYPE METHODS     |
   |____________________________| */
 
+// Arrays:
 import mapAF from './lib/methods/arrays/mapAF';
 import forEachAF from './lib/methods/arrays/forEachAF';
 import filterAF from './lib/methods/arrays/filterAF';
 // ...
-// import new prototype method here
+// import a new prototype method that acts on arrays here
 import sumAF from './lib/methods/arrays/sumAF';
 
-const arrayPath = `${libPath}methods/arrays/`;
-
-const prototypeMethods = [
-  [`@${libName}/map`, `${arrayPath}mapAF`, mapAF],
-  [`@${libName}/forEach`, `${arrayPath}forEachAF`, forEachAF],
-  [`@${libName}/filter`, `${arrayPath}filterAF`, filterAF],
+const arrayMethods = [
+  mapAF,
+  forEachAF,
+  filterAF,
   // ...
-  // add info for new prototype method here
-  [`@${libName}/sum`, `${arrayPath}sumAF`, sumAF],
-];
+  // and insert here
+  sumAF,
+].map(method => [
+  method,
+  `${libPath}methods/arrays/${method.name}`,
+  makeScoped(method.name),
+]);
 
 // ...
 
