@@ -1,6 +1,11 @@
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import {BannerPlugin} from 'webpack';
 
+import {
+  libNameCamel,
+  resolvePkgInfo,
+} from './scripts/helpers';
+
 const {
   name: libName,
   version,
@@ -8,7 +13,6 @@ const {
   description,
   license,
   licenseUrl,
-  keywords,
 } = require('./package.json');
 
 const modernTargets = [
@@ -73,12 +77,11 @@ const minify = () => ({
   ],
 });
 
-const [libNameCamel] = keywords; // 'AsyncAF'
-
 const banner = new BannerPlugin({
-  banner: `${libNameCamel} (${description})
+  banner: ({chunk: {name}, filename}) =>
+    `${filename.replace(/(\/index|.js)/g, '')} v${version}
 
-[file] v${version}
+${libNameCamel} (${description}) ${resolvePkgInfo(name, filename)}
 
 Copyright (c) 2017-present, ${author}
 
@@ -89,7 +92,6 @@ GitHub repository (${licenseUrl}).`,
 
 export {
   libName,
-  libNameCamel,
   moduleProp,
   minify,
   banner,
