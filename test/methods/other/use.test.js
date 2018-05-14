@@ -2,7 +2,7 @@ import {expect} from 'chai';
 
 import AsyncAF from '../../../dist/async-af';
 import AsyncAfWrapper from '../../../dist/@async-af/wrapper';
-import forEachAF from '../../../dist/@async-af/forEach';
+import forEachAF from '../../../dist/@async-af/foreach';
 import mapAF from '../../../dist/@async-af/map';
 import logAF from '../../../dist/@async-af/log';
 
