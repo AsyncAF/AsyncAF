@@ -1,8 +1,13 @@
 import fs from 'fs-extra';
+
 import packages from '../packageList';
+import {
+  isMain,
+  libNameCamel,
+  getDocsUrl,
+} from './helpers';
 
 const {
-  name: libName,
   description,
   author,
   license,
@@ -13,16 +18,13 @@ const {
   keywords,
 } = require('../package.json');
 
-packages.forEach(([pkgName, , member]) => {
+packages.forEach(([{name: memberName}, , pkgName]) => {
+  const docs = getDocsUrl(memberName);
+  const scopedDescription = `standalone ${libNameCamel} package: ${memberName} ${docs}`;
+
   fs.outputFileSync(`dist/${pkgName}/package.json`, JSON.stringify({
-    name: pkgName.toLowerCase(),
-    description: pkgName === libName
-      ? description
-      : `standalone ${keywords[0]} package: ${member.name} (${
-        member.name.includes`Wrapper`
-          ? `${homepage}/${member.name}.html`
-          : `${homepage}/${keywords[0]}.html#${member.name}`
-      })`,
+    name: pkgName,
+    description: isMain(memberName) ? description : scopedDescription,
     author,
     license,
     version,

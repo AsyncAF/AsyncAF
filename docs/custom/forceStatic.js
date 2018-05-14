@@ -2,14 +2,13 @@
 
 const methodsToForceStatic = [
   'logAF_options',
+  'use',
 ];
 
 const handlers = {
   newDoclet(e) {
     const shouldForceStatic = methodsToForceStatic.includes(e.doclet.name);
-    if (shouldForceStatic) {
-      e.doclet.scope = 'static';
-    }
+    if (shouldForceStatic) e.doclet.scope = 'static';
   },
 };
 

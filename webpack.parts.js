@@ -1,6 +1,11 @@
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import {BannerPlugin} from 'webpack';
 
+import {
+  libNameCamel,
+  resolvePkgInfo,
+} from './scripts/helpers';
+
 const {
   name: libName,
   version,
@@ -8,7 +13,6 @@ const {
   description,
   license,
   licenseUrl,
-  keywords,
 } = require('./package.json');
 
 const modernTargets = [
@@ -74,7 +78,15 @@ const minify = () => ({
 });
 
 const banner = new BannerPlugin({
-  banner: `${keywords[0]} (${description})\n\n[name] v${version}\n\nCopyright (c) 2017-present, ${author}\n\nThis source code is licensed under the ${license} license found in this library's GitHub repository (${licenseUrl}).`,
+  banner: ({chunk: {name}, filename}) =>
+    `${filename.replace(/(\/index|.js)/g, '')} v${version}
+
+${libNameCamel} (${description}) ${resolvePkgInfo(name, filename)}
+
+Copyright (c) 2017-present, ${author}
+
+This source code is licensed under the ${license} license found in this library's
+GitHub repository (${licenseUrl}).`,
   entryOnly: true,
 });
 

@@ -52,7 +52,7 @@ build-package.jsons:
 	babel-node scripts/createPackageJsons
 
 build-READMEs:
-	babel-node scripts/createREADMEs
+	babel-node scripts/createReadmes
 
 commit:
 	echo "\033[0;36menter commit msg following the angular convention ( \033[4;36mhttps://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit \033[0;36m)"

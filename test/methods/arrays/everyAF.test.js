@@ -104,22 +104,26 @@ describe('everyAF method', () => {
       'undefined is not a function',
     );
   });
-  it('should reject when not called on an Array', async () => {
-    await expect(AsyncAF(null).everyAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
+  it('should reject with TypeError when called on non-array-like objects', async () => {
+    await expect(AsyncAF(null).everyAF(() => {})).to.eventually.be.rejected.and.has.property(
       'message',
-      'Cannot read property \'everyAF\' of null',
+      'everyAF cannot be called on null, only on an Array or array-like Object',
     );
-    await expect(AsyncAF().everyAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
+    await expect(AsyncAF().everyAF(() => {})).to.eventually.be.rejected.and.has.property(
       'message',
-      'Cannot read property \'everyAF\' of undefined',
+      'everyAF cannot be called on undefined, only on an Array or array-like Object',
     );
-    await expect(AsyncAF({}).everyAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
+    await expect(AsyncAF({}).everyAF(() => {})).to.eventually.be.rejected.and.has.property(
       'message',
-      '[object Object].everyAF is not a function',
+      'everyAF cannot be called on [object Object], only on an Array or array-like Object',
     );
-    await expect(AsyncAF('string').everyAF((_, el) => el)).to.eventually.be.rejected.and.has.property(
+    await expect(AsyncAF(true).everyAF(() => {})).to.eventually.be.rejected.and.has.property(
       'message',
-      'string.everyAF is not a function',
+      'everyAF cannot be called on true, only on an Array or array-like Object',
+    );
+    await expect(AsyncAF(2).everyAF(() => { })).to.eventually.be.rejected.and.has.property(
+      'message',
+      'everyAF cannot be called on 2, only on an Array or array-like Object',
     );
   });
 });

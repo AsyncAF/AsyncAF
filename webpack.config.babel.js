@@ -1,6 +1,8 @@
 import path from 'path';
+import {optimize} from 'webpack';
 
-import packages from './packageList';
+import packages, {makeScoped} from './packageList';
+import {isMain} from './scripts/helpers';
 import {
   libName,
   moduleProp,
@@ -8,19 +10,21 @@ import {
   banner,
 } from './webpack.parts';
 
+const {ModuleConcatenationPlugin} = optimize;
+
 export default ({modern, cover}, {mode, cache}) => ({
   mode,
-  entry: packages.reduce((pkgs, [pkg, file]) => (
-    {...pkgs, [pkg]: path.resolve(file)}
+  entry: packages.reduce((pkgs, [{name}, file]) => (
+    {...pkgs, [name]: path.resolve(file)}
   ), {}),
   devtool: 'source-map',
   output: {
     path: path.resolve('dist'),
-    filename: ({chunk}) => `${chunk.name}/${
+    filename: ({chunk: {name}}) => `${isMain(name) ? libName : makeScoped(name)}/${
       (modern ? '' : 'legacy/') +
       (mode === 'production' ? 'min' : 'index')
     }.js`,
-    library: [libName, '[name]'],
+    library: '[name]',
     libraryTarget: 'umd',
     libraryExport: 'default',
     umdNamedDefine: true,
@@ -31,5 +35,6 @@ export default ({modern, cover}, {mode, cache}) => ({
   optimization: mode === 'production' ? minify() : {},
   plugins: [
     banner,
+    new ModuleConcatenationPlugin(),
   ],
 });

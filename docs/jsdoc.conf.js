@@ -1,9 +1,9 @@
-const title = require('../package.json').keywords[0];
+const {keywords: [title]} = require('../package.json');
 
 module.exports = {
   plugins: [
     'plugins/markdown',
-    'docs/custom/callbackFn.js',
+    'docs/custom/alterParams.js',
     'docs/custom/forceStatic.js',
   ],
   recurseDepth: 10,
@@ -30,6 +30,7 @@ module.exports = {
     encoding: 'utf8',
     template: 'node_modules/docdash',
     mainpagetitle: title,
+    tutorials: 'docs/tutorials',
   },
   docdash: {
     sort: false,
