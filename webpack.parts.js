@@ -6,14 +6,14 @@ import {
   resolvePkgInfo,
 } from './scripts/helpers';
 
-const {
-  name: libName,
+import {
+  name as libName,
   version,
   author,
   description,
   license,
   licenseUrl,
-} = require('./package.json');
+} from './package.json';
 
 const modernTargets = [
   'last 2 Chrome versions', 'not Chrome < 60',
@@ -52,6 +52,9 @@ const moduleProp = (cache, modern, cover) => ({
         }]],
       },
     },
+  }, {
+    test: /\.json$/,
+    loader: 'json-loader',
   }],
 });
 
