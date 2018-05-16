@@ -29,6 +29,7 @@ build:
 	webpack --mode development --env.modern
 	webpack --mode production --env.legacy
 	webpack --mode production --env.modern
+	BABEL_ENV=rollup rollup -c
 	echo "\n\033[0;36mbuilds complete!\033[0m 📦\n"
 
 test-built:

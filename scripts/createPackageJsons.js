@@ -33,10 +33,12 @@ packages.forEach(([{name: memberName}, , pkgName]) => {
     repository,
     keywords,
     main: 'index.js',
+    module: 'esm/index.js',
     files: [
       'index*',
       'min*',
       'legacy/**',
+      'esm/**',
       'README.md',
     ],
     publishConfig: {
