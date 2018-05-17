@@ -1,4 +1,8 @@
-const {keywords: [title]} = require('../package.json');
+const {
+  description,
+  homepage,
+  keywords: [title],
+} = require('../package.json');
 
 module.exports = {
   plugins: [
@@ -34,5 +38,23 @@ module.exports = {
   },
   docdash: {
     sort: false,
+    openGraph: {
+      title: `${title} - Documentation`,
+      type: 'website',
+      image: 'https://cdn.rawgit.com/AsyncAF/AsyncAF/1ce388a7/docs/custom/assets/async-af-logo.png',
+      site_name: title,
+      url: homepage,
+    },
+    meta: {
+      description,
+    },
+    icons: {
+      appleTouchIcon: '/apple-touch-icon.png',
+      favicon32x32: '/favicon-32x32.png',
+      favicon16x16: '/favicon-16x16.png',
+      manifest: '/site.webmanifest',
+      msTileColor: '#2d89ef',
+      themeColor: '#ffffff',
+    },
   },
 };

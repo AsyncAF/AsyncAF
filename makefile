@@ -39,6 +39,7 @@ test-built:
 docs:
 	echo "\ngenerating docs... 📝\n"
 	jsdoc -c docs/jsdoc.conf.js -R README.md
+	cp -r docs/custom/assets/favicons/ docs/out/
 	babel-node docs/custom/fixHashDot
 	babel-node docs/custom/fixLogAfOptions
 	babel-node docs/custom/fixEOF
