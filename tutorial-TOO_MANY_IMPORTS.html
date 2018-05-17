@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: Wrapper/Use: Too Many 🤬 Imports!? - Documentation</title>
+    
+    
+        
+            <meta name="description" content="Async/Await Fun" />
+        
+    
+    
+        <meta property="og:title" content="AsyncAF - Documentation"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="https://cdn.rawgit.com/AsyncAF/AsyncAF/1ce388a7/docs/custom/assets/async-af-logo.png"/>
+        
+            <meta property="og:site_name" content="AsyncAF"/>
+        
+        <meta property="og:url" content="https://async-af.js.org"/>
+    
+    
+      
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      
+      
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      
+      
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      
+      
+        <link rel="manifest" href="/site.webmanifest">
+      
+      
+        <meta name="msapplication-TileColor" content="#2d89ef">
+      
+      
+        <meta name="theme-color" content="#ffffff">
+      
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AsyncAF.html">AsyncAF</a><ul class='methods'><li data-type='method'><a href="AsyncAF.html#everyAF">everyAF</a></li><li data-type='method'><a href="AsyncAF.html#filterAF">filterAF</a></li><li data-type='method'><a href="AsyncAF.html#findAF">findAF</a></li><li data-type='method'><a href="AsyncAF.html#findIndexAF">findIndexAF</a></li><li data-type='method'><a href="AsyncAF.html#forEachAF">forEachAF</a></li><li data-type='method'><a href="AsyncAF.html#includesAF">includesAF</a></li><li data-type='method'><a href="AsyncAF.html#indexOfAF">indexOfAF</a></li><li data-type='method'><a href="AsyncAF.html#joinAF">joinAF</a></li><li data-type='method'><a href="AsyncAF.html#lastIndexOfAF">lastIndexOfAF</a></li><li data-type='method'><a href="AsyncAF.html#mapAF">mapAF</a></li><li data-type='method'><a href="AsyncAF.html#reduceAF">reduceAF</a></li><li data-type='method'><a href="AsyncAF.html#someAF">someAF</a></li><li data-type='method'><a href="AsyncAF.html#logAF">logAF</a></li><li data-type='method'><a href="AsyncAF.html#logAF_options">logAF.options</a></li></ul></li><li><a href="AsyncAfWrapper.html">AsyncAfWrapper</a><ul class='methods'><li data-type='method'><a href="AsyncAfWrapper.html#use">use</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-TOO_MANY_IMPORTS.html">Wrapper/Use: Too Many 🤬 Imports!?</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    <section>
+
+<header>
+    
+
+    <h1>Wrapper/Use: Too Many 🤬 Imports!?</h1>
+</header>
+
+<article>
+    <p><em>...or How to Use <code>babel-plugin-transform-imports</code></em>
+<br><br></p>
+<p><hr><br>
+<span style="font: 72px Times New Roman, serif; color: #ADACB5; float: left; margin-right: 3px; line-height: .12;">I</span>f you're pulling in AsyncAF's standalone scoped packages (<code>@async-af/map</code>, <code>@async-af/wrapper</code>, etc.), strategically using <a href="AsyncAfWrapper.html">AsyncAfWrapper</a> and <a href="AsyncAfWrapper.html#use">use</a> to pull in only what you need, you may have ended up with something like this:</p>
+<h3>The Too Many Imports Way 🙀</h3><pre class="prettyprint source lang-js"><code>// hypothetically awesome file that uses wrapper, map, filter, includes, every, indexof, some, reduce, join, and log
+
+import AsyncAF from '@async-af/wrapper';
+import mapAF from '@async-af/map';
+import filterAF from '@async-af/filter';
+import includesAF from '@async-af/includes';
+import everyAF from '@async-af/every';
+import indexOfAF from '@async-af/indexof';
+import someAF from '@async-af/some';
+import reduceAF from '@async-af/reduce';
+import joinAF from '@async-af/join';
+import logAF from '@async-af/log';
+
+AsyncAF.use({
+  // ...all the methods
+});
+
+// ...more sweet sweet code
+</code></pre><p>Using another tool; however, we can condense all those damned line-taking-up imports into a single line.</p>
+<h4>How to Do It⁉️</h4><h6>Installation</h6><p>First, install the individual AsyncAF packages as usual (npm, yarn, etc.).</p>
+<pre class="prettyprint source"><code>npm install --save @async-af/{wrapper,map,filter,includes,every,indexof,some,reduce,join,log}</code></pre><details style="margin-left: 24px; padding-top: -18px;"><summary><em>Or, if you're on Windows,</em></summary>
+<code>npm install --save @async-af/wrapper @async-af/map @async-af/filter @async-af/includes @async-af/every @async-af/indexof @async-af/some @async-af/reduce @async-af/join @async-af/log</code>
+</details>
+
+<p><br>
+Also install <a href="https://www.npmjs.com/package/babel-plugin-transform-imports" target="_blank"><code>babel-plugin-transform-imports</code></a>; this is where the magic happens.</p>
+<pre class="prettyprint source"><code>npm install --save-dev babel-plugin-transform-imports</code></pre><p>You can follow along in <code>babel-plugin-transform-imports</code>'s README if your setup is a bit different. There's <a href="https://webpack.js.org/" target=_blank>webpack</a> instructions there too. For our purposes, we'll assume you're already using <a href="https://babeljs.io/" target=_blank>babel</a> for transpiling.
+<br><br></p>
+<h6><em>.babelrc or variant</em></h6><p>Wherever your babel configuration lives (<code>.babelrc</code>, etc.), add to your plugins, <code>transform-imports</code> and add <code>async-af</code> to the list of libraries to transform as follows:</p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;presets&quot;: [
+    &quot;@babel/env&quot;
+  ],
+  &quot;plugins&quot;: [
+    [
+      &quot;transform-imports&quot;,
+      {
+        &quot;async-af&quot;: {
+          &quot;transform&quot;: &quot;@async-af/${member}&quot;,
+          &quot;preventFullImport&quot;: true
+        }
+      }
+    ]
+  ]
+}</code></pre><details><summary>Note if you're using AsyncAF in production code</summary>
+Don't forget to use the appropriate version if you need production/minified code or if you're targeting legacy browsers. If so, replace the path in <code>&quot;transform&quot;: &quot;@async-af/${member}&quot;</code> with:
+<br>
+<table align=left><th align=left style="padding: 0px 30px 0px 30px">mode</th><th align=left style="padding: 0px 30px 0px 30px">browsers</th><th align=left style="padding: 0px 30px 0px 30px">path</th><br>
+<tr><td style="padding: 0px 30px 0px 30px">development</td><td style="padding: 0px 30px 0px 30px">modern (ES6+)</td><td style="padding: 0px 30px 0px 30px"><code>@async-af/${member}</code></td></tr>
+<tr><td style="padding: 0px 30px 0px 30px">development</td><td style="padding: 0px 30px 0px 30px">legacy (ES5+)</td><td style="padding: 0px 30px 0px 30px"><code>@async-af/${member}/legacy</code></td></tr>
+<tr><td style="padding: 0px 30px 0px 30px">production</td><td style="padding: 0px 30px 0px 30px">modern (ES6+)</td><td style="padding: 0px 30px 0px 30px"><code>@async-af/${member}/min</code></td></tr>
+<tr><td style="padding: 0px 30px 0px 30px">production</td><td style="padding: 0px 30px 0px 30px">legacy (ES5+)</td><td style="padding: 0px 30px 0px 30px"><code>@async-af/${member}/legacy/min</code></td></tr>
+</table>
+
+<br>
+</details>
+
+<h3>You Did It: A Nice One-Liner 😻</h3><p>Now, with the babel plugin up and running <em>(make sure you've installed any peer dependencies for babel)</em>, you can refactor that wall of imports to something more succinct and <em>sophisticated</em>: 🥃</p>
+<pre class="prettyprint source lang-js"><code>// hypothetically awesome file that uses wrapper, map, filter, includes, every, indexof, some, reduce, join, and log
+
+import {wrapper as AsyncAF, map, filter, includes, every, indexOf, some, reduce, join, log} from 'async-af';
+
+AsyncAF.use({
+  // ...all the methods
+});
+
+// ...more sweet sweet code
+</code></pre><h4><em>Caveats; however</em></h4><p>While the imported method names are case-insensitive (e.g., <code>@async-af/indexof</code> vs. <code>indexOf</code>—as imported above); they must be &quot;AF-less&quot; (<code>map</code> vs. <code>mapAF</code>) when using this plugin.</p>
+<p>If it's important to you that the AsyncAF methods you use be clearly differentiated from native methods with trailing &quot;AF&quot;s, then you can use <code>import</code><em><code>package</code></em><code>as</code><em><code>packageAF</code></em> syntax, although the result is clearly not as concise:</p>
+<pre class="prettyprint source lang-js"><code>import {wrapper as AsyncAF, map as mapAF, filter as filterAF, includes as includesAF, every as everyAF, indexOf as indexOfAF, some as someAF, reduce as reduceAF, join as joinAF, log as logAF} from 'async-af';</code></pre><p>Alternatively, you can alias the methods when you add them to <a href="AsyncAfWrapper.html"><code>AsyncAfWrapper</code></a> via the <a href="AsyncAfWrapper.html#use"><code>use</code></a> method:</p>
+<pre class="prettyprint source lang-js"><code>import {wrapper as AsyncAF, map, filter, includes, every, indexOf, some, reduce, join, log} from 'async-af';
+
+AsyncAF.use({
+  mapAF: map,
+  filterAF: filter,
+  // ... etc.
+}, {
+  logAF: log
+});
+</code></pre>
+</article>
+
+</section>
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wednesday, May 16, 2018 using the <a href="https://github.com/AsyncAF/docdash">AsyncAF/docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+
+</body>
+</html>
