@@ -5,7 +5,7 @@
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
-  "version": "3.5.0",
+  "version": "4.0.0",
   "homepage": "https://async-af.js.org",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
@@ -62,14 +62,6 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "release": "lerna exec -- npm publish"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-object-rest-spread"
-    ]
-  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -111,6 +103,9 @@
     "mocha": "^4.0.1",
     "nyc": "^11.7.3",
     "opener": "^1.4.3",
+    "rollup": "^0.59.0",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "rollup-plugin-uglify": "^3.0.0",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0",
     "uglifyjs-webpack-plugin": "^1.2.5",

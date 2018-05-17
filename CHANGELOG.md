@@ -1,3 +1,28 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/AsyncAF/AsyncAF/compare/v3.5.0...v4.0.0) (2018-05-17)
+
+
+### Code Refactoring
+
+* change variable names when packages are exposed as variables ([1df6de4](https://github.com/AsyncAF/AsyncAF/commit/1df6de4))
+
+
+### Features
+
+* all array methods can now be used on array-like objects as well ([e3bd389](https://github.com/AsyncAF/AsyncAF/commit/e3bd389))
+* **es modules:** dev/min packages now available as es modules ([4afd961](https://github.com/AsyncAF/AsyncAF/commit/4afd961))
+* **join:** implement joinAF method ([3767ca2](https://github.com/AsyncAF/AsyncAF/commit/3767ca2))
+* **lastindexof:** implement lastIndexOfAF method ([c4adcf1](https://github.com/AsyncAF/AsyncAF/commit/c4adcf1))
+* **perf:** reduce dev bundle sizes 4-5.6% w/ ModuleConcatenationPlugin ([01fb955](https://github.com/AsyncAF/AsyncAF/commit/01fb955))
+* **use:** refactor 'use' method to accept static methods as well ([6be45ca](https://github.com/AsyncAF/AsyncAF/commit/6be45ca))
+
+
+### BREAKING CHANGES
+
+* variable names will now match each member's name in the docs (e.g., AsyncAF, AsyncAfWrapper, mapAF, logAF)
+
+
+
 <a name="3.5.0"></a>
 # [3.5.0](https://github.com/AsyncAF/AsyncAF/compare/v3.4.0...v3.5.0) (2018-05-06)
 

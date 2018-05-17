@@ -29,6 +29,7 @@ build:
 	webpack --mode development --env.modern
 	webpack --mode production --env.legacy
 	webpack --mode production --env.modern
+	BABEL_ENV=rollup rollup -c
 	echo "\n\033[0;36mbuilds complete!\033[0m 📦\n"
 
 test-built:
@@ -38,6 +39,7 @@ test-built:
 docs:
 	echo "\ngenerating docs... 📝\n"
 	jsdoc -c docs/jsdoc.conf.js -R README.md
+	cp -r docs/custom/assets/favicons/ docs/out/
 	babel-node docs/custom/fixHashDot
 	babel-node docs/custom/fixLogAfOptions
 	babel-node docs/custom/fixEOF

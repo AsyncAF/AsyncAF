@@ -7,7 +7,7 @@ import {
   getDocsUrl,
 } from './helpers';
 
-const {
+import {
   description,
   author,
   license,
@@ -16,7 +16,7 @@ const {
   bugs,
   repository,
   keywords,
-} = require('../package.json');
+} from '../package.json';
 
 packages.forEach(([{name: memberName}, , pkgName]) => {
   const docs = getDocsUrl(memberName);
@@ -33,10 +33,12 @@ packages.forEach(([{name: memberName}, , pkgName]) => {
     repository,
     keywords,
     main: 'index.js',
+    module: 'esm/index.js',
     files: [
       'index*',
       'min*',
       'legacy/**',
+      'esm/**',
       'README.md',
     ],
     publishConfig: {
