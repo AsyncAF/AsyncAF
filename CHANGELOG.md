@@ -1,3 +1,13 @@
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/AsyncAF/AsyncAF/compare/v5.0.0...v5.0.1) (2018-05-18)
+
+
+### Bug Fixes
+
+* **log:** fix bug in minified logAF method ([1044b24](https://github.com/AsyncAF/AsyncAF/commit/1044b24))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/AsyncAF/AsyncAF/compare/v4.0.0...v5.0.0) (2018-05-18)
 
