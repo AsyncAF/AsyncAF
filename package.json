@@ -5,7 +5,7 @@
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "homepage": "https://async-af.js.org",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
