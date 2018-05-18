@@ -11,6 +11,11 @@ const handlers = {
       e.doclet.params[0].optional = true;
       e.doclet.params[0].defaultvalue = "','";
     }
+
+    // capitalize 'Function' in logAfOptions labelFormat param
+    const isLabelFormat = e.doclet.params && e.doclet.params[0].name === 'options';
+    if (isLabelFormat)
+      e.doclet.params[3].type.names[1] = 'Function';
   },
 };
 

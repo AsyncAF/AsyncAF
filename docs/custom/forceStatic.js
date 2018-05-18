@@ -1,6 +1,7 @@
 // force scope to static when '@static' doesn't override '@alias' notation; add doclet.name to the array for any future occurrences
 
 const methodsToForceStatic = [
+  'logAF',
   'logAF_options',
   'use',
 ];
