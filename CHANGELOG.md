@@ -1,3 +1,18 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/AsyncAF/AsyncAF/compare/v4.0.0...v5.0.0) (2018-05-18)
+
+
+### Code Refactoring
+
+* **log:** refactor logAF custom format ([bf0ff59](https://github.com/AsyncAF/AsyncAF/commit/bf0ff59))
+
+
+### BREAKING CHANGES
+
+* **log:** logAF custom format no longer pulls variables from a string
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/AsyncAF/AsyncAF/compare/v3.5.0...v4.0.0) (2018-05-17)
 
