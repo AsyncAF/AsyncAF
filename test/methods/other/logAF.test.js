@@ -107,7 +107,7 @@ describe('logAF static method', () => {
         );
       });
       it('custom', async () => {
-        logAfStub.options({labelFormat: 'custom="here\'s the log! ~~~"'});
+        logAfStub.options({labelFormat: 'here\'s the log! ~~~'});
         await logAfStub('custom');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           'here\'s the log! ~~~',
@@ -117,10 +117,9 @@ describe('logAF static method', () => {
       });
     });
 
-    /* eslint-disable no-template-curly-in-string */
     context('custom labelFormat should have access to variable', () => {
       it('arrow', async () => {
-        logAfStub.options({labelFormat: 'custom=`${arrow}`'});
+        logAfStub.options({labelFormat: ({arrow}) => arrow});
         await logAfStub('arrow');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           /^={24}>$/,
@@ -129,7 +128,7 @@ describe('logAF static method', () => {
         );
       });
       it('line', async () => {
-        logAfStub.options({labelFormat: 'custom=`${line}`'});
+        logAfStub.options({labelFormat: ({line}) => line});
         await logAfStub('line number');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           /^\d+$/,
@@ -138,7 +137,7 @@ describe('logAF static method', () => {
         );
       });
       it('col', async () => {
-        logAfStub.options({labelFormat: 'custom=`${col}`'});
+        logAfStub.options({labelFormat: ({col}) => col});
         await logAfStub('col number');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           /^\d+$/,
@@ -147,7 +146,7 @@ describe('logAF static method', () => {
         );
       });
       it('parent', async () => {
-        logAfStub.options({labelFormat: 'custom=`${parent}`'});
+        logAfStub.options({labelFormat: ({parent}) => parent});
         await logAfStub('parent');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           'other/',
@@ -156,7 +155,7 @@ describe('logAF static method', () => {
         );
       });
       it('file', async () => {
-        logAfStub.options({labelFormat: 'custom=`${file}`'});
+        logAfStub.options({labelFormat: ({file}) => file});
         await logAfStub('file');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           'logAF.test.js',
@@ -165,7 +164,7 @@ describe('logAF static method', () => {
         );
       });
       it('path', async () => {
-        logAfStub.options({labelFormat: 'custom=`${path}`'});
+        logAfStub.options({labelFormat: ({path}) => path});
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
           /^\/.+\/AsyncAF\/test\/methods\//,
@@ -173,19 +172,34 @@ describe('logAF static method', () => {
           /^(\n|\r)in \d\.\d{3} secs$/,
         );
       });
-    }); /* eslint-enable */
+    });
 
     it('should warn when passed an invalid labelFormat and use defaults', async () => {
       const wrappedWarnStub = sinon.stub();
       logAfStub = Object.assign(logAF, {wrappedWarn: wrappedWarnStub});
 
-      logAfStub.options({labelFormat: 'invalidFormat'});
+      logAfStub.options({labelFormat: 2300});
       await logAfStub('invalidFormat');
       expect(wrappedWarnStub).to.have.been.calledWith(
-        'AsyncAF Warning: logAF labelFormat option must be set to \'file\' (default), \'path\', \'parent\', \'arrow\', or \'custom\'',
+        'Warning: logAF labelFormat option must be set to \'file\' (default), \'path\', \'parent\', \'arrow\', or a custom string or function\n',
       );
       expect(wrappedLogStub).to.have.been.calledWithMatch(
         /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
+        'invalidFormat',
+        /^(\n|\r)in \d\.\d{3} secs$/,
+      );
+    });
+    it('should warn when passed an invalid labelFormat and fall back to the prior setting', async () => {
+      const wrappedWarnStub = sinon.stub();
+      logAfStub = Object.assign(logAF, {wrappedWarn: wrappedWarnStub});
+      logAfStub.options({labelFormat: 'path'});
+      logAfStub.options({labelFormat: 2300});
+      await logAfStub('invalidFormat');
+      expect(wrappedWarnStub).to.have.been.calledWith(
+        'Warning: logAF labelFormat option must be set to \'file\' (default), \'path\', \'parent\', \'arrow\', or a custom string or function\n',
+      );
+      expect(wrappedLogStub).to.have.been.calledWithMatch(
+        /^@\/.+\/AsyncAF\/test\/methods\/other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
         'invalidFormat',
         /^(\n|\r)in \d\.\d{3} secs$/,
       );
