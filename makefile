@@ -42,6 +42,7 @@ docs:
 	cp -r docs/custom/assets/favicons/ docs/out/
 	babel-node docs/custom/fixHashDot
 	babel-node docs/custom/fixLogAfOptions
+	babel-node docs/custom/fixIndexHtml
 	babel-node docs/custom/fixEOF
 	babel-node docs/custom/alterSignature
 	echo "done!\n\n\033[0;36mplease open \033[4;36mfile://"$(CURDIR)"/docs/out/index.html\033[0;36m in the browser\nor run \033[0;31m'$$\033[0m npm run docs:open\033[0;31m'\033[0;36m for a preview\n\n\033[0;33mif satisfied, run \033[0;31m'$$\033[0m npm run docs:publish\033[0;31m'\033[0;33m to commit and push to your fork's gh-pages branch\033[0m\n"

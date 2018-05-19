@@ -89,7 +89,7 @@ Don't forget to use the appropriate version if you need production/minified code
 <br>
 </details>
 
-### You Did It: A Nice One-Liner 😻
+<h3 style=clear:both;padding-top:24px;>You Did It: A Nice One-Liner 😻</h3>
 
 Now, with the babel plugin up and running _(make sure you've installed any peer dependencies for babel)_, you can refactor that wall of imports to something more succinct and _sophisticated_: 🥃
 
