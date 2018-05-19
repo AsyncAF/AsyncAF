@@ -33,7 +33,7 @@ const staticMethods = [
   |      PROTOTYPE METHODS     |
   |____________________________| */
 
-// Arrays:
+// Arrays
 import mapAF from './lib/methods/arrays/mapAF';
 import forEachAF from './lib/methods/arrays/forEachAF';
 import filterAF from './lib/methods/arrays/filterAF';
@@ -66,8 +66,20 @@ const arrayMethods = [
   makeScoped(method.name),
 ]);
 
+// strings
+import splitAF from './lib/methods/strings/splitAF';
+
+const stringMethods = [
+  splitAF,
+].map(method => [
+  method,
+  `${libPath}methods/strings/${method.name}`,
+  makeScoped(method.name),
+]);
+
 const prototypeMethods = [
   ...arrayMethods,
+  ...stringMethods,
 ];
 
 /* ____________________________
