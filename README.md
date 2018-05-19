@@ -1,10 +1,10 @@
-![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/async-af.svg?style=for-the-badge&label=size&colorB=466EF1)
-[![npm version](https://img.shields.io/npm/v/async-af.svg?style=for-the-badge&colorB=cb3837)](https://www.npmjs.com/package/async-af)
-[![yarn version](https://img.shields.io/npm/v/async-af.svg?label=yarn&style=for-the-badge&colorB=2c8ebb)](https://yarnpkg.com/en/package/async-af)
-[![unpkg version](https://img.shields.io/npm/v/async-af.svg?style=for-the-badge&colorB=ffcc2f&label=unpkg)](https://unpkg.com/async-af/)
-[![codecov](https://img.shields.io/codecov/c/github/AsyncAF/AsyncAF.svg?style=for-the-badge&label=codecov&colorB=brightgreen)](https://codecov.io/gh/AsyncAF/AsyncAF)
-[![MIT License](https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa)](https://github.com/AsyncAF/AsyncAF/blob/master/README.md#license)
-<!-- [![license scan](https://img.shields.io/badge/license%20scan-passing-brightgreen.svg?style=for-the-badge)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/) -->
+<a><img src="https://img.shields.io/bundlephobia/minzip/async-af.svg?style=for-the-badge&amp;label=size&amp;colorB=466EF1" alt="npm package size (min + gzip)"></a>
+<a href="https://www.npmjs.com/package/async-af" target=_blank><img src="https://img.shields.io/npm/v/async-af.svg?style=for-the-badge&colorB=cb3837" alt="npm version"></a>
+<a href="https://yarnpkg.com/en/package/async-af" target=_blank><img src="https://img.shields.io/npm/v/async-af.svg?label=yarn&style=for-the-badge&colorB=2c8ebb" alt="yarn version"></a>
+<a href="https://unpkg.com/async-af/" target=_blank><img src="https://img.shields.io/npm/v/async-af.svg?style=for-the-badge&colorB=ffcc2f&label=unpkg" alt="unpkg version"></a>
+<a href="https://codecov.io/gh/AsyncAF/AsyncAF" target=_blank><img src="https://img.shields.io/codecov/c/github/AsyncAF/AsyncAF.svg?style=for-the-badge&label=codecov&colorB=brightgreen" alt=codecov></a>
+<a href="https://github.com/AsyncAF/AsyncAF/blob/master/README.md#license"><img src="https://img.shields.io/npm/l/async-af.svg?style=for-the-badge&colorB=aaaaaa" alt="MIT License"></a>
+<!-- <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/" target=_blank><img src="https://img.shields.io/badge/license%20scan-passing-brightgreen.svg?style=for-the-badge&label=fossa" alt="license scan"></a> -->
 
 <p align=center><a href="https://async-af.js.org" target=_blank><img src="https://cdn.rawgit.com/AsyncAF/AsyncAF/1ce388a7/docs/custom/assets/async-af-logo.png"></a></p>
 
@@ -29,7 +29,7 @@ Easy peazy, just `$ npm install --save async-af`, right?
 
 🔸 <strong>yarn:</strong> <code>$ yarn add async-af</code>
 
-🔹 <strong>bower:</strong> <code>async-af</code> is no longer published to bower. To continue using it with bower, look into <a href=https://github.com/mjeanroy/bower-npm-resolver><code>bower-npm-resolver</code></a>.
+🔹 <strong>bower:</strong> <code>async-af</code> is no longer published to bower. To continue using it with bower, look into <a href=https://github.com/mjeanroy/bower-npm-resolver target=_blank><code>bower-npm-resolver</code></a>.
 
 🔸 <strong>cdn:</strong> See the table for which script tag to use:
 
@@ -76,8 +76,8 @@ Easy peazy, just `$ npm install --save async-af`, right?
 <br>
 
 ## License
-AsyncAF is licensed under the [MIT License](https://choosealicense.com/licenses/mit/), so you can pretty much use it however you want
+AsyncAF is licensed under the <a href="https://choosealicense.com/licenses/mit/" target=_blank>MIT License</a>, so you can pretty much use it however you want
 
-(but [click here](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE) or [here](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/) to get into specifics).
+(but [click here](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE) or <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/" target=_blank>here</a> to get into specifics).
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/)
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/" target=_blank><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF.svg?type=large" alt="FOSSA Status"></a>
