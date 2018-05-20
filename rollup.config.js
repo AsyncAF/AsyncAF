@@ -28,8 +28,6 @@ const minify = min => (min ? uglify({
   mangle: {
     // safari10: true, // revisit after cross-env testing
   },
-  keep_fnames: true,
-  keep_classnames: false,
   sourceMap: true,
   toplevel: true,
 }) : () => {});

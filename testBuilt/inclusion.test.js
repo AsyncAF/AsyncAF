@@ -1,4 +1,8 @@
-import {expect} from 'chai';
+import chai, {expect} from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 /* eslint-disable import/first, import/extensions, import/no-unresolved */
 
@@ -88,4 +92,122 @@ describe('logAF should be available in', () => {
   it('logAfModernMin', () => expect(logAfModernMin).to.be.a('function'));
   it('logAfLegacy', () => expect(logAfLegacy).to.be.a('function'));
   it('logAfLegacyMin', () => expect(logAfLegacyMin).to.be.a('function'));
+});
+
+describe('logAF should work in all packages:', () => {
+  it('AsyncAfModern.logAF', async () => {
+    const {logAF} = AsyncAfModern;
+    const toLog = AsyncAfModern(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('AsyncAfModernMin.logAF', async () => {
+    const {logAF} = AsyncAfModernMin;
+    const toLog = AsyncAfModernMin(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('AsyncAfLegacy.logAF', async () => {
+    const {logAF} = AsyncAfLegacy;
+    const toLog = AsyncAfLegacy(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('AsyncAfLegacyMin.logAF', async () => {
+    const {logAF} = AsyncAfLegacyMin;
+    const toLog = AsyncAfLegacyMin(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('logAfModern', async () => {
+    const logAF = logAfModern;
+    AsyncAfWrapperModern.use({mapAF: mapAfModern});
+    const toLog = AsyncAfWrapperModern(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('logAfModernMin', async () => {
+    const logAF = logAfModernMin;
+    AsyncAfWrapperModernMin.use({mapAF: mapAfModernMin});
+    const toLog = AsyncAfWrapperModernMin(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('logAfLegacy', async () => {
+    const logAF = logAfLegacy;
+    AsyncAfWrapperLegacy.use({mapAF: mapAfLegacy});
+    const toLog = AsyncAfWrapperLegacy(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
+
+  it('logAfLegacyMin', async () => {
+    const logAF = logAfLegacyMin;
+    AsyncAfWrapperLegacyMin.use({mapAF: mapAfLegacyMin});
+    const toLog = AsyncAfWrapperLegacyMin(Promise.resolve([1, 3])).mapAF(n => n * 2);
+    const wrappedLogStub = sinon.stub();
+    const logAfStub = Object.assign(logAF, {wrappedLog: wrappedLogStub});
+
+    await logAfStub(toLog);
+    expect(wrappedLogStub).to.have.been.calledWithMatch(
+      /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
+      [2, 6],
+      /^(\n|\r)in \d\.\d{3} secs$/,
+    );
+  });
 });

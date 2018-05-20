@@ -1,3 +1,5 @@
+import name from './lib/methods/_internal/nameFunction';
+
 /* eslint-disable import/first */
 const libName = 'async-af';
 const libPath = './lib/';
@@ -22,7 +24,7 @@ const classes = [
 import logAF from './lib/methods/other/logAF';
 
 const staticMethods = [
-  logAF,
+  name(logAF, 'logAF'),
 ].map(method => [
   method,
   `${libPath}methods/other/${method.name}`,
@@ -48,18 +50,18 @@ import lastIndexOfAF from './lib/methods/arrays/lastIndexOfAF';
 import joinAF from './lib/methods/arrays/joinAF';
 
 const arrayMethods = [
-  mapAF,
-  forEachAF,
-  filterAF,
-  reduceAF,
-  everyAF,
-  someAF,
-  includesAF,
-  findAF,
-  findIndexAF,
-  indexOfAF,
-  lastIndexOfAF,
-  joinAF,
+  name(mapAF, 'mapAF'),
+  name(forEachAF, 'forEachAF'),
+  name(filterAF, 'filterAF'),
+  name(reduceAF, 'reduceAF'),
+  name(everyAF, 'everyAF'),
+  name(someAF, 'someAF'),
+  name(includesAF, 'includesAF'),
+  name(findAF, 'findAF'),
+  name(findIndexAF, 'findIndexAF'),
+  name(indexOfAF, 'indexOfAF'),
+  name(lastIndexOfAF, 'lastIndexOfAF'),
+  name(joinAF, 'joinAF'),
 ].map(method => [
   method,
   `${libPath}methods/arrays/${method.name}`,
@@ -70,7 +72,7 @@ const arrayMethods = [
 import splitAF from './lib/methods/strings/splitAF';
 
 const stringMethods = [
-  splitAF,
+  name(splitAF, 'splitAF'),
 ].map(method => [
   method,
   `${libPath}methods/strings/${method.name}`,
