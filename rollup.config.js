@@ -15,7 +15,7 @@ import {
   licenseUrl,
 } from './package.json';
 
-const minify = min => (min ? uglify({
+const minify = (min, memberName) => (min ? uglify({
   ecma: 6,
   output: {
     comments: /^!/,
@@ -23,13 +23,12 @@ const minify = min => (min ? uglify({
   compress: {
     passes: 2,
     unsafe: true,
-    unsafe_arrows: true,
+    // use unsafe_arrows except for 'AsyncAF' & 'AsyncAfWrapper'
+    unsafe_arrows: /^(?!asyncaf).+/i.test(memberName),
   },
   mangle: {
     // safari10: true, // revisit after cross-env testing
   },
-  keep_fnames: true,
-  keep_classnames: false,
   sourceMap: true,
   toplevel: true,
 }) : () => {});
@@ -55,7 +54,7 @@ GitHub repository (${licenseUrl}).
     babel({
       exclude: 'node_modules/**',
     }),
-    minify(min),
+    minify(min, memberName),
   ],
 }));
 

@@ -69,8 +69,6 @@ const minify = () => ({
         mangle: {
           // safari10: true, // revisit after cross-env testing
         },
-        keep_fnames: true,
-        keep_classnames: false,
         minimize: true,
         toplevel: true,
       },
