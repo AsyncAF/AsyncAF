@@ -1,3 +1,19 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/AsyncAF/AsyncAF/compare/v5.0.1...v5.1.0) (2018-05-20)
+
+
+### Bug Fixes
+
+* **es modules:** prevent minified classes from utlizing arrow functions ([3eb897b](https://github.com/AsyncAF/AsyncAF/commit/3eb897b))
+
+
+### Features
+
+* **perf:** reduce minified packages sizes by 1-18% ([f4d459e](https://github.com/AsyncAF/AsyncAF/commit/f4d459e))
+* **split:** implement splitAF method ([24c9ee4](https://github.com/AsyncAF/AsyncAF/commit/24c9ee4)), closes [#37](https://github.com/AsyncAF/AsyncAF/issues/37)
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/AsyncAF/AsyncAF/compare/v5.0.0...v5.0.1) (2018-05-18)
 
