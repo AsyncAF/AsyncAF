@@ -1,3 +1,18 @@
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/AsyncAF/AsyncAF/compare/v5.1.1...v5.2.0) (2018-05-21)
+
+
+### Features
+
+* **finally:** add finally method to AsyncAF & AsyncAfWrapper ([8d6bf2e](https://github.com/AsyncAF/AsyncAF/commit/8d6bf2e))
+
+
+
+<a name="5.1.1"></a>
+## [5.1.1](https://github.com/AsyncAF/AsyncAF/compare/v5.1.0...v5.1.1) (2018-05-20)
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/AsyncAF/AsyncAF/compare/v5.0.1...v5.1.0) (2018-05-20)
 
