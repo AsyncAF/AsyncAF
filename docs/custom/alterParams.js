@@ -5,12 +5,18 @@ const handlers = {
     if (isCallback)
       e.doclet.params[0].type.names[0] = 'Function';
 
-    // give joinAF's 'separator' param an 'optional' attribute
+    // give joinAF's 'separator' param an 'optional' attribute & denote default value
+    const isJoinAF = e.doclet.meta.filename === 'joinAF.js';
     const isSeparator = e.doclet.params && e.doclet.params[0].name === 'separator';
-    if (isSeparator) {
+    if (isJoinAF && isSeparator) {
       e.doclet.params[0].optional = true;
       e.doclet.params[0].defaultvalue = "','";
     }
+
+    // give splitAF's 'separator' param an 'optional' attribute
+    const isSplitAF = e.doclet.meta.filename === 'splitAF.js';
+    if (isSplitAF && isSeparator)
+      e.doclet.params[0].optional = true;
 
     // capitalize 'Function' in logAfOptions labelFormat param
     const isLabelFormat = e.doclet.params && e.doclet.params[0].name === 'options';
