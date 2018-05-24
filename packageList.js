@@ -48,6 +48,7 @@ import findIndexAF from './lib/methods/arrays/findIndexAF';
 import indexOfAF from './lib/methods/arrays/indexOfAF';
 import lastIndexOfAF from './lib/methods/arrays/lastIndexOfAF';
 import joinAF from './lib/methods/arrays/joinAF';
+import concatAF from './lib/methods/arrays/concatAF';
 
 const arrayMethods = [
   name(mapAF, 'mapAF'),
@@ -62,6 +63,7 @@ const arrayMethods = [
   name(indexOfAF, 'indexOfAF'),
   name(lastIndexOfAF, 'lastIndexOfAF'),
   name(joinAF, 'joinAF'),
+  name(concatAF, 'concatAF'),
 ].map(method => [
   method,
   `${libPath}methods/arrays/${method.name}`,
