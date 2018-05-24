@@ -74,11 +74,7 @@ const arrayMethods = [
 import splitAF from './lib/methods/strings/splitAF';
 
 const stringMethods = [
-  name(includesAF, 'includesAF'),
-  name(indexOfAF, 'indexOfAF'),
-  name(lastIndexOfAF, 'lastIndexOfAF'),
   name(splitAF, 'splitAF'),
-  name(concatAF, 'concatAF'),
 ].map(method => [
   method,
   `${libPath}methods/strings/${method.name}`,

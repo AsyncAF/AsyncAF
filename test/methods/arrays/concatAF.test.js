@@ -55,7 +55,8 @@ describe('concatAF method', () => {
     });
     it('nested arrays', async () => {
       const arrayWithNestedArray = Promise.resolve([3, [4, 5]]);
-      expect(await AsyncAF(arr).concat(arrayWithNestedArray)).to.eql([1, 2, 3, [4, 5]]);
+      expect(await AsyncAF(arr).concat(arrayWithNestedArray, 6))
+        .to.eql([1, 2, 3, [4, 5], 6]);
     });
     it('values', async () => {
       const promises = [3, 4, 5].map(v => Promise.resolve(v));
