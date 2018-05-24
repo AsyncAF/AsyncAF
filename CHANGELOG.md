@@ -1,3 +1,18 @@
+<a name="5.3.0"></a>
+# [5.3.0](https://github.com/AsyncAF/AsyncAF/compare/v5.2.0...v5.3.0) (2018-05-24)
+
+
+### Bug Fixes
+
+* **concat:** fix concat's handling of nested promises ([99a5ecc](https://github.com/AsyncAF/AsyncAF/commit/99a5ecc))
+
+
+### Features
+
+* **concat:** implement concatAF method ([b7fbf43](https://github.com/AsyncAF/AsyncAF/commit/b7fbf43))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/AsyncAF/AsyncAF/compare/v5.1.1...v5.2.0) (2018-05-21)
 
