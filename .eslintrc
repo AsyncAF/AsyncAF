@@ -46,6 +46,7 @@
     "no-unused-expressions": "off",
     "func-names": ["error", "as-needed"],
     "no-nested-ternary": "off",
-    "curly": ["error", "multi", "consistent"]
+    "curly": ["error", "multi", "consistent"],
+    "no-confusing-arrow": "off"
   }
 }

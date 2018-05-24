@@ -41,9 +41,35 @@ describe('concatAF method', () => {
     it('and concatenate multiple values', async () => {
       expect(await AsyncAF(arr).concat(3, 4, 5)).to.eql([1, 2, 3, 4, 5]);
     });
-    it('and concatenate a promises\'s resolved value', async () => {
-      expect(await AsyncAF(arr).concat(Promise.resolve(3))).to.eql([1, 2, 3]);
+  });
+
+  context('should work on Promise-wrapped values, including:', () => {
+    const arr = [1, 2].map(n => Promise.resolve(n));
+    it('an array', async () => {
+      const promise = Promise.resolve([3]);
+      expect(await AsyncAF(arr).concat(promise)).to.eql([1, 2, 3]);
     });
+    it('multiple arrays', async () => {
+      const [arr1, arr2] = [[3], [4, 5]].map(a => Promise.resolve(a));
+      expect(await AsyncAF(arr).concat(arr1, arr2)).to.eql([1, 2, 3, 4, 5]);
+    });
+    it('nested arrays', async () => {
+      const arrayWithNestedArray = Promise.resolve([3, [4, 5]]);
+      expect(await AsyncAF(arr).concat(arrayWithNestedArray)).to.eql([1, 2, 3, [4, 5]]);
+    });
+    it('values', async () => {
+      const promises = [3, 4, 5].map(v => Promise.resolve(v));
+      expect(await AsyncAF(arr).concat(...promises)).to.eql([1, 2, 3, 4, 5]);
+    });
+  });
+
+  it('should be available to use in flattening deeply nested promises', async () => {
+    /* eslint-disable max-len */
+    const flattenAsync = arr => AsyncAF(arr).reduce(async (acc, val) => Array.isArray(await val) ? AsyncAF(acc).concat(flattenAsync(val)) : AsyncAF(acc).concat(val), []);
+
+    const flattened = await flattenAsync(Promise.resolve([Promise.resolve(1), Promise.resolve([Promise.resolve([Promise.resolve(2), Promise.resolve([Promise.resolve(3), Promise.resolve(4)])])])]));
+
+    expect(flattened).to.eql([1, 2, 3, 4]);
   });
 
   context('should work with AsyncAF-wrapped values, including:', () => {
