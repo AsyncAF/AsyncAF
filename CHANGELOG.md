@@ -1,3 +1,13 @@
+<a name="5.3.2"></a>
+## [5.3.2](https://github.com/AsyncAF/AsyncAF/compare/v5.3.1...v5.3.2) (2018-06-11)
+
+
+
+<a name="5.3.1"></a>
+## [5.3.1](https://github.com/AsyncAF/AsyncAF/compare/v5.3.0...v5.3.1) (2018-05-24)
+
+
+
 <a name="5.3.0"></a>
 # [5.3.0](https://github.com/AsyncAF/AsyncAF/compare/v5.2.0...v5.3.0) (2018-05-24)
 
