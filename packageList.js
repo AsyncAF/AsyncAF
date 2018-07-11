@@ -4,7 +4,7 @@ import name from './lib/methods/_internal/nameFunction';
 const libName = 'async-af';
 const libPath = './lib/';
 
-const makeScoped = name => `@${libName}/${name.replace(/(AsyncAf|AF)/g, '').toLowerCase()}`;
+const makeScoped = name => `@${libName}/${name.replace(/AsyncAf|AF/g, '').toLowerCase()}`;
 
 /* ____________________________
   |           CLASSES          |
