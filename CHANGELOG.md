@@ -1,3 +1,13 @@
+<a name="5.3.3"></a>
+## [5.3.3](https://github.com/AsyncAF/AsyncAF/compare/v5.3.2...v5.3.3) (2018-07-11)
+
+
+### Performance Improvements
+
+* remove unnecessary capturing parentheses ([36d8eab](https://github.com/AsyncAF/AsyncAF/commit/36d8eab))
+
+
+
 <a name="5.3.2"></a>
 ## [5.3.2](https://github.com/AsyncAF/AsyncAF/compare/v5.3.1...v5.3.2) (2018-06-11)
 
