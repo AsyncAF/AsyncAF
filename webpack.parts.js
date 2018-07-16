@@ -80,7 +80,7 @@ const minify = () => ({
 
 const banner = new BannerPlugin({
   banner: ({chunk: {name}, filename}) =>
-    `${filename.replace(/(\/index|.js)/g, '')} v${version}
+    `${filename.replace(/\/index|.js/g, '')} v${version}
 
 ${libNameCamel} (${description}) ${resolvePkgInfo(name, filename)}
 
