@@ -16,6 +16,15 @@ describe('full AsyncAF class', () => {
     // eslint-disable-next-line no-proto
     expect(AsyncAF().__proto__).to.equal(AsyncAF.prototype);
   });
+  it('should have a customized toStringTag: "AsyncAF"', () => {
+    expect([
+      AsyncAF().toString(),
+      AsyncAF() + '', // eslint-disable-line prefer-template
+      `${AsyncAF()}`,
+      String(AsyncAF()),
+    ]).to.eql(Array(4).fill('[object AsyncAF]'));
+    expect(AsyncAF.prototype[Symbol.toStringTag]).to.equal('AsyncAF');
+  });
 
   context('should have access to prototype methods', () => {
     const a = AsyncAF();
