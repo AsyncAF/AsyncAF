@@ -1,3 +1,24 @@
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/AsyncAF/AsyncAF/compare/v5.3.3...v6.0.0) (2018-08-01)
+
+
+### Code Refactoring
+
+* store AsyncAF instance data in a WeakMap for privacy ([36cbaf6](https://github.com/AsyncAF/AsyncAF/commit/36cbaf6))
+
+
+### Features
+
+* add Symbol.toStringTag to AsyncAF classes for easier debugging ([7f0aa86](https://github.com/AsyncAF/AsyncAF/commit/7f0aa86))
+
+
+### BREAKING CHANGES
+
+* the inner promise within AsyncAF instances can no longer be accessed at, e.g., AsyncAF().data
+* AsyncAF().toString() will now show '[object AsyncAF]' rather than '[object Object]'
+
+
+
 <a name="5.3.3"></a>
 ## [5.3.3](https://github.com/AsyncAF/AsyncAF/compare/v5.3.2...v5.3.3) (2018-07-11)
 
