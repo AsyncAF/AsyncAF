@@ -13,7 +13,6 @@ describe('full AsyncAF class', () => {
     expect(Object.getPrototypeOf(AsyncAF())).to.equal(AsyncAF.prototype);
   });
   it('should be the __proto__ of instances', () => {
-    // eslint-disable-next-line no-proto
     expect(AsyncAF().__proto__).to.equal(AsyncAF.prototype);
   });
   it('should have a customized toStringTag: "AsyncAF"', () => {
@@ -87,7 +86,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF(false)).to.be.false;
     });
     it('Function', async () => {
-      /* eslint-disable require-jsdoc */
       function functionDeclaration() {}
       const functionExpression = function () {};
       const namedFunctionExpression = function namedFunctionExpression() {};
