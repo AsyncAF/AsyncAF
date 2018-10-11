@@ -1,6 +1,7 @@
 import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
+import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
 
@@ -22,7 +23,7 @@ describe('forEachAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 6]);
     });
-    it('and return undefined', async () => {
+    it('and resolve to undefined', async () => {
       expect(await AsyncAF(nums).forEachAF(num => num)).to.equal(undefined);
     });
   });
@@ -42,68 +43,49 @@ describe('forEachAF method', () => {
     });
   });
 
-  context('should work on an array of Promise.resolve calls', () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).forEachAF(num => {
-        numsTimes2.push(num * 2);
-      });
-      expect(numsTimes2).to.eql([2, 4, 6]);
+  it('should process elements in parallel', async () => {
+    const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
+    const nums = [];
+    await AsyncAF([3, 2, 1]).forEachAF(async n => {
+      await delay(n * 100);
+      nums.push(n);
     });
-  });
-
-  context('should process elements in order and in parallel', () => {
-    const clock = sinon.useFakeTimers();
-    const nums = [
-      new Promise(resolve => setTimeout(() => resolve(1), 2000)),
-      new Promise(resolve => setTimeout(() => resolve(2), 1000)),
-      new Promise(resolve => setTimeout(() => resolve(3), 0)),
-    ];
-    clock.tick(2000); // tick exactly 2000 to be sure elements are processed in parallel
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).forEachAF(num => {
-        numsTimes2.push(num * 2);
-      });
-      expect(numsTimes2).to.eql([2, 4, 6]);
-    });
-    it('and work with indices/array arguments', async () => {
-      const result = [];
-      await AsyncAF(nums).forEachAF(async (num, i, arr) => {
-        result.push(num + (await arr[i - 1] || 0));
-      });
-      expect(result).to.eql([1, 3, 5]);
-    });
+    expect(nums).to.eql([1, 2, 3]);
+    expect(Date.now()).to.equal(300);
     clock.restore();
   });
 
+  it('should work with indices/array arguments', async () => {
+    const nums = [];
+    await AsyncAF([1, 2, 3]).forEachAF((num, i, arr) => {
+      nums.push(num + (arr[i - 1] || 0));
+    });
+    expect(nums).to.eql([1, 3, 5]);
+  });
+
   it('should work with thisArg specified', async () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
 
     class Thing {
       constructor(num) {
         this.sum = num;
       }
+      async goodAdd(nums) {
+        await AsyncAF(nums).forEachAF(function (num) {
+          this.sum += num;
+        }, this); // should work because we're specifying thisArg as this
+      }
+      async otherGoodAdd(nums) {
+        await AsyncAF(nums).forEachAF(num => {
+          this.sum += num;
+        }); // should work w/o specifying thisArg because of => funcs' lexical this binding
+      }
+      async badAdd(nums) {
+        await AsyncAF(nums).forEachAF(function (num) {
+          this.sum += num;
+        }); // should be rejected w/o specifying thisArg
+      }
     }
-    /* eslint-disable func-names */
-    Thing.prototype.goodAdd = async function (nums) {
-      await AsyncAF(nums).forEachAF(function callback(num) {
-        this.sum += num;
-      }, this); // should work because we're specifying thisArg as this
-    };
-
-    Thing.prototype.otherGoodAdd = async function (nums) {
-      await AsyncAF(nums).forEachAF(num => {
-        this.sum += num;
-      }); // should work w/o specifying thisArg because of => funcs' lexical this binding
-    };
-
-    Thing.prototype.badAdd = async function (nums) {
-      await AsyncAF(nums).forEachAF(function callback(num) {
-        this.sum += num;
-      }); // should be rejected w/o specifying thisArg
-    };
 
     const thing = new Thing(6);
     await thing.goodAdd(nums);
@@ -116,32 +98,32 @@ describe('forEachAF method', () => {
     const thing3 = new Thing(6);
     expect(thing3.badAdd(nums)).to.be.rejectedWith(TypeError);
   });
-  it('should reject with TypeError: undefined is not a function', async () => {
-    await expect(AsyncAF([]).forEachAF()).to.eventually.be.rejected.and.has.property(
-      'message',
-      'undefined is not a function',
-    );
+
+  it('should work on an array-like object', async () => {
+    const nums = [];
+    await (async function () {
+      await AsyncAF(arguments).forEachAF(n => {
+        nums.push(n);
+      });
+    }(1, 2, 3));
+    expect(nums).to.eql([1, 2, 3]);
   });
+
+  it('should reject with TypeError: undefined is not a function', async () => {
+    await expect(AsyncAF([]).forEachAF()).to.eventually.be.rejectedWith(TypeError)
+      .and.has.property(
+        'message',
+        'undefined is not a function',
+      );
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'forEachAF cannot be called on null, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF().forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'forEachAF cannot be called on undefined, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF({}).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'forEachAF cannot be called on [object Object], only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(true).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'forEachAF cannot be called on true, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(2).forEachAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'forEachAF cannot be called on 2, only on an Array or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).forEachAF().catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `forEachAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
   });
 });

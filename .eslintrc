@@ -4,6 +4,17 @@
     "mocha": true
   },
   "extends": ["airbnb-base"],
+  "overrides": [{
+    "files": "*.test.js",
+    "rules": {
+      "prefer-rest-params": "off",
+      "no-proto": "off",
+      "require-jsdoc": "off",
+      "func-names": "off",
+      "no-await-in-loop": "off",
+      "class-methods-use-this": "off"
+      }
+    }],
   "rules": {
     "no-restricted-syntax": [
       "error",
