@@ -51,25 +51,12 @@ describe('findAF method', () => {
     );
   });
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findAF cannot be called on null, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF().findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findAF cannot be called on undefined, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF({}).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findAF cannot be called on [object Object], only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(true).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findAF cannot be called on true, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(2).findAF(e => e === 1)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findAF cannot be called on 2, only on an Array or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).findAF(() => true).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `findAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
   });
 });

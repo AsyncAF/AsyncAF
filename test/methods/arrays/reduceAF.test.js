@@ -109,26 +109,13 @@ describe('reduceAF method', () => {
     );
   });
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).reduceAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'reduceAF cannot be called on null, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF().reduceAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'reduceAF cannot be called on undefined, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF({}).reduceAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'reduceAF cannot be called on [object Object], only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(true).reduceAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'reduceAF cannot be called on true, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(2).reduceAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'reduceAF cannot be called on 2, only on an Array or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).reduceAF(() => {}).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `reduceAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
   });
   it('should reject when given an empty array and no initial value', async () => {
     await expect(AsyncAF([]).reduceAF((_, el) => el)).to.eventually.be.rejected.and.has.property(

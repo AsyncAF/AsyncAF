@@ -112,25 +112,12 @@ describe('includesAF method', () => {
   });
 
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).includesAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'includesAF cannot be called on null, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF().includesAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'includesAF cannot be called on undefined, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF({}).includesAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'includesAF cannot be called on [object Object], only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF(true).includesAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'includesAF cannot be called on true, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF(2).includesAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'includesAF cannot be called on 2, only on an Array, String, or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).includesAF(2).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `includesAF cannot be called on ${value}, only on an Array, String, or array-like Object`,
+        );
+      });
   });
 });

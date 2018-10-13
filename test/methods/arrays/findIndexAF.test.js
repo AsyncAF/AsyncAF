@@ -51,25 +51,12 @@ describe('findIndexAF method', () => {
     );
   });
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).findIndexAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findIndexAF cannot be called on null, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF().findIndexAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findIndexAF cannot be called on undefined, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF({}).findIndexAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findIndexAF cannot be called on [object Object], only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(true).findIndexAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findIndexAF cannot be called on true, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(2).findIndexAF(() => {})).to.eventually.be.rejected.and.has.property(
-      'message',
-      'findIndexAF cannot be called on 2, only on an Array or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).findIndexAF(() => {}).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `findIndexAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
   });
 });
