@@ -23,10 +23,10 @@ describe('everyAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return false when any result is falsey', async () => {
+    it('and resolve to false when any result is falsey', async () => {
       expect(await AsyncAF(nums).everyAF(n => n % 2)).to.be.false;
     });
-    it('and return true when all results are truthy', async () => {
+    it('and resolve to true when all results are truthy', async () => {
       expect(await AsyncAF(nums).everyAF(n => typeof n === 'number')).to.be.true;
     });
   });
@@ -45,10 +45,10 @@ describe('everyAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return false when any result is falsey', async () => {
+    it('and resolve to false when any result is falsey', async () => {
       expect(await AsyncAF(nums).everyAF(n => n % 2)).to.be.false;
     });
-    it('and return true when all results are truthy', async () => {
+    it('and resolve to true when all results are truthy', async () => {
       expect(await AsyncAF(nums).everyAF(n => typeof n === 'number')).to.be.true;
     });
   });
@@ -63,10 +63,10 @@ describe('everyAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return false when any result is falsey', async () => {
+    it('and resolve to false when any result is falsey', async () => {
       expect(await AsyncAF(nums).everyAF(n => n % 2)).to.be.false;
     });
-    it('and return true when all results are truthy', async () => {
+    it('and resolve to true when all results are truthy', async () => {
       expect(await AsyncAF(nums).everyAF(n => typeof n === 'number')).to.be.true;
     });
   });

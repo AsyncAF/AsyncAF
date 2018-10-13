@@ -13,7 +13,7 @@ describe('joinAF method', () => {
 
   context('should work on an array of non-promises', () => {
     const animals = ['cow', 'rabbit', 'chicken', 'moose'];
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -33,7 +33,7 @@ describe('joinAF method', () => {
 
   context('should work on an array-like object', () => {
     const animals = {0: 'cow', 1: 'rabbit', 2: 'chicken', 3: 'moose', length: 4};
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -53,7 +53,7 @@ describe('joinAF method', () => {
 
   context('should work on an array of promises', () => {
     const animals = ['cow', 'rabbit', 'chicken', 'moose'].map(n => Promise.resolve(n));
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -75,7 +75,7 @@ describe('joinAF method', () => {
     const animals = Promise.resolve(
       {0: 'cow', 1: 'rabbit', 2: 'chicken', 3: 'moose', length: 4},
     );
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {

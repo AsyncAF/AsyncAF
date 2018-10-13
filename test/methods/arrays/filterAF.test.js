@@ -22,7 +22,7 @@ describe('filterAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return an Array', async () => {
+    it('and resolve to an Array', async () => {
       expect(await AsyncAF(nums).filterAF(n => n % 2)).to.be.an.instanceOf(Array);
     });
     it('and filter the new Array\'s elements', async () => {
@@ -43,7 +43,7 @@ describe('filterAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return an Array', async () => {
+    it('and resolve to an Array', async () => {
       expect(await AsyncAF(nums).filterAF(n => n % 2)).to.be.an.instanceOf(Array);
     });
     it('and filter the new Array\'s elements', async () => {
@@ -60,7 +60,7 @@ describe('filterAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return an Array', async () => {
+    it('and resolve to an Array', async () => {
       expect(await AsyncAF(nums).filterAF(n => n % 2)).to.be.an.instanceOf(Array);
     });
     it('and filter the new Array\'s elements', async () => {

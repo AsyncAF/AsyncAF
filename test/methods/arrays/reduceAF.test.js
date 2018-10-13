@@ -22,7 +22,7 @@ describe('reduceAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return the correct type', async () => {
+    it('and resolve to the correct type', async () => {
       expect(await AsyncAF(nums).reduceAF((sum, num) => sum + num))
         .to.be.a('number').and.equal(7);
     });
@@ -46,7 +46,7 @@ describe('reduceAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return the correct type', async () => {
+    it('and resolve to the correct type', async () => {
       expect(await AsyncAF(nums).reduceAF((sum, num) => sum + num))
         .to.be.a('number').and.equal(7);
     });
@@ -66,7 +66,7 @@ describe('reduceAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return the correct type', async () => {
+    it('and resolve to the correct type', async () => {
       expect(await AsyncAF(nums).reduceAF((sum, num) => sum + num))
         .to.be.a('number').and.equal(7);
     });

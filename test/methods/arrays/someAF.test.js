@@ -23,10 +23,10 @@ describe('someAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return true when any result is truthy', async () => {
+    it('and resolve to true when any result is truthy', async () => {
       expect(await AsyncAF(nums).someAF(n => n % 2)).to.be.true;
     });
-    it('and return false when all results are falsey', async () => {
+    it('and resolve to false when all results are falsey', async () => {
       expect(await AsyncAF(nums).someAF(n => typeof n === 'string')).to.be.false;
     });
   });
@@ -45,10 +45,10 @@ describe('someAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return true when any result is truthy', async () => {
+    it('and resolve to true when any result is truthy', async () => {
       expect(await AsyncAF(nums).someAF(n => n % 2)).to.be.true;
     });
-    it('and return false when all results are falsey', async () => {
+    it('and resolve to false when all results are falsey', async () => {
       expect(await AsyncAF(nums).someAF(n => typeof n === 'string')).to.be.false;
     });
   });
@@ -63,10 +63,10 @@ describe('someAF method', () => {
       });
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
-    it('and return true when any result is truthy', async () => {
+    it('and resolve to true when any result is truthy', async () => {
       expect(await AsyncAF(nums).someAF(n => n % 2)).to.be.true;
     });
-    it('and return false when all results are falsey', async () => {
+    it('and resolve to false when all results are falsey', async () => {
       expect(await AsyncAF(nums).someAF(n => typeof n === 'string')).to.be.false;
     });
   });
