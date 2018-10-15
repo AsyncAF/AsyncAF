@@ -16,17 +16,15 @@ import {
 } from './package.json';
 
 const modernTargets = [
-  'last 2 Chrome versions', 'not Chrome < 60',
-  'last 2 Safari versions', 'not Safari < 10.1',
-  'last 2 iOS versions', 'not iOS < 10.3',
-  'last 2 Firefox versions', 'not Firefox < 54',
-  'last 2 Edge versions', 'not Edge < 15',
+  'last 2 Chrome versions',
+  'last 2 Safari versions',
+  'last 2 iOS versions',
+  'last 2 Firefox versions',
+  'last 2 Edge versions',
 ];
 
 const legacyTargets = [
   '> 0.5%',
-  'last 2 versions',
-  'Firefox ESR',
   'not dead',
   'not ie <= 10',
 ];
@@ -49,6 +47,7 @@ const moduleProp = (cache, modern, cover) => ({
         presets: [['@babel/preset-env', {
           modules: false,
           targets: {browsers: modern ? modernTargets : legacyTargets},
+          shippedProposals: true,
         }]],
       },
     },
