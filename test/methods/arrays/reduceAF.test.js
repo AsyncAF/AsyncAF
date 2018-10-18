@@ -19,7 +19,7 @@ describe('reduceAF method', () => {
       const numsTimes2 = [];
       await AsyncAF(nums).reduceAF((_, num) => {
         numsTimes2.push(num * 2);
-      });
+      }, 0);
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
     it('and resolve to the correct type', async () => {
@@ -43,7 +43,7 @@ describe('reduceAF method', () => {
       const numsTimes2 = [];
       await AsyncAF(nums).reduceAF((_, num) => {
         numsTimes2.push(num * 2);
-      });
+      }, 0);
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
     it('and resolve to the correct type', async () => {
@@ -63,7 +63,7 @@ describe('reduceAF method', () => {
       const numsTimes2 = [];
       await AsyncAF(nums).reduceAF((_, num) => {
         numsTimes2.push(num * 2);
-      });
+      }, 0);
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
     it('and resolve to the correct type', async () => {
@@ -89,14 +89,14 @@ describe('reduceAF method', () => {
       const numsTimes2 = [];
       await AsyncAF(nums).reduceAF((_, num) => {
         numsTimes2.push(num * 2);
-      });
+      }, 0);
       expect(numsTimes2).to.eql([2, 4, 8]);
     });
     it('and work with indices/array arguments', async () => {
       const result = [];
       await AsyncAF(nums).reduceAF(async (_, num, i, arr) => {
         result.push(num + (await arr[i - 1] || 0));
-      });
+      }, 0);
       expect(result).to.eql([1, 3, 6]);
     });
     clock.restore();
