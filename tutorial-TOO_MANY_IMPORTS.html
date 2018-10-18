@@ -57,7 +57,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AsyncAF.html">AsyncAF</a><ul class='methods'><li data-type='method'><a href="AsyncAF.html#everyAF">everyAF</a></li><li data-type='method'><a href="AsyncAF.html#filterAF">filterAF</a></li><li data-type='method'><a href="AsyncAF.html#findAF">findAF</a></li><li data-type='method'><a href="AsyncAF.html#findIndexAF">findIndexAF</a></li><li data-type='method'><a href="AsyncAF.html#forEachAF">forEachAF</a></li><li data-type='method'><a href="AsyncAF.html#includesAF">includesAF</a></li><li data-type='method'><a href="AsyncAF.html#indexOfAF">indexOfAF</a></li><li data-type='method'><a href="AsyncAF.html#joinAF">joinAF</a></li><li data-type='method'><a href="AsyncAF.html#lastIndexOfAF">lastIndexOfAF</a></li><li data-type='method'><a href="AsyncAF.html#mapAF">mapAF</a></li><li data-type='method'><a href="AsyncAF.html#reduceAF">reduceAF</a></li><li data-type='method'><a href="AsyncAF.html#someAF">someAF</a></li><li data-type='method'><a href="AsyncAF.html#logAF">logAF</a></li><li data-type='method'><a href="AsyncAF.html#logAF_options">logAF.options</a></li><li data-type='method'><a href="AsyncAF.html#splitAF">splitAF</a></li></ul></li><li><a href="AsyncAfWrapper.html">AsyncAfWrapper</a><ul class='methods'><li data-type='method'><a href="AsyncAfWrapper.html#use">use</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-TOO_MANY_IMPORTS.html">Wrapper/Use: Too Many 🤬 Imports!?</a></li></ul>
+    <h2><a href="/">Home</a></h2><h3>Classes</h3><ul><li><a href="/AsyncAF">AsyncAF</a><ul class='methods'><li data-type='method'><a href="/AsyncAF#concatAF">concatAF</a></li><li data-type='method'><a href="/AsyncAF#everyAF">everyAF</a></li><li data-type='method'><a href="/AsyncAF#filterAF">filterAF</a></li><li data-type='method'><a href="/AsyncAF#findAF">findAF</a></li><li data-type='method'><a href="/AsyncAF#findIndexAF">findIndexAF</a></li><li data-type='method'><a href="/AsyncAF#forEachAF">forEachAF</a></li><li data-type='method'><a href="/AsyncAF#includesAF">includesAF</a></li><li data-type='method'><a href="/AsyncAF#indexOfAF">indexOfAF</a></li><li data-type='method'><a href="/AsyncAF#joinAF">joinAF</a></li><li data-type='method'><a href="/AsyncAF#lastIndexOfAF">lastIndexOfAF</a></li><li data-type='method'><a href="/AsyncAF#mapAF">mapAF</a></li><li data-type='method'><a href="/AsyncAF#reduceAF">reduceAF</a></li><li data-type='method'><a href="/AsyncAF#someAF">someAF</a></li><li data-type='method'><a href="/AsyncAF#logAF">logAF</a></li><li data-type='method'><a href="/AsyncAF#logAF_options">logAF.options</a></li><li data-type='method'><a href="/AsyncAF#series">series</a></li><li data-type='method'><a href="/AsyncAF#io">io</a></li><li data-type='method'><a href="/AsyncAF#splitAF">splitAF</a></li></ul></li><li><a href="/AsyncAfWrapper">AsyncAfWrapper</a><ul class='methods'><li data-type='method'><a href="/AsyncAfWrapper#use">use</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-TOO_MANY_IMPORTS.html">Wrapper/Use: Too Many 🤬 Imports!?</a></li></ul>
 </nav>
 
 <div id="main">
@@ -75,7 +75,7 @@
     <p><em>...or How to Use <code>babel-plugin-transform-imports</code></em>
 <br><br></p>
 <p><hr><br>
-<span style="font: 72px Times New Roman, serif; color: #ADACB5; float: left; margin-right: 3px; line-height: .12;">I</span>f you're pulling in AsyncAF's standalone scoped packages (<code>@async-af/map</code>, <code>@async-af/wrapper</code>, etc.), strategically using <a href="AsyncAfWrapper.html">AsyncAfWrapper</a> and <a href="AsyncAfWrapper.html#use">use</a> to pull in only what you need, you may have ended up with something like this:</p>
+<span style="font: 72px Times New Roman, serif; color: #ADACB5; float: left; margin-right: 3px; line-height: .12;">I</span>f you're pulling in AsyncAF's standalone scoped packages (<code>@async-af/map</code>, <code>@async-af/wrapper</code>, etc.), strategically using <a href="/AsyncAfWrapper">AsyncAfWrapper</a> and <a href="/AsyncAfWrapper#use">use</a> to pull in only what you need, you may have ended up with something like this:</p>
 <h3>The Too Many Imports Way 🙀</h3><pre class="prettyprint source lang-js"><code>// hypothetically awesome file that uses wrapper, map, filter, includes, every, indexof, some, reduce, join, and log
 
 import AsyncAF from '@async-af/wrapper';
@@ -147,7 +147,7 @@ AsyncAF.use({
 // ...more sweet sweet code
 </code></pre><h4><em>Caveats; however</em></h4><p>While the imported method names are case-insensitive (e.g., <code>@async-af/indexof</code> vs. <code>indexOf</code>—as imported above); they must be &quot;AF-less&quot; (<code>map</code> vs. <code>mapAF</code>) when using this plugin.</p>
 <p>If it's important to you that the AsyncAF methods you use be clearly differentiated from native methods with trailing &quot;AF&quot;s, then you can use <code>import</code><em><code>package</code></em><code>as</code><em><code>packageAF</code></em> syntax, although the result is clearly not as concise:</p>
-<pre class="prettyprint source lang-js"><code>import {wrapper as AsyncAF, map as mapAF, filter as filterAF, includes as includesAF, every as everyAF, indexOf as indexOfAF, some as someAF, reduce as reduceAF, join as joinAF, log as logAF} from 'async-af';</code></pre><p>Alternatively, you can alias the methods when you add them to <a href="AsyncAfWrapper.html"><code>AsyncAfWrapper</code></a> via the <a href="AsyncAfWrapper.html#use"><code>use</code></a> method:</p>
+<pre class="prettyprint source lang-js"><code>import {wrapper as AsyncAF, map as mapAF, filter as filterAF, includes as includesAF, every as everyAF, indexOf as indexOfAF, some as someAF, reduce as reduceAF, join as joinAF, log as logAF} from 'async-af';</code></pre><p>Alternatively, you can alias the methods when you add them to <a href="/AsyncAfWrapper"><code>AsyncAfWrapper</code></a> via the <a href="/AsyncAfWrapper#use"><code>use</code></a> method:</p>
 <pre class="prettyprint source lang-js"><code>import {wrapper as AsyncAF, map, filter, includes, every, indexOf, some, reduce, join, log} from 'async-af';
 
 AsyncAF.use({
@@ -167,7 +167,7 @@ AsyncAF.use({
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sunday, May 20, 2018 using the <a href="https://github.com/AsyncAF/docdash">AsyncAF/docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wednesday, October 17, 2018 using the <a href="https://github.com/AsyncAF/docdash">AsyncAF/docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
