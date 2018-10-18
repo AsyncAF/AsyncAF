@@ -7,7 +7,15 @@ const opt = '<span class=signature-attributes>opt</span>';
 const sigsToAlter = [
   {
     name: 'logAF_options',
-    signature: `options: {label${opt}, duration${opt}, labelFormat${opt}}`,
+    signature: `(options: {label${opt}, duration${opt}, labelFormat${opt}})`,
+  },
+  {
+    name: 'series',
+    signature: '',
+  },
+  {
+    name: 'io',
+    signature: '',
   },
 ];
 
@@ -15,7 +23,10 @@ fs.readFile('docs/out/AsyncAF.html', 'utf8').then(html => {
   let revised = html;
   sigsToAlter.forEach(({name, signature}) => {
     revised = revised.split(`id=${name}`);
-    revised[1] = revised[1].replace(/class=signature>\(.+\)</, `class=signature>(${signature})<`);
+    revised[1] = revised[1].replace(
+      /class=signature>(?:\(\)|\(.*\))</,
+      `class=signature>${signature}<`,
+    );
     revised = revised.join(`id=${name}`);
   });
   return revised;
