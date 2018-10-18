@@ -64,6 +64,14 @@ describe('concatAF method', () => {
     });
   });
 
+  it('should preserve holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const arr1 = [, , 1, , 2, , ];
+    const arr2 = [, , 3, , 4, , ];
+    expect(arr1.concat(arr2)).to.eql([, , 1, , 2, , , , 3, , 4, , ]);
+    expect(await AsyncAF(arr1).concatAF(arr2)).to.eql([, , 1, , 2, , , , 3, , 4, , ]);
+  }); /* eslint-enable */
+
   it('should be available to use in flattening deeply nested promises', async () => {
     /* eslint-disable max-len */
     const flattenAsync = arr => AsyncAF(arr).reduce(async (acc, val) => Array.isArray(await val) ? AsyncAF(acc).concat(flattenAsync(val)) : AsyncAF(acc).concat(val), []);

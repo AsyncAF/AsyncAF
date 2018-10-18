@@ -44,6 +44,11 @@ describe('findIndexAF method', () => {
     });
   });
 
+  it('should treat holes in sparse arrays as undefined', async () => {
+    expect([, , 0].findIndex(el => !el)).to.equal(0);
+    expect(await AsyncAF([, , 0]).findIndexAF(el => !el)).to.equal(0);
+  });
+
   it('should throw TypeError when callback is not a function', () => {
     expect(AsyncAF([]).findIndexAF()).to.eventually.be.rejected.and.have.property(
       'message',

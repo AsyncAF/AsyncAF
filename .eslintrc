@@ -12,7 +12,8 @@
       "require-jsdoc": "off",
       "func-names": "off",
       "no-await-in-loop": "off",
-      "class-methods-use-this": "off"
+      "class-methods-use-this": "off",
+      "no-sparse-arrays": "off"
       }
     }],
   "rules": {
@@ -58,6 +59,7 @@
     "func-names": ["error", "as-needed"],
     "no-nested-ternary": "off",
     "curly": ["error", "multi", "consistent"],
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "consistent-return": "off"
   }
 }

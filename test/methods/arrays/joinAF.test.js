@@ -93,6 +93,11 @@ describe('joinAF method', () => {
     });
   });
 
+  it('should treat holes in sparse arrays as undefined', async () => {
+    expect([, , undefined, 1].join`_`).to.equal('___1');
+    expect(await AsyncAF([, , undefined, 1]).joinAF`_`).to.equal('___1');
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
     for (const value of [null, undefined, {}, true, 2])
       await AsyncAF(value).joinAF('').catch(e => {

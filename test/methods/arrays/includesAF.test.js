@@ -63,6 +63,11 @@ describe('includesAF method', () => {
     });
   });
 
+  it('should treat holes in sparse arrays as undefined', async () => {
+    expect([, , 1].includes(undefined)).to.be.true;
+    expect(await AsyncAF([, , 1]).includesAF(undefined)).to.be.true;
+  });
+
   context('should work on an array of promises', () => {
     const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(4)];
     it('and resolve to true if the array includes the specified element', async () => {

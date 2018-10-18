@@ -136,6 +136,24 @@ describe('series.mapAF method', () => {
     expect(nums).to.eql([1, 2, 3]);
   });
 
+  it('should preserve holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const sparseArr = [, , 1, , 2, , , ];
+    expect(await AsyncAF(sparseArr).io.mapAF(n => n)).to.eql(sparseArr);
+  });
+
+  it('should ignore holes when iterating through sparse arrays', async () => {
+    const nums = [];
+    let count = 0;
+    expect(await AsyncAF([, , 1, , 2, , , ]).io.mapAF(n => {
+      nums.push(n);
+      count++;
+      return n * 2;
+    })).to.eql([, , 2, , 4, , , ]); // doesn't map empty slots (no NaNs)
+    expect(nums).to.eql([1, 2]); // doesn't push empty slots
+    expect(count).to.equal(2); // doesn't increment count unless value is non-empty
+  }); /* eslint-enable */
+
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([]).series.mapAF()).to.eventually.be.rejectedWith(TypeError)
       .and.has.property(

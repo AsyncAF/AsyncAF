@@ -27,7 +27,7 @@ describe('mapAF method', () => {
 
   context('should work on an array of promises', () => {
     const promises = [1, 2, 3].map(n => Promise.resolve(n));
-    it('should resolve to an instance of Array', async () => {
+    it('and resolve to an instance of Array', async () => {
       expect(await AsyncAF(promises).mapAF(num => num * 2)).to.be.an.instanceOf(Array);
     });
     it('and map its resolved elements', async () => {
@@ -104,6 +104,35 @@ describe('mapAF method', () => {
     }(1, 2, 3));
     expect(nums).to.eql([1, 2, 3]);
   });
+
+  it('should preserve holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const sparseArr = [, , 1, , 2, , , ];
+    expect(sparseArr.map(n => n)).to.eql(sparseArr);
+    expect(await AsyncAF(sparseArr).mapAF(n => n)).to.eql(sparseArr);
+  });
+
+  it('should ignore holes when iterating through sparse arrays', async () => {
+    const nums = [];
+    let count = 0;
+    expect([, , 1, , 2, , , ].map(n => {
+      nums.push(n);
+      count++;
+      return n * 2;
+    })).to.eql([, , 2, , 4, , , ]);
+    expect(nums).to.eql([1, 2]);
+    expect(count).to.equal(2);
+
+    const numsAF = [];
+    let countAF = 0;
+    expect(await AsyncAF([, , 1, , 2, , , ]).mapAF(n => {
+      numsAF.push(n);
+      countAF++;
+      return n * 2;
+    })).to.eql([, , 2, , 4, , , ]); // doesn't map empty slots (no NaNs)
+    expect(numsAF).to.eql([1, 2]); // doesn't push empty slots
+    expect(countAF).to.equal(2); // doesn't increment count unless value is non-empty
+  }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([]).mapAF()).to.eventually.be.rejectedWith(TypeError)

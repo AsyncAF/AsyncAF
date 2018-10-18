@@ -102,6 +102,13 @@ describe('reduceAF method', () => {
     clock.restore();
   });
 
+  it('should ignore holes in sparse arrays', async () => {
+    expect([, undefined, '1'].reduce((a, b) => a + b))
+      .to.equal('undefined1');
+    expect(await AsyncAF([, undefined, '1']).reduceAF((a, b) => a + b))
+      .to.equal('undefined1');
+  });
+
   it('should accept nullish arguments for initialValue', async () => {
     expect(await AsyncAF([]).reduceAF(acc => acc, undefined)).to.be.undefined;
     expect(await AsyncAF([]).reduceAF(acc => acc, null)).to.be.null;

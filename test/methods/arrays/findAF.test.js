@@ -44,6 +44,11 @@ describe('findAF method', () => {
     });
   });
 
+  it('should treat holes in sparse arrays as undefined', async () => {
+    expect([, , 0].find(el => !el)).to.to.undefined;
+    expect(await AsyncAF([, , 0]).findAF(el => !el)).to.be.undefined;
+  });
+
   it('should throw TypeError when callback is not a function', () => {
     expect(AsyncAF([]).findAF()).to.eventually.be.rejected.and.have.property(
       'message',

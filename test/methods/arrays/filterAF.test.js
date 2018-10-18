@@ -93,6 +93,12 @@ describe('filterAF method', () => {
     clock.restore();
   });
 
+  it('should remove holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    expect([, , 1, , 2, , ].filter(() => true)).to.eql([1, 2]);
+    expect(await AsyncAF([, , 1, , 2, , ]).filterAF(() => true)).to.eql([1, 2]);
+  }); /* eslint-enable */
+
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([]).filterAF()).to.eventually.be.rejected.and.has.property(
       'message',

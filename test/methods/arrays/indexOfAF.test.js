@@ -111,6 +111,11 @@ describe('indexOfAF method', () => {
     });
   });
 
+  it('should ignore holes in sparse arrays', async () => {
+    expect([, , 1].indexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([, , 1]).indexOfAF(undefined)).to.equal(-1);
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
     for (const value of [null, undefined, {}, true, 2])
       await AsyncAF(value).indexOfAF(() => {}).catch(e => {

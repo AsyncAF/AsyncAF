@@ -111,6 +111,11 @@ describe('lastIndexOfAF method', () => {
     });
   });
 
+  it('should ignore holes in sparse arrays', async () => {
+    expect([, , 1].lastIndexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([, , 1]).lastIndexOfAF(undefined)).to.equal(-1);
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
     for (const value of [null, undefined, {}, true, 2])
       await AsyncAF(value).lastIndexOfAF(2).catch(e => {

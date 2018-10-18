@@ -105,6 +105,19 @@ describe('series.forEachAF method', () => {
     expect(nums).to.eql([1, 2, 3]);
   });
 
+  it('should ignore holes when iterating through sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const nums = [];
+    let count = 0;
+
+    await AsyncAF([, , 1, , 2, , , ]).io.forEachAF(n => {
+      nums.push(n * 2);
+      count++;
+    });
+    expect(nums).to.eql([2, 4]); // doesn't push empty slots
+    expect(count).to.equal(2); // doesn't increment count unless value is non-empty
+  }); /* eslint-enable */
+
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([]).series.forEachAF()).to.eventually.be.rejectedWith(TypeError)
       .and.has.property(

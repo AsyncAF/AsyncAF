@@ -98,6 +98,11 @@ describe('someAF method', () => {
     clock.restore();
   });
 
+  it('should ignore holes in sparse arrays', async () => {
+    expect([, , 1].some(n => !Number.isInteger(n))).to.be.false;
+    expect(await AsyncAF([, , 1]).some(n => !Number.isInteger(n))).to.be.false;
+  });
+
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([]).someAF()).to.eventually.be.rejected.and.has.property(
       'message',
