@@ -102,6 +102,11 @@ describe('reduceAF method', () => {
     clock.restore();
   });
 
+  it('should accept nullish arguments for initialValue', async () => {
+    expect(await AsyncAF([]).reduceAF(acc => acc, undefined)).to.be.undefined;
+    expect(await AsyncAF([]).reduceAF(acc => acc, null)).to.be.null;
+  });
+
   it('should reject with TypeError: undefined is not a function', async () => {
     await expect(AsyncAF([1, 2]).reduceAF()).to.eventually.be.rejected.and.has.property(
       'message',
