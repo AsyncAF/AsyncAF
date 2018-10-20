@@ -1,6 +1,7 @@
 import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
+import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
 
@@ -32,11 +33,7 @@ describe('everyAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [
-      new Promise(resolve => resolve(1)),
-      new Promise(resolve => resolve(2)),
-      new Promise(resolve => resolve(4)),
-    ];
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
     it('and apply a function to each', async () => {
       const numsTimes2 = [];
       await AsyncAF(nums).everyAF(num => {
@@ -53,49 +50,48 @@ describe('everyAF method', () => {
     });
   });
 
-  context('should work on an array of Promise.resolve calls', () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(4)];
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).everyAF(num => {
-        numsTimes2.push(num * 2);
-        return true;
-      });
-      expect(numsTimes2).to.eql([2, 4, 8]);
+  it('should work with indices/array arguments', async () => {
+    const result = [];
+    await AsyncAF([1, 2, 4]).everyAF(async (num, i, arr) => {
+      result.push(num + (await arr[i - 1] || 0));
+      return true;
     });
-    it('and resolve to false when any result is falsey', async () => {
-      expect(await AsyncAF(nums).everyAF(n => n % 2)).to.be.false;
-    });
-    it('and resolve to true when all results are truthy', async () => {
-      expect(await AsyncAF(nums).everyAF(n => typeof n === 'number')).to.be.true;
-    });
+    expect(result).to.eql([1, 3, 6]);
   });
 
-  context('should process elements in order and in parallel', () => {
-    const clock = sinon.useFakeTimers();
-    const nums = [
-      new Promise(resolve => setTimeout(() => resolve(1), 2000)),
-      new Promise(resolve => setTimeout(() => resolve(2), 1000)),
-      new Promise(resolve => setTimeout(() => resolve(4), 0)),
-    ];
-    clock.tick(2000); // tick exactly 2000 to be sure elements are processed in parallel
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).everyAF(num => {
-        numsTimes2.push(num * 2);
-        return true;
-      });
-      expect(numsTimes2).to.eql([2, 4, 8]);
+  it('should process elements in parallel', async () => {
+    const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
+    const nums = [];
+    await AsyncAF([3, 2, 1]).everyAF(async n => {
+      await delay(n * 100);
+      nums.push(n);
+      return true;
     });
-    it('and work with indices/array arguments', async () => {
-      const result = [];
-      await AsyncAF(nums).everyAF(async (num, i, arr) => {
-        result.push(num + (await arr[i - 1] || 0));
-        return true;
-      });
-      expect(result).to.eql([1, 3, 6]);
-    });
+    expect(nums).to.eql([1, 2, 3]);
+    expect(Date.now()).to.equal(300);
     clock.restore();
+  });
+
+  it('should always return true given an empty array', async () => {
+    expect([].every(() => false)).to.be.true;
+    expect(await AsyncAF([]).everyAF(() => false)).to.be.true;
+  });
+
+  it('should not call callback given an empty array', async () => {
+    const empty = [];
+    await AsyncAF([]).everyAF(() => empty.push(1));
+    expect(empty).to.be.empty;
+  });
+
+  it('should work on an array-like object', async () => {
+    const nums = [];
+    await (async function () {
+      await AsyncAF(arguments).everyAF(n => {
+        nums.push(n);
+        return true;
+      });
+    }(1, 2, 3));
+    expect(nums).to.eql([1, 2, 3]);
   });
 
   it('should ignore holes in sparse arrays', async () => {
