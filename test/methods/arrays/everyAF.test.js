@@ -83,6 +83,42 @@ describe('everyAF method', () => {
     expect(empty).to.be.empty;
   });
 
+  it('should work with thisArg specified', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+
+    class Thing {
+      constructor(num) {
+        this.sum = num;
+      }
+      async goodAdd(nums) {
+        await AsyncAF(nums).everyAF(function (num) {
+          this.sum += num;
+        }, this); // should work because we're specifying thisArg as this
+      }
+      async otherGoodAdd(nums) {
+        await AsyncAF(nums).everyAF(num => {
+          this.sum += num;
+        }); // should work w/o specifying thisArg because of => funcs' lexical this binding
+      }
+      async badAdd(nums) {
+        await AsyncAF(nums).everyAF(function (num) {
+          this.sum += num;
+        }); // should be rejected w/o specifying thisArg
+      }
+    }
+
+    const thing = new Thing(6);
+    await thing.goodAdd(nums);
+    expect(thing.sum).to.equal(12);
+
+    const thing2 = new Thing(6);
+    await thing2.otherGoodAdd(nums);
+    expect(thing2.sum).to.equal(12);
+
+    const thing3 = new Thing(6);
+    expect(thing3.badAdd(nums)).to.be.rejectedWith(TypeError);
+  });
+
   it('should work on an array-like object', async () => {
     const nums = [];
     await (async function () {
