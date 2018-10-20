@@ -70,7 +70,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF([])).to.eql([]);
     });
     it('Object', async () => {
-      // expect(await AsyncAF({a: 1})).to.eql({a: 1});
       expect(await AsyncAF({})).to.eql({});
     });
     it('String', async () => {
@@ -95,7 +94,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF(functionExpression)).to.equal(functionExpression);
       expect(await AsyncAF(namedFunctionExpression)).to.equal(namedFunctionExpression);
       expect(await AsyncAF(arrowFunction)).to.equal(arrowFunction);
-      /* eslint-enable */
     });
     it('undefined', async () => {
       expect(await AsyncAF()).to.be.undefined;
