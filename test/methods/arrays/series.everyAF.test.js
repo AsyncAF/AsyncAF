@@ -1,0 +1,126 @@
+import chai, {expect} from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+import sinon from 'sinon';
+import delay from 'delay';
+
+import AsyncAF from '../../../dist/async-af';
+
+chai.use(chaiAsPromised);
+
+describe('series.everyAF method', () => {
+  it('io (inOrder) should be an alias for series', () => {
+    expect(AsyncAF().io).to.eql(AsyncAF().series);
+    expect(AsyncAF().io.everyAF).to.equal(AsyncAF().series.everyAF);
+  });
+
+  context('should work on an array of non-promises', () => {
+    const nums = [1, 2, 4];
+    it('and apply a function to each', async () => {
+      const numsTimes2 = [];
+      await AsyncAF(nums).io.everyAF(num => {
+        numsTimes2.push(num * 2);
+        return true;
+      });
+      expect(numsTimes2).to.eql([2, 4, 8]);
+    });
+    it('and resolve to false when any result is falsey', async () => {
+      expect(await AsyncAF(nums).io.everyAF(n => n % 2)).to.be.false;
+    });
+    it('and resolve to true when all results are truthy', async () => {
+      expect(await AsyncAF(nums).io.everyAF(n => typeof n === 'number')).to.be.true;
+    });
+  });
+
+  context('should work on an array of promises', () => {
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
+    it('and apply a function to each', async () => {
+      const numsTimes2 = [];
+      await AsyncAF(nums).io.everyAF(num => {
+        numsTimes2.push(num * 2);
+        return true;
+      });
+      expect(numsTimes2).to.eql([2, 4, 8]);
+    });
+    it('and resolve to false when any result is falsey', async () => {
+      expect(await AsyncAF(nums).io.everyAF(n => n % 2)).to.be.false;
+    });
+    it('and resolve to true when all results are truthy', async () => {
+      expect(await AsyncAF(nums).io.everyAF(n => typeof n === 'number')).to.be.true;
+    });
+  });
+
+  it('should work with indices/array arguments', async () => {
+    const result = [];
+    await AsyncAF([1, 2, 4]).io.everyAF(async (num, i, arr) => {
+      result.push(num + (await arr[i - 1] || 0));
+      return true;
+    });
+    expect(result).to.eql([1, 3, 6]);
+  });
+
+  it('should process elements in series', async () => {
+    const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
+    const nums = [];
+    await AsyncAF([3, 2, 1]).io.everyAF(async n => {
+      await delay(n * 100);
+      nums.push(n);
+      return true;
+    });
+    expect(nums).to.eql([3, 2, 1]);
+    expect(Date.now()).to.equal(600);
+    clock.restore();
+  });
+
+  it('should stop iterating once a value resolves to false', async () => {
+    const nums = [];
+    await AsyncAF([1, 2, 3]).io.everyAF(n => {
+      nums.push(n);
+      return n !== 2;
+    });
+    expect(nums).to.eql([1, 2]);
+  });
+
+  it('should always return true given an empty array', async () => {
+    expect([].every(() => false)).to.be.true;
+    expect(await AsyncAF([]).io.everyAF(() => false)).to.be.true;
+  });
+
+  it('should not call callback given an empty array', async () => {
+    const empty = [];
+    await AsyncAF([]).io.everyAF(() => empty.push(1));
+    expect(empty).to.be.empty;
+  });
+
+  it('should work on an array-like object', async () => {
+    const nums = [];
+    await (async function () {
+      await AsyncAF(arguments).io.everyAF(n => {
+        nums.push(n);
+        return true;
+      });
+    }(1, 2, 3));
+    expect(nums).to.eql([1, 2, 3]);
+  });
+
+  it('should ignore holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    expect([, , 1, , 2, , ].every(n => Number.isInteger(n))).to.be.true;
+    expect(await AsyncAF([, , 1, , 2, , ]).io.everyAF(n => Number.isInteger(n))).to.be.true;
+  }); /* eslint-enable */
+
+  it('should reject with TypeError: undefined is not a function', async () => {
+    await expect(AsyncAF([]).io.everyAF()).to.eventually.be.rejected.and.has.property(
+      'message',
+      'undefined is not a function',
+    );
+  });
+  it('should reject with TypeError when called on non-array-like objects', async () => {
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).io.everyAF(() => {}).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `everyAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
+  });
+});
