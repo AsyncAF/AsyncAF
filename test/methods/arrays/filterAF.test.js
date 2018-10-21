@@ -1,6 +1,7 @@
 import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
+import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
 
@@ -31,11 +32,7 @@ describe('filterAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [
-      new Promise(resolve => resolve(1)),
-      new Promise(resolve => resolve(2)),
-      new Promise(resolve => resolve(4)),
-    ];
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
     it('and apply a function to each', async () => {
       const numsTimes2 = [];
       await AsyncAF(nums).filterAF(num => {
@@ -51,52 +48,93 @@ describe('filterAF method', () => {
     });
   });
 
-  context('should work on an array of Promise.resolve calls', () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(4)];
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).forEachAF(num => {
-        numsTimes2.push(num * 2);
-      });
-      expect(numsTimes2).to.eql([2, 4, 8]);
+  it('should process elements in parallel', async () => {
+    const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
+    const nums = [];
+    await AsyncAF([3, 2, 1]).filterAF(async n => {
+      await delay(n * 100);
+      return nums.push(n);
     });
-    it('and resolve to an Array', async () => {
-      expect(await AsyncAF(nums).filterAF(n => n % 2)).to.be.an.instanceOf(Array);
-    });
-    it('and filter the new Array\'s elements', async () => {
-      expect(await AsyncAF(nums).filterAF(n => n % 2)).to.eql([1]);
-    });
-  });
-
-  context('should process elements in order and in parallel', () => {
-    const clock = sinon.useFakeTimers();
-    const nums = [
-      new Promise(resolve => setTimeout(() => resolve(1), 2000)),
-      new Promise(resolve => setTimeout(() => resolve(2), 1000)),
-      new Promise(resolve => setTimeout(() => resolve(4), 0)),
-    ];
-    clock.tick(2000); // tick exactly 2000 to be sure elements are processed in parallel
-    it('and apply a function to each', async () => {
-      const numsTimes2 = [];
-      await AsyncAF(nums).filterAF(num => {
-        numsTimes2.push(num * 2);
-      });
-      expect(numsTimes2).to.eql([2, 4, 8]);
-    });
-    it('and work with indices/array arguments', async () => {
-      const result = [];
-      await AsyncAF(nums).filterAF(async (num, i, arr) => {
-        result.push(num + (await arr[i - 1] || 0));
-      });
-      expect(result).to.eql([1, 3, 6]);
-    });
+    expect(nums).to.eql([1, 2, 3]);
+    expect(Date.now()).to.equal(300);
     clock.restore();
+  });
+
+  it('should work with indices/array arguments', async () => {
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
+    const result = [];
+    await AsyncAF(nums).filterAF(async (num, i, arr) => {
+      result.push(num + (await arr[i - 1] || 0));
+    });
+    expect(result).to.eql([1, 3, 6]);
+  });
+
+  it('should work with thisArg specified', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+
+    class Thing {
+      constructor(num) {
+        this.sum = num;
+      }
+      async goodAdd(nums) {
+        await AsyncAF(nums).filterAF(function (num) {
+          this.sum += num;
+          return true;
+        }, this); // should work because we're specifying thisArg as this
+      }
+      async otherGoodAdd(nums) {
+        await AsyncAF(nums).filterAF(num => {
+          this.sum += num;
+          return true;
+        }); // should work w/o specifying thisArg because of => funcs' lexical this binding
+      }
+      async badAdd(nums) {
+        await AsyncAF(nums).filterAF(function (num) {
+          this.sum += num;
+          return true;
+        }); // should be rejected w/o specifying thisArg
+      }
+    }
+
+    const thing = new Thing(6);
+    await thing.goodAdd(nums);
+    expect(thing.sum).to.equal(12);
+
+    const thing2 = new Thing(6);
+    await thing2.otherGoodAdd(nums);
+    expect(thing2.sum).to.equal(12);
+
+    const thing3 = new Thing(6);
+    expect(thing3.badAdd(nums)).to.be.rejectedWith(TypeError);
+  });
+
+  it('should work on an array-like object', async () => {
+    const nums = [];
+    await (async function () {
+      await AsyncAF(arguments).filterAF(n => nums.push(n));
+    }(1, 2, 3));
+    expect(nums).to.eql([1, 2, 3]);
   });
 
   it('should remove holes in sparse arrays', async () => {
     /* eslint-disable array-bracket-spacing */
     expect([, , 1, , 2, , ].filter(() => true)).to.eql([1, 2]);
     expect(await AsyncAF([, , 1, , 2, , ]).filterAF(() => true)).to.eql([1, 2]);
+  });
+
+  it('should ignore holes when iterating through sparse arrays', async () => {
+    const nums = [];
+    let count = 0;
+    await AsyncAF([, , 1, , 2, , , ]).filterAF(n => {
+      nums.push(n * 2);
+      count++;
+    });
+    expect(nums).to.eql([2, 4]); // doesn't push empty slots
+    expect(count).to.equal(2); // doesn't increment count unless value is non-empty
+  });
+
+  it('should work with index argument in a sparse array', async () => {
+    expect(await AsyncAF([, , 1, , 2, , 3, , ]).filterAF((_, i) => i === 2)).to.eql([1]);
   }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {
