@@ -134,6 +134,10 @@ describe('everyAF method', () => {
     /* eslint-disable array-bracket-spacing */
     expect([, , 1, , 2, , ].every(n => Number.isInteger(n))).to.be.true;
     expect(await AsyncAF([, , 1, , 2, , ]).everyAF(n => Number.isInteger(n))).to.be.true;
+  });
+
+  it('should work with index argument in a sparse array', async () => {
+    expect(await AsyncAF([, 1, , 2, , 3, , , ]).everyAF((_, i) => i % 2)).to.be.true;
   }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {

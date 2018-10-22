@@ -132,6 +132,14 @@ describe('mapAF method', () => {
     })).to.eql([, , 2, , 4, , , ]); // doesn't map empty slots (no NaNs)
     expect(numsAF).to.eql([1, 2]); // doesn't push empty slots
     expect(countAF).to.equal(2); // doesn't increment count unless value is non-empty
+  });
+
+  it('should work with index argument in a sparse array', async () => {
+    const oddIndexedValues = [];
+    await AsyncAF([, 1, , 2, , 3, , , 4]).mapAF((n, i) => {
+      i % 2 && oddIndexedValues.push(n);
+    });
+    expect(oddIndexedValues).to.eql([1, 2, 3]);
   }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {
