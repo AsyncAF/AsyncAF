@@ -1,5 +1,7 @@
 import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import sinon from 'sinon';
+import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
 
@@ -44,10 +46,84 @@ describe('findIndexAF method', () => {
     });
   });
 
+  it('should process elements in parallel', async () => {
+    const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
+    const nums = [];
+    await AsyncAF([3, 2, 1]).findIndexAF(async n => {
+      await delay(n * 100);
+      nums.push(n);
+    });
+    expect(nums).to.eql([1, 2, 3]);
+    expect(Date.now()).to.equal(300);
+    clock.restore();
+  });
+
+  it('should work with thisArg specified', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+
+    class Thing {
+      constructor(num) {
+        this.sum = num;
+      }
+      async goodAdd(nums) {
+        await AsyncAF(nums).findIndexAF(function (num) {
+          this.sum += num;
+        }, this); // should work because we're specifying thisArg as this
+      }
+      async otherGoodAdd(nums) {
+        await AsyncAF(nums).findIndexAF(num => {
+          this.sum += num;
+        }); // should work w/o specifying thisArg because of => funcs' lexical this binding
+      }
+      async badAdd(nums) {
+        await AsyncAF(nums).findIndexAF(function (num) {
+          this.sum += num;
+        }); // should be rejected w/o specifying thisArg
+      }
+    }
+
+    const thing = new Thing(6);
+    await thing.goodAdd(nums);
+    expect(thing.sum).to.equal(12);
+
+    const thing2 = new Thing(6);
+    await thing2.otherGoodAdd(nums);
+    expect(thing2.sum).to.equal(12);
+
+    const thing3 = new Thing(6);
+    expect(thing3.badAdd(nums)).to.be.rejectedWith(TypeError);
+  });
+
+  it('should work on an array-like object', async () => {
+    const nums = [];
+    await (async function () {
+      await AsyncAF(arguments).findIndexAF(n => {
+        nums.push(n);
+      });
+    }(1, 2, 3));
+    expect(nums).to.eql([1, 2, 3]);
+  });
+
   it('should treat holes in sparse arrays as undefined', async () => {
     expect([, , 0].findIndex(el => !el)).to.equal(0);
     expect(await AsyncAF([, , 0]).findIndexAF(el => !el)).to.equal(0);
   });
+
+  it('should not ignore holes when iterating through sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const nums = [];
+    let count = 0;
+    await AsyncAF([, , 1, , 2, , , ]).findIndexAF(n => {
+      nums.push(n * 2);
+      count++;
+    });
+    expect(nums).to.eql([NaN, NaN, 2, NaN, 4, NaN, NaN]); // pushes empty slots
+    expect(count).to.equal(7); // increments count even when value is empty
+  });
+
+  it('should work with index argument in a sparse array', async () => {
+    expect(await AsyncAF([, , 1, , 2, , 3, , ]).findIndexAF((_, i) => i === 2)).to.equal(2);
+  }); /* eslint-enable */
 
   it('should throw TypeError when callback is not a function', () => {
     expect(AsyncAF([]).findIndexAF()).to.eventually.be.rejected.and.have.property(
