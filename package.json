@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "async-af",
-  "description": "Async/Await Fun",
+  "description": "The asynciest of async libs there ever was or ever will be...AsyncAF!?",
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
@@ -26,6 +26,9 @@
     "array",
     "method",
     "methods",
+    "parallel",
+    "series",
+    "serial",
     "map",
     "forEach",
     "reduce",
