@@ -45,10 +45,8 @@ describe('full AsyncAF class', () => {
   });
 
   context('should have methods then and catch', () => {
-    const promises = [Promise.resolve(1), Promise.resolve(2)];
     it('and be thenable', async () => {
-      const doubled = await AsyncAF(promises).then(data => data.map(n => n * 2));
-      expect(doubled).to.eql([2, 4]);
+      expect(await AsyncAF(Promise.resolve(1)).then(n => n)).to.equal(1);
     });
     it('and follow PromisesA+ spec (https://promisesaplus.com/#point-43)', async () => {
       const aaf1 = AsyncAF(['a']);
@@ -56,7 +54,7 @@ describe('full AsyncAF class', () => {
       expect(await aaf2).to.eql(['a']);
     });
     it('and be catchable', async () => {
-      await AsyncAF(promises).then(() => {
+      await AsyncAF(Promise.resolve()).then(() => {
         throw new Error('caught');
       }).catch(e => {
         expect(e.message).to.equal('caught');
