@@ -53,6 +53,8 @@
       "ignoreTemplateLiterals": true
     }],
     "function-paren-newline": ["error", "consistent"],
+    "no-param-reassign": ["error", {"props": false}],
+    "no-bitwise": ["error", {"int32Hint": true, "allow": [">>>"]}],
     "no-plusplus": "off",
     "no-shadow": "off",
     "no-unused-expressions": "off",
