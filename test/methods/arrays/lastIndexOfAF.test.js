@@ -116,6 +116,32 @@ describe('lastIndexOfAF method', () => {
     expect(await AsyncAF([, , 1]).lastIndexOfAF(undefined)).to.equal(-1);
   });
 
+  it('should not find the index of NaN', async () => {
+    expect([, , NaN, undefined].lastIndexOf(NaN)).to.equal(-1);
+    expect(await AsyncAF([, , NaN, undefined]).lastIndexOfAF(NaN)).to.equal(-1);
+  });
+
+  it('should find the index of undefined', async () => {
+    expect([, , NaN, undefined].lastIndexOf(undefined)).to.equal(3);
+    expect(await AsyncAF([, , NaN, undefined]).lastIndexOfAF(undefined)).to.equal(3);
+  });
+
+  it('should default fromIndex to length - 1 when undefined or invalid', async () => {
+    expect(await AsyncAF([1, 2, 3]).lastIndexOfAF(3, undefined)).to.equal(2);
+    expect(AsyncAF([1, 2, 3]).lastIndexOfAF(3, Math)).to.not.eventually.throw;
+    expect(await AsyncAF([1, 2, 3]).lastIndexOfAF(3, Math)).to.equal(2);
+  });
+
+  it('should resolve to -1 given an empty array', async () => {
+    expect([].lastIndexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([]).lastIndexOfAF(undefined)).to.equal(-1);
+  });
+
+  it('should handle a large negative fromIndex on an empty array', async () => {
+    expect([].lastIndexOf('a', -100)).to.equal(-1);
+    expect(await AsyncAF([]).lastIndexOfAF('a', -100)).to.equal(-1);
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
     for (const value of [null, undefined, {}, true, 2])
       await AsyncAF(value).lastIndexOfAF(2).catch(e => {
