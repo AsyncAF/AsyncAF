@@ -64,7 +64,7 @@ describe('indexOfAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(4)];
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
     it('and resolve to the first index of the specified element', async () => {
       expect(await AsyncAF(nums).indexOfAF(1)).to.equal(0);
     });
@@ -114,6 +114,32 @@ describe('indexOfAF method', () => {
   it('should ignore holes in sparse arrays', async () => {
     expect([, , 1].indexOf(undefined)).to.equal(-1);
     expect(await AsyncAF([, , 1]).indexOfAF(undefined)).to.equal(-1);
+  });
+
+  it('should not find the index of NaN', async () => {
+    expect([, , NaN, undefined].indexOf(NaN)).to.equal(-1);
+    expect(await AsyncAF([, , NaN, undefined]).indexOfAF(NaN)).to.equal(-1);
+  });
+
+  it('should find the index of undefined', async () => {
+    expect([, , NaN, undefined].indexOf(undefined)).to.equal(3);
+    expect(await AsyncAF([, , NaN, undefined]).indexOfAF(undefined)).to.equal(3);
+  });
+
+  it('should default fromIndex to 0 when undefined or invalid', async () => {
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(1, undefined)).to.equal(0);
+    expect(AsyncAF([1, 2, 3]).indexOfAF(1, Math)).to.not.eventually.throw;
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(1, Math)).to.equal(0);
+  });
+
+  it('should always resolve to -1 given a fromIndex of an array\'s length', async () => {
+    expect([1, 2, 3].indexOf(3, 3)).to.equal(-1);
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(3, 3)).to.equal(-1);
+  });
+
+  it('should resolve to -1 given an empty array', async () => {
+    expect([].indexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([]).indexOfAF(undefined)).to.equal(-1);
   });
 
   it('should reject with TypeError when called on non-array-like objects', async () => {
