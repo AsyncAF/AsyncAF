@@ -49,13 +49,32 @@ describe('series.everyAF method', () => {
     });
   });
 
-  it('should work with indices/array arguments', async () => {
+  it('should work when referencing array argument at index <= current', async () => {
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
     const result = [];
-    await AsyncAF([1, 2, 4]).io.everyAF(async (num, i, arr) => {
-      result.push(num + (await arr[i - 1] || 0));
+    await AsyncAF(nums).io.everyAF((num, i, arr) => {
+      result.push(num + (arr[i - 1] || 0));
       return true;
     });
     expect(result).to.eql([1, 3, 6]);
+    expect(await AsyncAF(nums).io.everyAF((n, i, arr) => n === arr[i])).to.be.true;
+  });
+
+  it('should work when referencing array argument at index > current w/ await', async () => {
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
+    const result = [];
+    await AsyncAF(nums).io.everyAF(async (num, _, arr) => {
+      result.push(num + (await arr[arr.length - 1] || 0));
+      return true;
+    });
+    expect(result).to.eql([5, 6, 8]);
+
+    const badResult = [];
+    await AsyncAF(nums).io.everyAF((num, _, arr) => {
+      badResult.push(num + (arr[arr.length - 1] || 0));
+      return true;
+    });
+    expect(badResult).to.eql([...[1, 2].map(n => `${n}[object Promise]`), 8]);
   });
 
   it('should process elements in series', async () => {

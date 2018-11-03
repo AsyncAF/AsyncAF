@@ -1,8 +1,11 @@
-import {expect} from 'chai';
+import chai, {expect} from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
+
+chai.use(chaiAsPromised);
 
 describe('mapAF method', () => {
   it('should have the same arity as native map', () => {

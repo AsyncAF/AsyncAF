@@ -16,33 +16,33 @@ describe('findIndexAF method', () => {
 
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 3];
-    it('and find and resolve to the first element that satisfies the callback', async () => {
+    it('and find and resolve to the first index that satisfies the callback', async () => {
       expect(await AsyncAF(nums).findIndexAF(n => n % 2 === 0)).to.equal(1);
     });
-    it('and resolve to undefined if no elements satisfy the callback', async () => {
+    it('and resolve to -1 if no index satisfies the callback', async () => {
       expect(await AsyncAF(nums).findIndexAF(n => n === 5)).to.equal(-1);
     });
     it('and work with the index param', async () => {
       expect(await AsyncAF(nums).findIndexAF((_, i) => i === 2)).to.equal(2);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((n, i, array) => n === array[2])).to.equal(2);
+      expect(await AsyncAF(nums).findIndexAF((n, _, array) => n === array[2])).to.equal(2);
     });
   });
 
   context('should work on an array of promises', () => {
     const nums = [1, 2, 3].map(n => Promise.resolve(n));
-    it('and find and resolve to the first element that satisfies the callback', async () => {
+    it('and find and resolve to the first index that satisfies the callback', async () => {
       expect(await AsyncAF(nums).findIndexAF(n => n % 2 === 0)).to.equal(1);
     });
-    it('and resolve to undefined if no elements satisfy the callback', async () => {
+    it('and resolve to -1 if no index satisfies the callback', async () => {
       expect(await AsyncAF(nums).findIndexAF(n => n === 5)).to.equal(-1);
     });
     it('and work with the index param', async () => {
       expect(await AsyncAF(nums).findIndexAF((_, i) => i === 2)).to.equal(2);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((n, i, array) => n === array[2])).to.equal(2);
+      expect(await AsyncAF(nums).findIndexAF((n, _, array) => n === array[2])).to.equal(2);
     });
   });
 
@@ -105,8 +105,8 @@ describe('findIndexAF method', () => {
   });
 
   it('should treat holes in sparse arrays as undefined', async () => {
-    expect([, , 0].findIndex(el => !el)).to.equal(0);
-    expect(await AsyncAF([, , 0]).findIndexAF(el => !el)).to.equal(0);
+    expect([, , 0].findIndex(el => el === undefined)).to.equal(0);
+    expect(await AsyncAF([, , 0]).findIndexAF(el => el === undefined)).to.equal(0);
   });
 
   it('should not ignore holes when iterating through sparse arrays', async () => {
@@ -124,6 +124,11 @@ describe('findIndexAF method', () => {
   it('should work with index argument in a sparse array', async () => {
     expect(await AsyncAF([, , 1, , 2, , 3, , ]).findIndexAF((_, i) => i === 2)).to.equal(2);
   }); /* eslint-enable */
+
+  it('should resolve to -1 given an empty array', async () => {
+    expect([].findIndex(() => true)).to.equal(-1);
+    expect(await AsyncAF([]).findIndexAF(() => true)).to.equal(-1);
+  });
 
   it('should throw TypeError when callback is not a function', () => {
     expect(AsyncAF([]).findIndexAF()).to.eventually.be.rejected.and.have.property(

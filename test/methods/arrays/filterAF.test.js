@@ -135,6 +135,13 @@ describe('filterAF method', () => {
 
   it('should work with index argument in a sparse array', async () => {
     expect(await AsyncAF([, , 1, , 2, , 3, , ]).filterAF((_, i) => i === 2)).to.eql([1]);
+  });
+
+  it('should filter undefined values in a sparse array', async () => {
+    const before = [, undefined, , undefined, , ];
+    const after = [undefined, undefined];
+    expect(before.filter(el => el === undefined)).to.eql(after);
+    expect(await AsyncAF(before).filterAF(el => el === undefined)).to.eql(after);
   }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {

@@ -25,11 +25,7 @@ describe('series.forEachAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [
-      new Promise(resolve => resolve(1)),
-      new Promise(resolve => resolve(2)),
-      new Promise(resolve => resolve(3)),
-    ];
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
     it('and apply a function to each', async () => {
       const numsTimes2 = [];
       await AsyncAF(nums).series.forEachAF(num => {
@@ -57,6 +53,15 @@ describe('series.forEachAF method', () => {
       nums.push(num + (arr[i - 1] || 0));
     });
     expect(nums).to.eql([1, 3, 5]);
+  });
+
+  it('should work when referencing array argument at index > or < current', async () => {
+    const nums = [1, 2, 3, 4, 5].map(n => Promise.resolve(n));
+    const middleNums = [];
+    await AsyncAF(nums).io.forEachAF((n, _, arr) => {
+      if (n > arr[0] && n < arr[arr.length - 1]) middleNums.push(n);
+    });
+    expect(middleNums).to.eql([2, 3, 4]);
   });
 
   it('should work with thisArg specified', async () => {

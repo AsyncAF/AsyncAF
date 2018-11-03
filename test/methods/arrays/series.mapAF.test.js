@@ -1,8 +1,11 @@
-import {expect} from 'chai';
+import chai, {expect} from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import delay from 'delay';
 
 import AsyncAF from '../../../dist/async-af';
+
+chai.use(chaiAsPromised);
 
 describe('series.mapAF method', () => {
   it('io (inOrder) should be an alias for series', () => {
@@ -88,6 +91,12 @@ describe('series.mapAF method', () => {
       nums.push(num + (arr[i - 1] || 0));
     });
     expect(nums).to.eql([1, 3, 5]);
+  });
+
+  it('should work when referencing array argument at index > or < current', async () => {
+    const nums = [1, 2, 3, 4, 5].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.mapAF((n, _, arr) => n + arr[0] + arr[arr.length - 1]))
+      .to.eql([7, 8, 9, 10, 11]);
   });
 
   it('should work with thisArg specified', async () => {

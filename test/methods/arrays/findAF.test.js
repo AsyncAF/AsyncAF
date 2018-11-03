@@ -42,7 +42,7 @@ describe('findAF method', () => {
       expect(await AsyncAF(nums).findAF((_, i) => i === 2)).to.equal(3);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).findAF((n, i, array) => n === array[2])).to.equal(3);
+      expect(await AsyncAF(nums).findAF((n, _, array) => n === array[2])).to.equal(3);
     });
   });
 
@@ -105,8 +105,8 @@ describe('findAF method', () => {
   });
 
   it('should treat holes in sparse arrays as undefined', async () => {
-    expect([, , 0].find(el => !el)).to.be.undefined;
-    expect(await AsyncAF([, , 0]).findAF(el => !el)).to.be.undefined;
+    expect([, , 0].find((_, i) => i === 0)).to.be.undefined;
+    expect(await AsyncAF([, , 0]).findAF((_, i) => i === 0)).to.be.undefined;
   });
 
   it('should not ignore holes when iterating through sparse arrays', async () => {
@@ -124,6 +124,11 @@ describe('findAF method', () => {
   it('should work with index argument in a sparse array', async () => {
     expect(await AsyncAF([, , 1, , 2, , 3, , ]).findAF((_, i) => i === 2)).to.equal(1);
   }); /* eslint-enable */
+
+  it('should resolve to undefined given an empty array', async () => {
+    expect([].find(() => true)).to.be.undefined;
+    expect(await AsyncAF([]).findAF(() => true)).to.be.undefined;
+  });
 
   it('should throw TypeError when callback is not a function', () => {
     expect(AsyncAF([]).findAF()).to.eventually.be.rejected.and.have.property(

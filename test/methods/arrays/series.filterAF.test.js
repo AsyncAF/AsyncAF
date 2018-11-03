@@ -68,6 +68,13 @@ describe('series.filterAF method', () => {
     expect(result).to.eql([1, 3, 6]);
   });
 
+  it('should work when referencing array argument at index > or < current', async () => {
+    const nums = [1, 2, 3, 4, 5].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.filterAF((_, i, arr) => (
+      arr[i] > arr[0] && arr[i] < arr[arr.length - 1]
+    ))).to.eql([2, 3, 4]);
+  });
+
   it('should work with thisArg specified', async () => {
     const nums = [1, 2, 3].map(n => Promise.resolve(n));
 
@@ -134,6 +141,13 @@ describe('series.filterAF method', () => {
 
   it('should work with index argument in a sparse array', async () => {
     expect(await AsyncAF([, , 1, , 2, , 3, , ]).io.filterAF((_, i) => i === 2)).to.eql([1]);
+  });
+
+  it('should filter undefined values in a sparse array', async () => {
+    const before = [, undefined, , undefined, , ];
+    const after = [undefined, undefined];
+    expect(before.filter(el => el === undefined)).to.eql(after);
+    expect(await AsyncAF(before).io.filterAF(el => el === undefined)).to.eql(after);
   }); /* eslint-enable */
 
   it('should reject with TypeError: undefined is not a function', async () => {

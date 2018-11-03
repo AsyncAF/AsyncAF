@@ -29,11 +29,7 @@ describe('forEachAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [
-      new Promise(resolve => resolve(1)),
-      new Promise(resolve => resolve(2)),
-      new Promise(resolve => resolve(3)),
-    ];
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
     it('and apply a function to each', async () => {
       const numsTimes2 = [];
       await AsyncAF(nums).forEachAF(num => {

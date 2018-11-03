@@ -7,7 +7,7 @@ import AsyncAF from '../../../dist/async-af';
 
 chai.use(chaiAsPromised);
 
-describe('findAF method', () => {
+describe('series.findAF method', () => {
   it('io (inOrder) should be an alias for series', () => {
     expect(AsyncAF().io).to.eql(AsyncAF().series);
     expect(AsyncAF().io.findAF).to.equal(AsyncAF().series.findAF);
@@ -41,8 +41,24 @@ describe('findAF method', () => {
       expect(await AsyncAF(nums).io.findAF((_, i) => i === 2)).to.equal(3);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).io.findAF((n, i, array) => n === array[2])).to.equal(3);
+      expect(await AsyncAF(nums).io.findAF((n, _, array) => n === array[2])).to.equal(3);
     });
+  });
+
+  it('should work when referencing array argument at index <= current', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.findAF((n, i, arr) => n === arr[i - 1] + arr[i - 2]))
+      .to.equal(3);
+    expect(await AsyncAF(nums).io.findAF((n, _, arr) => n === arr[arr.length - 1]))
+      .to.equal(3);
+  });
+
+  it('should work when referencing array argument at index > current w/ await', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.findAF(async (n, _, arr) => n === (await arr[2]) - arr[0]))
+      .to.equal(2);
+    expect(await AsyncAF(nums).io.findAF((n, _, arr) => n === arr[2] - arr[0]))
+      .to.be.undefined;
   });
 
   it('should process elements in series', async () => {
@@ -104,8 +120,8 @@ describe('findAF method', () => {
   });
 
   it('should treat holes in sparse arrays as undefined', async () => {
-    expect([, , 0].find(el => !el)).to.be.undefined;
-    expect(await AsyncAF([, , 0]).io.findAF(el => !el)).to.be.undefined;
+    expect([, , 0].find((_, i) => i === 0)).to.be.undefined;
+    expect(await AsyncAF([, , 0]).io.findAF((_, i) => i === 0)).to.be.undefined;
   });
 
   it('should not ignore holes when iterating through sparse arrays', async () => {
@@ -123,6 +139,11 @@ describe('findAF method', () => {
   it('should work with index argument in a sparse array', async () => {
     expect(await AsyncAF([, , 1, , 2, , 3, , ]).io.findAF((_, i) => i === 2)).to.equal(1);
   }); /* eslint-enable */
+
+  it('should resolve to undefined given an empty array', async () => {
+    expect([].find(() => true)).to.be.undefined;
+    expect(await AsyncAF([]).io.findAF(() => true)).to.be.undefined;
+  });
 
   it('should resolve after finding an element that satisfies callback', async () => {
     const nums = [];
