@@ -13,7 +13,6 @@ describe('full AsyncAF class', () => {
     expect(Object.getPrototypeOf(AsyncAF())).to.equal(AsyncAF.prototype);
   });
   it('should be the __proto__ of instances', () => {
-    // eslint-disable-next-line no-proto
     expect(AsyncAF().__proto__).to.equal(AsyncAF.prototype);
   });
   it('should have a customized toStringTag: "AsyncAF"', () => {
@@ -46,10 +45,8 @@ describe('full AsyncAF class', () => {
   });
 
   context('should have methods then and catch', () => {
-    const promises = [Promise.resolve(1), Promise.resolve(2)];
     it('and be thenable', async () => {
-      const doubled = await AsyncAF(promises).then(data => data.map(n => n * 2));
-      expect(doubled).to.eql([2, 4]);
+      expect(await AsyncAF(Promise.resolve(1)).then(n => n)).to.equal(1);
     });
     it('and follow PromisesA+ spec (https://promisesaplus.com/#point-43)', async () => {
       const aaf1 = AsyncAF(['a']);
@@ -57,7 +54,7 @@ describe('full AsyncAF class', () => {
       expect(await aaf2).to.eql(['a']);
     });
     it('and be catchable', async () => {
-      await AsyncAF(promises).then(() => {
+      await AsyncAF(Promise.resolve()).then(() => {
         throw new Error('caught');
       }).catch(e => {
         expect(e.message).to.equal('caught');
@@ -71,7 +68,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF([])).to.eql([]);
     });
     it('Object', async () => {
-      // expect(await AsyncAF({a: 1})).to.eql({a: 1});
       expect(await AsyncAF({})).to.eql({});
     });
     it('String', async () => {
@@ -87,7 +83,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF(false)).to.be.false;
     });
     it('Function', async () => {
-      /* eslint-disable require-jsdoc */
       function functionDeclaration() {}
       const functionExpression = function () {};
       const namedFunctionExpression = function namedFunctionExpression() {};
@@ -97,7 +92,6 @@ describe('full AsyncAF class', () => {
       expect(await AsyncAF(functionExpression)).to.equal(functionExpression);
       expect(await AsyncAF(namedFunctionExpression)).to.equal(namedFunctionExpression);
       expect(await AsyncAF(arrowFunction)).to.equal(arrowFunction);
-      /* eslint-enable */
     });
     it('undefined', async () => {
       expect(await AsyncAF()).to.be.undefined;

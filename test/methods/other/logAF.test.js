@@ -48,10 +48,11 @@ describe('logAF static method', () => {
     it('should be label: true, labelFormat: file, duration: true', async () => {
       await logAfStub(1, 2);
       expect(wrappedLogStub).to.have.been.calledWithMatch(
+        '',
         /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
         1,
         2,
-        /^(\n|\r)in \d\.\d{3} secs$/,
+        /^(\n|\r) in \d\.\d{3} secs$/,
       );
     });
   });
@@ -64,8 +65,9 @@ describe('logAF static method', () => {
       logAfStub.options({label: false});
       await logAfStub('no label');
       expect(wrappedLogStub).to.be.calledWithMatch(
+        '',
         'no label',
-        /^(\n|\r)in \d\.\d{3} secs$/,
+        /^(\n|\r) in \d\.\d{3} secs$/,
       );
     });
 
@@ -73,6 +75,7 @@ describe('logAF static method', () => {
       logAfStub.options({duration: false});
       await logAfStub('no duration');
       expect(wrappedLogStub).to.have.been.calledWithMatch(
+        '',
         /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
         'no duration',
       );
@@ -83,36 +86,40 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: 'path'});
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^@\/.+\/AsyncAF\/test\/methods\/other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
           'path',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('parent', async () => {
         logAfStub.options({labelFormat: 'parent'});
         await logAfStub('parent');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^@other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
           'parent',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('arrow', async () => {
         logAfStub.options({labelFormat: 'arrow'});
         await logAfStub('arrow');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^={24}>$/,
           'arrow',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('custom', async () => {
         logAfStub.options({labelFormat: 'here\'s the log! ~~~'});
         await logAfStub('custom');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           'here\'s the log! ~~~',
           'custom',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
     });
@@ -122,54 +129,60 @@ describe('logAF static method', () => {
         logAfStub.options({labelFormat: ({arrow}) => arrow});
         await logAfStub('arrow');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^={24}>$/,
           'arrow',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('line', async () => {
         logAfStub.options({labelFormat: ({line}) => line});
         await logAfStub('line number');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^\d+$/,
           'line number',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('col', async () => {
         logAfStub.options({labelFormat: ({col}) => col});
         await logAfStub('col number');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^\d+$/,
           'col number',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('parent', async () => {
         logAfStub.options({labelFormat: ({parent}) => parent});
         await logAfStub('parent');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           'other/',
           'parent',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('file', async () => {
         logAfStub.options({labelFormat: ({file}) => file});
         await logAfStub('file');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           'logAF.test.js',
           'file',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
       it('path', async () => {
         logAfStub.options({labelFormat: ({path}) => path});
         await logAfStub('path');
         expect(wrappedLogStub).to.have.been.calledWithMatch(
+          '',
           /^\/.+\/AsyncAF\/test\/methods\//,
           'path',
-          /^(\n|\r)in \d\.\d{3} secs$/,
+          /^(\n|\r) in \d\.\d{3} secs$/,
         );
       });
     });
@@ -184,9 +197,10 @@ describe('logAF static method', () => {
         'Warning: logAF labelFormat option must be set to \'file\' (default), \'path\', \'parent\', \'arrow\', or a custom string or function\n',
       );
       expect(wrappedLogStub).to.have.been.calledWithMatch(
+        '',
         /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
         'invalidFormat',
-        /^(\n|\r)in \d\.\d{3} secs$/,
+        /^(\n|\r) in \d\.\d{3} secs$/,
       );
     });
     it('should warn when passed an invalid labelFormat and fall back to the prior setting', async () => {
@@ -199,9 +213,10 @@ describe('logAF static method', () => {
         'Warning: logAF labelFormat option must be set to \'file\' (default), \'path\', \'parent\', \'arrow\', or a custom string or function\n',
       );
       expect(wrappedLogStub).to.have.been.calledWithMatch(
+        '',
         /^@\/.+\/AsyncAF\/test\/methods\/other\/logAF.test.js:\d+:\d+:(\n|\r)$/,
         'invalidFormat',
-        /^(\n|\r)in \d\.\d{3} secs$/,
+        /^(\n|\r) in \d\.\d{3} secs$/,
       );
     });
   });
@@ -220,20 +235,22 @@ describe('@async-af/log separate package', () => {
   it('should work when called directly', async () => {
     await logStub(...nums);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
       1,
       2,
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
   it('should work when added to AsyncAfWrapper', async () => {
     AsyncAfWrapper.use({}, {log: logStub});
     await AsyncAfWrapper.log(...nums);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@logAF.test.js:\d+:\d+:(\n|\r)$/,
       1,
       2,
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 });

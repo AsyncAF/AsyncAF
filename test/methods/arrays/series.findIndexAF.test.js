@@ -7,54 +7,70 @@ import AsyncAF from '../../../dist/async-af';
 
 chai.use(chaiAsPromised);
 
-describe('findIndexAF method', () => {
-  it('should have the same arity as native findIndex', () => {
-    expect(AsyncAF([]).findIndexAF.length).to.equal([].findIndex.length);
-    expect(AsyncAF.prototype.findIndexAF.length)
-      .to.equal(Array.prototype.findIndex.length);
+describe('series.findIndexAF method', () => {
+  it('io (inOrder) should be an alias for series', () => {
+    expect(AsyncAF().io).to.eql(AsyncAF().series);
+    expect(AsyncAF().io.findIndexAF).to.equal(AsyncAF().series.findIndexAF);
   });
 
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 3];
     it('and find and resolve to the first index that satisfies the callback', async () => {
-      expect(await AsyncAF(nums).findIndexAF(n => n % 2 === 0)).to.equal(1);
+      expect(await AsyncAF(nums).io.findIndexAF(n => n % 2 === 0)).to.equal(1);
     });
     it('and resolve to -1 if no index satisfies the callback', async () => {
-      expect(await AsyncAF(nums).findIndexAF(n => n === 5)).to.equal(-1);
+      expect(await AsyncAF(nums).io.findIndexAF(n => n === 5)).to.equal(-1);
     });
     it('and work with the index param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((_, i) => i === 2)).to.equal(2);
+      expect(await AsyncAF(nums).io.findIndexAF((_, i) => i === 2)).to.equal(2);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((n, _, array) => n === array[2])).to.equal(2);
+      expect(await AsyncAF(nums).io.findIndexAF((n, _, array) => n === array[2])).to.equal(2);
     });
   });
 
   context('should work on an array of promises', () => {
     const nums = [1, 2, 3].map(n => Promise.resolve(n));
     it('and find and resolve to the first index that satisfies the callback', async () => {
-      expect(await AsyncAF(nums).findIndexAF(n => n % 2 === 0)).to.equal(1);
+      expect(await AsyncAF(nums).io.findIndexAF(n => n % 2 === 0)).to.equal(1);
     });
     it('and resolve to -1 if no index satisfies the callback', async () => {
-      expect(await AsyncAF(nums).findIndexAF(n => n === 5)).to.equal(-1);
+      expect(await AsyncAF(nums).io.findIndexAF(n => n === 5)).to.equal(-1);
     });
     it('and work with the index param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((_, i) => i === 2)).to.equal(2);
+      expect(await AsyncAF(nums).io.findIndexAF((_, i) => i === 2)).to.equal(2);
     });
     it('and work with the array param', async () => {
-      expect(await AsyncAF(nums).findIndexAF((n, _, array) => n === array[2])).to.equal(2);
+      expect(await AsyncAF(nums).io.findIndexAF((n, _, array) => n === array[2]))
+        .to.equal(2);
     });
   });
 
-  it('should process elements in parallel', async () => {
+  it('should work when referencing array argument at index <= current', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.findIndexAF((n, i, arr) => n === arr[i - 1] + arr[i - 2]))
+      .to.equal(2);
+    expect(await AsyncAF(nums).io.findIndexAF((n, _, arr) => n === arr[arr.length - 1]))
+      .to.equal(2);
+  });
+
+  it('should work when referencing array argument at index > current w/ await', async () => {
+    const nums = [1, 2, 3].map(n => Promise.resolve(n));
+    expect(await AsyncAF(nums).io.findIndexAF(async (n, _, arr) => n === (await arr[2]) - arr[0]))
+      .to.equal(1);
+    expect(await AsyncAF(nums).io.findIndexAF((n, _, arr) => n === arr[2] - arr[0]))
+      .to.equal(-1);
+  });
+
+  it('should process elements in series', async () => {
     const clock = sinon.useFakeTimers({shouldAdvanceTime: true});
     const nums = [];
-    await AsyncAF([3, 2, 1]).findIndexAF(async n => {
+    await AsyncAF([3, 2, 1]).io.findIndexAF(async n => {
       await delay(n * 100);
       nums.push(n);
     });
-    expect(nums).to.eql([1, 2, 3]);
-    expect(Date.now()).to.equal(300);
+    expect(nums).to.eql([3, 2, 1]);
+    expect(Date.now()).to.equal(600);
     clock.restore();
   });
 
@@ -66,17 +82,17 @@ describe('findIndexAF method', () => {
         this.sum = num;
       }
       async goodAdd(nums) {
-        await AsyncAF(nums).findIndexAF(function (num) {
+        await AsyncAF(nums).io.findIndexAF(function (num) {
           this.sum += num;
         }, this); // should work because we're specifying thisArg as this
       }
       async otherGoodAdd(nums) {
-        await AsyncAF(nums).findIndexAF(num => {
+        await AsyncAF(nums).io.findIndexAF(num => {
           this.sum += num;
         }); // should work w/o specifying thisArg because of => funcs' lexical this binding
       }
       async badAdd(nums) {
-        await AsyncAF(nums).findIndexAF(function (num) {
+        await AsyncAF(nums).io.findIndexAF(function (num) {
           this.sum += num;
         }); // should be rejected w/o specifying thisArg
       }
@@ -97,7 +113,7 @@ describe('findIndexAF method', () => {
   it('should work on an array-like object', async () => {
     const nums = [];
     await (async function () {
-      await AsyncAF(arguments).findIndexAF(n => {
+      await AsyncAF(arguments).io.findIndexAF(n => {
         nums.push(n);
       });
     }(1, 2, 3));
@@ -106,14 +122,14 @@ describe('findIndexAF method', () => {
 
   it('should treat holes in sparse arrays as undefined', async () => {
     expect([, , 0].findIndex(el => el === undefined)).to.equal(0);
-    expect(await AsyncAF([, , 0]).findIndexAF(el => el === undefined)).to.equal(0);
+    expect(await AsyncAF([, , 0]).io.findIndexAF(el => el === undefined)).to.equal(0);
   });
 
   it('should not ignore holes when iterating through sparse arrays', async () => {
     /* eslint-disable array-bracket-spacing */
     const nums = [];
     let count = 0;
-    await AsyncAF([, , 1, , 2, , , ]).findIndexAF(n => {
+    await AsyncAF([, , 1, , 2, , , ]).io.findIndexAF(n => {
       nums.push(n * 2);
       count++;
     });
@@ -122,23 +138,33 @@ describe('findIndexAF method', () => {
   });
 
   it('should work with index argument in a sparse array', async () => {
-    expect(await AsyncAF([, , 1, , 2, , 3, , ]).findIndexAF((_, i) => i === 2)).to.equal(2);
+    expect(await AsyncAF([, , 1, , 2, , 3, , ]).io.findIndexAF((_, i) => i === 2))
+      .to.equal(2);
   }); /* eslint-enable */
 
   it('should resolve to -1 given an empty array', async () => {
     expect([].findIndex(() => true)).to.equal(-1);
-    expect(await AsyncAF([]).findIndexAF(() => true)).to.equal(-1);
+    expect(await AsyncAF([]).io.findIndexAF(() => true)).to.equal(-1);
+  });
+
+  it('should resolve after finding an index that satisfies callback', async () => {
+    const nums = [];
+    expect(await AsyncAF([10, 20, 30]).io.findIndexAF(n => {
+      nums.push(n);
+      return n > 10;
+    })).to.equal(1);
+    expect(nums).to.eql([10, 20]);
   });
 
   it('should throw TypeError when callback is not a function', () => {
-    expect(AsyncAF([]).findIndexAF()).to.eventually.be.rejected.and.have.property(
+    expect(AsyncAF([]).io.findIndexAF()).to.eventually.be.rejected.and.have.property(
       'message',
       'undefined is not a function',
     );
   });
   it('should reject with TypeError when called on non-array-like objects', async () => {
     for (const value of [null, undefined, {}, true, 2])
-      await AsyncAF(value).findIndexAF(() => {}).catch(e => {
+      await AsyncAF(value).io.findIndexAF(() => {}).catch(e => {
         expect(e).to.be.an.instanceOf(TypeError).and.have.property(
           'message',
           `findIndexAF cannot be called on ${value}, only on an Array or array-like Object`,

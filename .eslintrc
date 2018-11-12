@@ -4,6 +4,18 @@
     "mocha": true
   },
   "extends": ["airbnb-base"],
+  "overrides": [{
+    "files": "*.test.js",
+    "rules": {
+      "prefer-rest-params": "off",
+      "no-proto": "off",
+      "require-jsdoc": "off",
+      "func-names": "off",
+      "no-await-in-loop": "off",
+      "class-methods-use-this": "off",
+      "no-sparse-arrays": "off"
+      }
+    }],
   "rules": {
     "no-restricted-syntax": [
       "error",
@@ -41,12 +53,15 @@
       "ignoreTemplateLiterals": true
     }],
     "function-paren-newline": ["error", "consistent"],
+    "no-param-reassign": ["error", {"props": false}],
+    "no-bitwise": ["error", {"int32Hint": true, "allow": [">>>"]}],
     "no-plusplus": "off",
     "no-shadow": "off",
     "no-unused-expressions": "off",
     "func-names": ["error", "as-needed"],
     "no-nested-ternary": "off",
     "curly": ["error", "multi", "consistent"],
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "consistent-return": "off"
   }
 }

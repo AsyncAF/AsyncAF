@@ -13,7 +13,7 @@ describe('joinAF method', () => {
 
   context('should work on an array of non-promises', () => {
     const animals = ['cow', 'rabbit', 'chicken', 'moose'];
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -33,7 +33,7 @@ describe('joinAF method', () => {
 
   context('should work on an array-like object', () => {
     const animals = {0: 'cow', 1: 'rabbit', 2: 'chicken', 3: 'moose', length: 4};
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -53,7 +53,7 @@ describe('joinAF method', () => {
 
   context('should work on an array of promises', () => {
     const animals = ['cow', 'rabbit', 'chicken', 'moose'].map(n => Promise.resolve(n));
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -75,7 +75,7 @@ describe('joinAF method', () => {
     const animals = Promise.resolve(
       {0: 'cow', 1: 'rabbit', 2: 'chicken', 3: 'moose', length: 4},
     );
-    it('should return an empty string given an empty array', async () => {
+    it('should resolve to an empty string given an empty array', async () => {
       expect(await AsyncAF([]).joinAF()).to.equal('');
     });
     it('should use a comma as the default separator', async () => {
@@ -93,26 +93,18 @@ describe('joinAF method', () => {
     });
   });
 
+  it('should treat holes in sparse arrays as undefined', async () => {
+    expect([, , undefined, 1].join`_`).to.equal('___1');
+    expect(await AsyncAF([, , undefined, 1]).joinAF`_`).to.equal('___1');
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).joinAF('')).to.eventually.be.rejected.and.has.property(
-      'message',
-      'joinAF cannot be called on null, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF().joinAF('')).to.eventually.be.rejected.and.has.property(
-      'message',
-      'joinAF cannot be called on undefined, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF({}).joinAF('')).to.eventually.be.rejected.and.has.property(
-      'message',
-      'joinAF cannot be called on [object Object], only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(true).joinAF('')).to.eventually.be.rejected.and.has.property(
-      'message',
-      'joinAF cannot be called on true, only on an Array or array-like Object',
-    );
-    await expect(AsyncAF(2).joinAF('')).to.eventually.be.rejected.and.has.property(
-      'message',
-      'joinAF cannot be called on 2, only on an Array or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).joinAF('').catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `joinAF cannot be called on ${value}, only on an Array or array-like Object`,
+        );
+      });
   });
 });

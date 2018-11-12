@@ -48,6 +48,7 @@ docs:
 	echo "done!\n\n\033[0;36mplease open \033[4;36mfile://"$(CURDIR)"/docs/out/index.html\033[0;36m in the browser\nor run \033[0;31m'$$\033[0m npm run docs:open\033[0;31m'\033[0;36m for a preview\n\n\033[0;33mif satisfied, run \033[0;31m'$$\033[0m npm run docs:publish\033[0;31m'\033[0;33m to commit and push to your fork's gh-pages branch\033[0m\n"
 
 docs-publish:
+	babel-node docs/custom/remove.html.js
 	gh-pages -x -a -d docs/out -m "auto-generated commit"
 	echo "\033[0;36m\n docs published to your fork's gh-pages branch\033[0m\n"
 

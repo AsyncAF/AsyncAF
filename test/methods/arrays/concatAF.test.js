@@ -64,6 +64,14 @@ describe('concatAF method', () => {
     });
   });
 
+  it('should preserve holes in sparse arrays', async () => {
+    /* eslint-disable array-bracket-spacing */
+    const arr1 = [, , 1, , 2, , ];
+    const arr2 = [, , 3, , 4, , ];
+    expect(arr1.concat(arr2)).to.eql([, , 1, , 2, , , , 3, , 4, , ]);
+    expect(await AsyncAF(arr1).concatAF(arr2)).to.eql([, , 1, , 2, , , , 3, , 4, , ]);
+  }); /* eslint-enable */
+
   it('should be available to use in flattening deeply nested promises', async () => {
     /* eslint-disable max-len */
     const flattenAsync = arr => AsyncAF(arr).reduce(async (acc, val) => Array.isArray(await val) ? AsyncAF(acc).concat(flattenAsync(val)) : AsyncAF(acc).concat(val), []);
@@ -123,25 +131,12 @@ describe('concatAF method', () => {
   });
 
   it('should reject with TypeError when called on non-compatible objects', async () => {
-    await expect(AsyncAF(null).concatAF([])).to.eventually.be.rejected.and.has.property(
-      'message',
-      'concatAF cannot be called on null, only on an Array or String',
-    );
-    await expect(AsyncAF().concatAF([])).to.eventually.be.rejected.and.has.property(
-      'message',
-      'concatAF cannot be called on undefined, only on an Array or String',
-    );
-    await expect(AsyncAF({}).concatAF([])).to.eventually.be.rejected.and.has.property(
-      'message',
-      'concatAF cannot be called on [object Object], only on an Array or String',
-    );
-    await expect(AsyncAF(true).concatAF([])).to.eventually.be.rejected.and.has.property(
-      'message',
-      'concatAF cannot be called on true, only on an Array or String',
-    );
-    await expect(AsyncAF(2).concatAF([])).to.eventually.be.rejected.and.has.property(
-      'message',
-      'concatAF cannot be called on 2, only on an Array or String',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).concatAF([]).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `concatAF cannot be called on ${value}, only on an Array or String`,
+        );
+      });
   });
 });

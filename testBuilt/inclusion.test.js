@@ -103,9 +103,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -117,9 +118,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -131,9 +133,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -145,9 +148,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -160,9 +164,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -175,9 +180,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -190,9 +196,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 
@@ -205,9 +212,10 @@ describe('logAF should work in all packages:', () => {
 
     await logAfStub(toLog);
     expect(wrappedLogStub).to.have.been.calledWithMatch(
+      '',
       /^@inclusion.test.js:\d+:\d+:(\n|\r)$/,
       [2, 6],
-      /^(\n|\r)in \d\.\d{3} secs$/,
+      /^(\n|\r) in \d\.\d{3} secs$/,
     );
   });
 });

@@ -17,10 +17,10 @@ describe('indexOfAF method', () => {
 
   context('should work on an array of non-promises', () => {
     const nums = [1, 2, 4];
-    it('and return the first index of the specified element', async () => {
+    it('and resolve to the first index of the specified element', async () => {
       expect(await AsyncAF(nums).indexOfAF(1)).to.equal(0);
     });
-    it('and return -1 if the array doesn\'t include the specified element', async () => {
+    it('and resolve to -1 if the array doesn\'t include the specified element', async () => {
       expect(await AsyncAF(nums).indexOfAF(5)).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -33,10 +33,10 @@ describe('indexOfAF method', () => {
 
   context('should work on a string', () => {
     const str = 'test string';
-    it('and return the first index of the specified string', async () => {
+    it('and resolve to the first index of the specified string', async () => {
       expect(await AsyncAF(str).indexOfAF('test')).to.equal(0);
     });
-    it('and return -1 if the string doesn\'t include the specified string', async () => {
+    it('and resolve to -1 if the string doesn\'t include the specified string', async () => {
       expect(await AsyncAF(str).indexOfAF('xyz')).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -49,10 +49,10 @@ describe('indexOfAF method', () => {
 
   context('should work on an array-like object', () => {
     const arrLike = {0: 1, 1: 2, 2: 4, length: 3};
-    it('and return the first index of the specified element', async () => {
+    it('and resolve to the first index of the specified element', async () => {
       expect(await AsyncAF(arrLike).indexOfAF(2)).to.equal(1);
     });
-    it('and return -1 if the array doesn\'t include the specified element', async () => {
+    it('and resolve to -1 if the array doesn\'t include the specified element', async () => {
       expect(await AsyncAF(arrLike).indexOfAF(5)).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -64,11 +64,11 @@ describe('indexOfAF method', () => {
   });
 
   context('should work on an array of promises', () => {
-    const nums = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(4)];
-    it('and return the first index of the specified element', async () => {
+    const nums = [1, 2, 4].map(n => Promise.resolve(n));
+    it('and resolve to the first index of the specified element', async () => {
       expect(await AsyncAF(nums).indexOfAF(1)).to.equal(0);
     });
-    it('and return -1 if the array doesn\'t include the specified element', async () => {
+    it('and resolve to -1 if the array doesn\'t include the specified element', async () => {
       expect(await AsyncAF(nums).indexOfAF(5)).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -81,10 +81,10 @@ describe('indexOfAF method', () => {
 
   context('should work on a promise that resolves to a string', () => {
     const str = Promise.resolve('test string');
-    it('and return the first index of the specified string', async () => {
+    it('and resolve to the first index of the specified string', async () => {
       expect(await AsyncAF(str).indexOfAF('test')).to.equal(0);
     });
-    it('and return -1 if the string doesn\'t include the specified string', async () => {
+    it('and resolve to -1 if the string doesn\'t include the specified string', async () => {
       expect(await AsyncAF(str).indexOfAF('xyz')).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -97,10 +97,10 @@ describe('indexOfAF method', () => {
 
   context('should work on a promise that resolves to an array-like object', () => {
     const arrLike = Promise.resolve({0: 1, 1: 2, 2: 4, length: 3});
-    it('and return the first index of the specified element', async () => {
+    it('and resolve to the first index of the specified element', async () => {
       expect(await AsyncAF(arrLike).indexOfAF(1)).to.equal(0);
     });
-    it('and return -1 if the array doesn\'t include the specified element', async () => {
+    it('and resolve to -1 if the array doesn\'t include the specified element', async () => {
       expect(await AsyncAF(arrLike).indexOfAF(5)).to.equal(-1);
     });
     it('and work with fromIndex specified', async () => {
@@ -111,26 +111,44 @@ describe('indexOfAF method', () => {
     });
   });
 
+  it('should ignore holes in sparse arrays', async () => {
+    expect([, , 1].indexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([, , 1]).indexOfAF(undefined)).to.equal(-1);
+  });
+
+  it('should not find the index of NaN', async () => {
+    expect([, , NaN, undefined].indexOf(NaN)).to.equal(-1);
+    expect(await AsyncAF([, , NaN, undefined]).indexOfAF(NaN)).to.equal(-1);
+  });
+
+  it('should find the index of undefined', async () => {
+    expect([, , NaN, undefined].indexOf(undefined)).to.equal(3);
+    expect(await AsyncAF([, , NaN, undefined]).indexOfAF(undefined)).to.equal(3);
+  });
+
+  it('should default fromIndex to 0 when undefined or invalid', async () => {
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(1, undefined)).to.equal(0);
+    expect(AsyncAF([1, 2, 3]).indexOfAF(1, Math)).to.not.eventually.throw;
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(1, Math)).to.equal(0);
+  });
+
+  it('should always resolve to -1 given a fromIndex of an array\'s length', async () => {
+    expect([1, 2, 3].indexOf(3, 3)).to.equal(-1);
+    expect(await AsyncAF([1, 2, 3]).indexOfAF(3, 3)).to.equal(-1);
+  });
+
+  it('should resolve to -1 given an empty array', async () => {
+    expect([].indexOf(undefined)).to.equal(-1);
+    expect(await AsyncAF([]).indexOfAF(undefined)).to.equal(-1);
+  });
+
   it('should reject with TypeError when called on non-array-like objects', async () => {
-    await expect(AsyncAF(null).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'indexOfAF cannot be called on null, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF().indexOfAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'indexOfAF cannot be called on undefined, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF({}).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'indexOfAF cannot be called on [object Object], only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF(true).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'indexOfAF cannot be called on true, only on an Array, String, or array-like Object',
-    );
-    await expect(AsyncAF(2).indexOfAF(2)).to.eventually.be.rejected.and.has.property(
-      'message',
-      'indexOfAF cannot be called on 2, only on an Array, String, or array-like Object',
-    );
+    for (const value of [null, undefined, {}, true, 2])
+      await AsyncAF(value).indexOfAF(() => {}).catch(e => {
+        expect(e).to.be.an.instanceOf(TypeError).and.have.property(
+          'message',
+          `indexOfAF cannot be called on ${value}, only on an Array, String, or array-like Object`,
+        );
+      });
   });
 });

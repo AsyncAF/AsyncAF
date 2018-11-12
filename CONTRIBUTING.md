@@ -56,7 +56,8 @@ On with the logic! 🤓 ...here's some code:
 // lib/methods/arrays/sumAF.js
 
 const sumAF = function () {
-  return this.then(numbers => numbers.reduce((sum, num) => sum + num));
+  return this.then(nums => Promise.all(nums))
+    .then(nums => nums.reduce((sum, num) => sum + num));
 };
 
 ```
@@ -96,7 +97,7 @@ import logAF from './lib/methods/other/logAF';
 // a new static method would be imported here
 
 const staticMethods = [
-  logAF,
+  name(logAF, 'logAF'),
   // ...
   // and inserted here
 ].map(method => [
@@ -118,12 +119,12 @@ import filterAF from './lib/methods/arrays/filterAF';
 import sumAF from './lib/methods/arrays/sumAF';
 
 const arrayMethods = [
-  mapAF,
-  forEachAF,
-  filterAF,
+  name(mapAF, 'mapAF'),
+  name(forEachAF, 'forEachAF'),
+  name(filterAF, 'filterAF'),
   // ...
   // and insert here
-  sumAF,
+  name(sumAF, 'sumAF'), // for performance reasons, name the new method
 ].map(method => [
   method,
   `${libPath}methods/arrays/${method.name}`,
