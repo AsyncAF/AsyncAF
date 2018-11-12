@@ -1,3 +1,47 @@
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/AsyncAF/AsyncAF/compare/v6.0.0...v7.0.0) (2018-11-12)
+
+
+### Bug Fixes
+
+* **reduce:** fix bug with the way reduceAF handles  a null initialValue ([b234f42](https://github.com/AsyncAF/AsyncAF/commit/b234f42))
+* correct formatting when `label` is turned off ([f103f7d](https://github.com/AsyncAF/AsyncAF/commit/f103f7d))
+* handle sparse arrays correctly in all array methods ([210cfc1](https://github.com/AsyncAF/AsyncAF/commit/210cfc1))
+* include missing col number when using destructured logAF ([38edc41](https://github.com/AsyncAF/AsyncAF/commit/38edc41))
+
+
+### Code Refactoring
+
+* resolve to whole array instead of resolving each element ([03a3b0f](https://github.com/AsyncAF/AsyncAF/commit/03a3b0f))
+
+
+### Features
+
+* **every:** implement series/io.everyAF ([2859363](https://github.com/AsyncAF/AsyncAF/commit/2859363))
+* **filter:** implement series/io.filterAF ([eb887ba](https://github.com/AsyncAF/AsyncAF/commit/eb887ba))
+* **find:** implement series/io.findAF ([5e43ad9](https://github.com/AsyncAF/AsyncAF/commit/5e43ad9))
+* **findindex:** implement series/io.findIndexAF ([6fff02b](https://github.com/AsyncAF/AsyncAF/commit/6fff02b))
+* **includes:** implement series/io.includesAF ([7e0830d](https://github.com/AsyncAF/AsyncAF/commit/7e0830d))
+* **indexof:** implement series/io.indexOfAF ([a2d0f5c](https://github.com/AsyncAF/AsyncAF/commit/a2d0f5c))
+* **lastindexof:** implement series/io.lastIndexOfAF ([f90f7bd](https://github.com/AsyncAF/AsyncAF/commit/f90f7bd))
+* **reduce:** implement series/io.reduceAF ([e96f741](https://github.com/AsyncAF/AsyncAF/commit/e96f741))
+* **series:** implement serial forEach and map ([989dfe7](https://github.com/AsyncAF/AsyncAF/commit/989dfe7))
+* **some:** implement series/io.someAF ([4372f38](https://github.com/AsyncAF/AsyncAF/commit/4372f38))
+
+
+### Performance Improvements
+
+* **deps:** update browserslist & caniuse-lite for decreased pkg sizes ([0ded7f9](https://github.com/AsyncAF/AsyncAF/commit/0ded7f9))
+
+
+### BREAKING CHANGES
+
+* `await AsyncAF([/* promise1, promise2 */]);` will no longer resolve each inner promise much in the same way as `Promise.all`; this was an undocumented feature
+* certain methods will now treat holes in sparse arrays differently; see http://2ality.com/2015/09/holes-arrays-es6.html for details on each method
+* **reduce:** reduceAF now handles an empty array with a null initialValue in the same way as native reduce
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/AsyncAF/AsyncAF/compare/v5.3.3...v6.0.0) (2018-08-01)
 
