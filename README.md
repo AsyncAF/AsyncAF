@@ -27,11 +27,11 @@ function getActiveUsers(userIds) {
   return AsyncAF(userIds)
     // map user ids to user objects with an async function
     .mapAF(async userId => {
-      const response = await fetch(`fake-game-api/users/${userId}`);
-      return response.json();
+      const user = await fetch(`fake-game-api/users/${userId}`);
+      return user.json();
     })
     // filter by active users
-    .filterAF(user => user.isActive)
+    .filterAF(user => user.isActive);
 }
 ```
 
