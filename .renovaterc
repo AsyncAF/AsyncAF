@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "bumpVersion": "patch",
+  "enabled": false,
+  "packageRules": [
+    {
+      "packageNames": ["browserslist", "caniuse-lite"],
+      "schedule": ["after 10pm on friday"],
+      "enabled": true
+    }
+  ],
+  "prCreation": "not-pending",
+  "rangeStrategy": "bump",
+  "timezone": "America/Los_Angeles"
+}
