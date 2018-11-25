@@ -7,11 +7,14 @@
     "automerge": false
   },
   "bumpVersion": "patch",
-  "enabled": false,
   "packageRules": [
     {
+      "packagePatterns": ["*"],
+      "enabled": false
+    },
+    {
       "packageNames": ["browserslist", "caniuse-lite"],
-      "schedule": ["after 10pm on friday"],
+      "schedule": ["after 6pm on friday"],
       "enabled": true
     }
   ],
