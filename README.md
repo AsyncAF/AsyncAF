@@ -224,7 +224,7 @@ Being cognizant of when to use `series` vs. when to rely on the default parallel
 
 Another use case for `series` might be if you're sending multiple requests to a rate-limited API. In that case you may not want to throw a ton of parallel requests at the API, but rather wait for each one in series.
 
-<div>Love AsyncAF?&nbsp;&nbsp;<iframe src="https://ghbtns.com/github-btn.html?user=AsyncAF&repo=AsyncAF&type=star&count=false" frameborder="0" scrolling="0" width="160px" height="30px" style="position:absolute"></iframe></div>
+<div>Love AsyncAF? <a href="https://github.com/AsyncAF/AsyncAF"><img src="https://badgen.net/badge//star/blue?icon=github" alt="star it on GitHub"></a></div>
 
 See something to improve? [File an issue](https://github.com/AsyncAF/AsyncAF/issues) or
 [see how to contribute](https://github.com/AsyncAF/AsyncAF/blob/master/CONTRIBUTING.md).💙
