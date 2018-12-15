@@ -5,7 +5,7 @@
   "author": "Scott Rudiger (https://github.com/ScottRudiger)",
   "license": "MIT",
   "licenseUrl": "https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "homepage": "https://async-af.js.org",
   "bugs": {
     "url": "https://github.com/AsyncAF/AsyncAF/issues"
@@ -88,7 +88,7 @@
     "@commitlint/config-conventional": "^6.1.3",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^4.1.6",
-    "browserslist": "^4.3.5",
+    "browserslist": "^4.3.6",
     "caniuse-lite": "^1.0.30000907",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
