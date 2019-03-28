@@ -2,11 +2,8 @@
   "extends": [
     "config:base"
   ],
-  "automerge": true,
-  "major": {
-    "automerge": false
-  },
   "bumpVersion": "patch",
+  "rebaseStalePrs": true,
   "packageRules": [
     {
       "packagePatterns": ["*"],
@@ -14,8 +11,12 @@
     },
     {
       "packageNames": ["browserslist", "caniuse-lite"],
-      "schedule": ["after 6pm on friday"],
-      "enabled": true
+      "enabled": true,
+      "automerge": true,
+      "major": {
+        "automerge": false
+      },
+      "schedule": ["after 6pm on friday"]
     }
   ],
   "prCreation": "not-pending",
