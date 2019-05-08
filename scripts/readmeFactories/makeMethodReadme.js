@@ -1,6 +1,6 @@
 import {getDocsUrl} from '../helpers';
 
-export default (pkgName, memberName) =>
+export default (pkgName, memberName) => (
   `# ${pkgName}
 
 This is the standalone [\`AsyncAF\`]${getDocsUrl()} package for [\`${memberName}\`]${getDocsUrl(memberName)}.
@@ -12,4 +12,4 @@ This is the standalone [\`AsyncAF\`]${getDocsUrl()} package for [\`${memberName}
    - [\`AsyncAfWrapper\`]${getDocsUrl('AsyncAfWrapper')}
    - and the [\`use\`]${getDocsUrl('use').replace('F', 'fWrapper')} method
 - or for more general setup, take a look at the main [AsyncAF README](https://github.com/AsyncAF/AsyncAF/blob/master/README.md)
-`;
+`);

@@ -1,6 +1,6 @@
 import {getDocsUrl} from '../helpers';
 
-export default pkgName =>
+export default pkgName => (
   `# ${pkgName}
 
 This is the standalone [\`AsyncAF\`]${getDocsUrl()} package for [\`AsyncAfWrapper\`]${getDocsUrl('AsyncAfWrapper')}.
@@ -65,4 +65,4 @@ AsyncAF.logAF(promises);
 \`\`\`
 
 **protip:** you can use the same technique to add your own custom prototype or static methods to AsyncAfWrapper or even to the main AsyncAF class; see [\`use\`]${getDocsUrl`use`.replace('F', 'fWrapper')} for an example.
-`;
+`);
