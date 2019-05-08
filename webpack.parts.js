@@ -78,7 +78,7 @@ const minify = () => ({
 });
 
 const banner = new BannerPlugin({
-  banner: ({chunk: {name}, filename}) =>
+  banner: ({chunk: {name}, filename}) => (
     `${filename.replace(/\/index|.js/g, '')} v${version}
 
 ${libNameCamel} (${description}) ${resolvePkgInfo(name, filename)}
@@ -86,7 +86,8 @@ ${libNameCamel} (${description}) ${resolvePkgInfo(name, filename)}
 Copyright (c) 2017-present, ${author}
 
 This source code is licensed under the ${license} license found in this library's
-GitHub repository (${licenseUrl}).`,
+GitHub repository (${licenseUrl}).`
+  ),
   entryOnly: true,
 });
 

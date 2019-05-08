@@ -1,9 +1,5 @@
-/node_modules
-/dist
-/coverage
+node_modules
+dist
+coverage
 scratchPad.js
-
-#temp
-reduceAF.js
-logAFOptions/
-docs/out/
+docs/out
