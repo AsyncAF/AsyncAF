@@ -1,9 +1,10 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(ci)"
   ],
   "bumpVersion": "patch",
-  "rebaseStalePrs": true,
   "packageRules": [
     {
       "packagePatterns": ["*"],
@@ -13,13 +14,15 @@
       "packageNames": ["browserslist", "caniuse-lite"],
       "enabled": true,
       "automerge": true,
+      "automergeType": "pr"
+      "prCreation": "not-pending",
+      "rebaseStalePrs": true,
       "major": {
         "automerge": false
       },
-      "schedule": ["after 6pm on friday"]
+      "schedule": ["after 12pm on friday"]
     }
   ],
-  "prCreation": "not-pending",
   "rangeStrategy": "bump",
   "timezone": "America/Los_Angeles"
 }
