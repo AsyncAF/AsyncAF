@@ -14,7 +14,7 @@
       "packageNames": ["browserslist", "caniuse-lite"],
       "enabled": true,
       "automerge": true,
-      "automergeType": "pr"
+      "automergeType": "pr",
       "prCreation": "not-pending",
       "rebaseStalePrs": true,
       "major": {
