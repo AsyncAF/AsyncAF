@@ -11,6 +11,7 @@
       "enabled": false
     },
     {
+      "groupName": "browserslist-caniuse-lite",
       "packageNames": ["browserslist", "caniuse-lite"],
       "enabled": true,
       "automerge": true,
