@@ -11,10 +11,10 @@
   ],
   "cache": true,
   "include": [
-    "./lib**"
+    "lib**"
   ],
   "exclude": [
-    "./lib/methods/_internal**",
-    "./lib/methods/arrays/sumAF.js"
+    "lib/methods/_internal**",
+    "lib/methods/arrays/sumAF.js"
   ]
 }
