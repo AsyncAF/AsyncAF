@@ -21,7 +21,7 @@
       "major": {
         "automerge": false
       },
-      "schedule": ["after 12pm on friday"]
+      "schedule": ["after 2pm on the 18th day of the month"]
     }
   ],
   "rangeStrategy": "bump",
