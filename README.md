@@ -9,9 +9,13 @@
 
 <br>
 
-Working with promises or async/await?
+_Working with promises or async/await?_
 
-Use AsyncAF to transform your code into beautiful asynchronous JavaScript chains, with methods similar to the ones we all know (and love! 😍) such as `map`, `forEach`, `filter`, `reduce`, and more.
+Use AsyncAF to transform your code into beautiful asynchronous JavaScript chains, with methods similar to the ones we all know (and love! 😍) such as `map`, `forEach`, `filter`, `reduce`, and more—the major difference is that unlike native JavaScript methods:
+
+- AsyncAF's methods return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and resolve data asynchronously
+- Because of this many of AsyncAF's methods also accept [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) and process them differently than the standard JavaScript library
+- When AsyncAF processes iterations of a callback function (such as the callback to [forEach](https://async-af.js.org/AsyncAF#forEachAF), it does so in parallel / concurrently by default, and in series / sequentially by [setting a flag](https://async-af.js.org/AsyncAF#series)
 
 <a href="https://async-af.js.org/AsyncAF" target=_blank>
   Check out the docs
