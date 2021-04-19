@@ -117,7 +117,7 @@
     "rollup-plugin-uglify": "^3.0.0",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0",
-    "uglifyjs-webpack-plugin": "^1.2.5",
+    "uglifyjs-webpack-plugin": "^2.0.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   }
