@@ -233,5 +233,5 @@ See something to improve? [File an issue](https://github.com/AsyncAF/AsyncAF/iss
 AsyncAF is licensed under the <a href="https://choosealicense.com/licenses/mit/" target=_blank>MIT License</a>, so you can pretty much use it however you want
 
 (but [click here](https://github.com/AsyncAF/AsyncAF/blob/master/LICENSE) or <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/" target=_blank>here</a> to get into specifics).
-
+ 
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF/refs/branch/master/" target=_blank><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FAsyncAF%2FAsyncAF.svg?type=large" alt="FOSSA Status"></a>
